@@ -131,7 +131,7 @@ class Comment implements Model
         foreach ($responses as $response) {
             $userModel = new User();
             $userModel->isId($response->user_id);
-            $response->user_name = (new \src\core\Model($userModel))->read(['id'], ['name'])->first()->name;
+            $response->user_response = (new \src\core\Model($userModel))->read(['id'], ['name', 'photo'])->first();
         }
         return $responses;
     }

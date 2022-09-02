@@ -9,7 +9,7 @@
             <h1 class="text-primary">{{ article.title }}</h1>
             <h2 class="text-secondary">{{ article.subtitle }}</h2>
             {% if article.cover is defined %}
-                <img src="{{ BASE_URL }}/{{ article.cover }}" alt="" srcset="" class="rounded-3 mb-3 img-fluid">
+                <img src="{{ BASE_URL }}/{{ article.cover }}" alt="{{ article.title }}" srcset="" class="rounded-3 mb-3 img-fluid">
             {% endif %}
             <div class="col-9 col-lg-9 m-auto mt3">
                 <span class="opacity-50">Por</span> <span class="border rounded-circle p-2 icon-profile-male"></span>
