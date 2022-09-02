@@ -1,0 +1,42 @@
+#article-options {
+    transition: all .3s;
+}
+.toggle-opt-hidden {
+    transform: translateX(100px);
+}
+.toggle-opt-show {
+    transform: translateX(0);
+}
+/* #comments-container {
+    height: 0;
+    overflow-y: auto;
+    transition: all .3s;
+} */
+#comments-container.comments-show {
+    height: 30rem;
+}
+.comment-content {
+    width: 72%;
+}
+.comment-response {
+    color: rgb(159, 151, 151);
+}
+.response-container form div {
+    height: 40px;
+}
+.response-container form input {
+    outline: none;
+    height: 100%;
+    background-color: transparent;
+}
+.response-container button {
+    background-color: #0dcaf0;
+    width: 40px;
+    height: 40px;
+}
+
+@media (min-width: 768px) {
+    .comment-content {
+        width: 85%;
+    }
+}

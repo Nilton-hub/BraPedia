@@ -1,0 +1,40 @@
+{
+    "name": "niltonduarte/blog366",
+    "description": "Uma aplicação para a criação de artigos",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Nilton Duarte",
+            "email": "tvirapegubeco@gmail.com",
+            "role": "developer",
+            "homepage": "https://instagram.com/n.i.l.t.o.n.1"
+        }
+    ],
+    "config": {
+        "vendor-dir": "vendor"
+    },
+    "autoload": {
+        "psr-4": {
+            "src\\": "src"
+        },
+        "files": [
+            "./boot/bootstrap.php",
+            "./src/boot/config.php",
+            "./src/boot/functions.php"
+        ]
+    },
+    "require": {
+        "php": "^7.4",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "ext-gd": "*",
+        "nikic/fast-route": "^v1.3.0",
+        "willry/querybuilder": "^1.1.1",
+        "twig/twig": "^v3.4.1",
+        "cboden/ratchet": "^v0.4.4",
+        "gumlet/php-image-resize": "2.0.*",
+        "phpmailer/phpmailer": "^6.6"
+    }
+}

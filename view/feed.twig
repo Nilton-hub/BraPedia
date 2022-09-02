@@ -1,0 +1,25 @@
+{% extends('__theme.twig') %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ BASE_URL }}/assets/styles/feed.css">
+{% endblock %}
+{% block title %}Feed{% endblock %}
+{% block message %}{{ message }}{% endblock %}
+{% block body %}
+    <main class="container flex-grow-1">
+        {#    TEMPLATE`S ARTICLE    #}
+        {% if articles is defined and articles|length > 0 %}
+            {% for article in articles %}
+                {% set cover = (article.cover ? "#{BASE_URL}/#{article.cover}" : "#{BASE_URL}/assets/images/article-back-cover.svg") %}
+                {% include('fragments/article.twig') %}
+            {% endfor %}
+        {% endif %}
+        {#   END TEMPLATE`S ARTICLE    #}
+    </main>
+    <div class="position-absolute" id="bottom-reference">AAA</div>
+    <a href="#main-header" class="btn btn-primary d-inline-block m-4 ms-auto rounded-circle" style="z-index: 10;">
+        <span></span>
+    </a>
+{% endblock %}
+{% block scripts %}
+    <script src="{{ BASE_URL }}/assets/scripts/feed.js"></script>
+{% endblock %}

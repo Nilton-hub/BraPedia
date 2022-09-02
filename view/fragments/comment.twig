@@ -1,0 +1,67 @@
+
+<div class="mx-1 mb-3 bg-info bg-opacity-10 p-2 position-relative" id="container-of-comment-{{ comment.commentid }}">
+    {% if user is not null and user|length > 0 and comment.user_id == user.id %}
+        <div class="btn-comment-actions" onclick="toggleComments({{ article.id }}, {{ comment.commentid }})">...</div>
+        <!-- btn Comment -->
+        <div class="comment-actions-{{ comment.commentid }} no-close-comment-opts d-none">
+            <!-- Comment Options -->
+            <ul class="no-close-comment-opts">
+                {% if comment.user_id == user.id %}
+                    <li class="opt-edit no-close-comment-opts" onclick="commentActionEdit({{ comment.commentid }})">
+                        Editar
+                    </li>
+                {% endif %}
+                <li class="opt-delete no-close-comment-opts" onclick="commentActionRemove({{ comment.commentid }})">
+                    Apagar
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+    <div class="d-flex d-flex align-items-center gap-2">
+        {% if comment.photo|length > 0 %}
+            <div
+                style="background-image: url({{ BASE_URL }}/{{ comment.photo }}); width: 30px; height: 30px; background-size: cover; border-radius: 50%;">
+            </div>
+        {% else %}
+            <div class="profile mb-3 mt-2">
+                <div
+                    style="background-image: url({{ BASE_URL }}/assets/images/icon-profile-png.png); width: 30px; height: 30px; background-size: cover; border-radius: 50%;">
+                </div>
+            </div>
+        {% endif %}
+        <strong class="d-block">{{ comment.user_name }}</strong>
+    </div>
+    <p id="post-comment-{{ comment.commentid }}">
+        {{ comment.text }}
+    </p>
+    <div style="position: absolute; right: 10px; top: 55px;  display: none; width: 50px;">
+        <button style="width: 100%; font-size: 0.8rem;"
+                id="btn-update-comment-{{ comment.commentid }}">
+            Ok
+        </button>
+        <button style="width: 100%; font-size: 0.8rem;"
+                id="btn-cancel-comment-{{ comment.commentid }}">
+            cancel
+        </button>
+    </div>
+    <div id="response-list-container-{{ comment.commentid }}">
+        {% if responses is defined and responses|length > 0 %}
+            {% for response in responses %}
+                {% if comment.commentid == response.comment_id %}
+                    {% include('fragments/comment-repply.twig') %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+    {% if user.id is not null and user.id|length > 0 %}
+        <form action="{{ BASE_URL }}/comment/repply" method="post" class="form-response-{{ comment.commentid }}">
+            <label for="input-response-{{ comment.commentid }}"></label>
+            <input type="hidden" name="comment_id" value="{{ comment.commentid }}">
+            <input type="hidden" name="article_id" value="{{ article.id }}">
+            <div class="d-flex">
+                <input type="text" name="response" placeholder="Responder" class="" required id="input-response-{{ comment.commentid }}">
+                <button type="submit" class="icon-send"></button>
+            </div>
+        </form>
+    {% endif %}
+</div>

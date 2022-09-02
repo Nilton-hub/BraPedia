@@ -1,0 +1,12 @@
+.header-form {
+    overflow: hidden;
+}
+
+.header-form div {
+    cursor: pointer !important;
+    box-shadow: 3px 3px 3px black;
+}
+
+main  div {
+    width: 80% !important;
+}

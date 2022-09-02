@@ -1,0 +1,71 @@
+{% extends('__theme.twig') %}
+{% block style %}
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-size: 20px !important;
+        }
+
+        * {
+            font-family: CordiaUPC, verdana, arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .main {
+            color: rgba(70, 67, 67, 0.8);
+            text-align: center;
+        }
+
+        .main .header {
+            background: linear-gradient(85deg, darkblue 30%, #a2a2e6 90%);
+            padding: 5px;
+        }
+
+        .body {
+            padding: 5px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            padding-top: 0;
+        }
+
+        @media screen and (max-width: 540px) {
+            main {
+                width: 100%;
+            }
+        }
+
+        @media screen and (min-width: 700px) {
+            main {
+                width: 80%;
+            }
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="main">
+        <div class="header">
+            <h1 style="color: #f0f0f0">Redefinir Senha</h1>
+        </div>
+        <div class="body" style="font-size: 20px;">
+            <p>Olá, {{ username }}!</p>
+            <p>
+                Abaixo está o link para criar uma nova senha no BraPedia. Acesse-o para abrir a página onde você poderá
+                redefiní-la.
+            </p>
+
+            <a href="{{ "#{baseUrl}/recuperar-senha/#{code}" }}">REDEFINIR SENHA</a>
+            <p>
+                Por segurança, este link será válido por até 24 horas.
+            </p>
+            <div style="background: orangered; padding: 0 5px; border-radius: 6px; color: white;">
+                <h2>Importante!</h2>
+                <p>
+                    Se não foi você que tentou recuperar a senha da sua conta, apenas ignore este email.
+                    Os seus dados permanecerão seguros!
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

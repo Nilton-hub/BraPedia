@@ -1,0 +1,134 @@
+#article-options {
+    transition: all .3s;
+}
+.toggle-opt-hidden {
+    transform: translateX(100px);
+}
+.toggle-opt-show {
+    transform: translateX(0);
+}
+
+/* COMMENTS */
+#comments-container.comments-show {
+    height: 30rem;
+}
+.comment-content {
+    width: 72%;
+}
+.comment-actions-div {
+    width: 75%;
+    height: 25px;
+    font-size: .8rem;
+    margin: 25px 0;
+}
+.comment-actions-div button {
+    display: inline-block;
+    height: 100%;
+    border-radius: 5px;
+    border: none;
+    background: #0a53be;
+    padding: 0 10px;
+    color: white;
+    transition: background 3ms;
+}
+.comment-actions-div button:hover {
+    background: #206dde;
+}
+[id^="comment-response"] {
+    color: rgb(159, 151, 151);
+}
+[id^="div-response-actions-"] {
+    width: 100%;
+    height: 30px;
+    margin: 10px 0;
+}
+[id^="div-response-actions-"] button.btn-response-action-save, [id^="div-response-actions-"] button.btn-response-action-cancel {
+    height: 100%;
+    width: auto;
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 0.8rem;
+    background: #0a53be;
+    transition: background 3ms;
+    color: white;
+}
+[id^="div-response-actions-"] button.btn-response-action-save:hover,
+[id^="div-response-actions-"] button.btn-response-action-cancel:hover {
+    background: #206dde;
+}
+/* END COMMENTS */
+
+/* RESPONSE */
+.response-container form div {
+    height: 40px;
+}
+.response-container form input {
+    outline: none;
+    height: 100%;
+    background-color: transparent;
+}
+.response-container button {
+    background-color: #0dcaf0;
+    width: 40px;
+    height: 40px;
+}
+/* END RESPONSE */
+
+/* COMMENTS ACTIONS */
+[class^="btn-comment-actions"], [class^="btn-response-actions"] {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #2c3034;
+    border: none;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 13px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    transform: rotate(90deg);
+    cursor: pointer;
+}
+[class^="btn-comment-actions"]:hover, [class^="btn-response-actions"]:hover {
+    background: rgba(160, 156, 156, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    color: white;
+}
+[class^="comment-actions"], [class^="response-actions"] {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    padding: 0;
+    z-index: 5;
+}
+[class^="comment-actions"] ul, [class^="response-actions"] ul {
+    padding: 0;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3),
+    0 0 5px 5px rgba(0, 0, 0, 0.15),
+    0 0 8px 8px rgba(0, 0, 0, 0.085);
+}
+[class^="comment-actions"] li, [class^="response-actions"] li {
+    padding: 10px 20px;
+    list-style: none;
+    margin: 0;
+    cursor: pointer;
+}
+[class^="comment-actions"] li:first-child, [class^="response-actions"] li:first-child {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+[class^="comment-actions"] li:hover, [class^="response-actions"] li:hover {
+    background: rgba(169, 169, 169, 0.5);
+}
+/* END COMMENTS ACTIONS */
+
+@media (min-width: 768px) {
+    .comment-content {
+        width: 85%;
+    }
+}

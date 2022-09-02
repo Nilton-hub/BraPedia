@@ -1,0 +1,21 @@
+
+<div class="d-flex border-top pt-2 pe-2 mb-5 position-relative" style="margin-left: auto; width: 85%;" id="comment-repply-container-{{ response.id }}">
+    <div class="btn-response-actions-{{ article.id }}" id="btn-response-actions-{{ article.id }}" onclick="toggleResponse({{ article.id }}, {{ response.id }})" style="left: -30px;">...</div><!-- btn -->
+    <div class="response-actions-{{ response.id }} no-close-comment-opts d-none" style="left: -30px; max-width: 120px;">
+        <ul class="no-close-comment-opts">
+            <li class="opt-edit no-close-comment-opts" onclick="commentRepplyEdit({{ response.id }})">Editar</li>
+            <li class="opt-delete no-close-comment-opts" onclick="commentRepplyDelete({{ response.id }})">Apagar</li>
+        </ul>
+    </div>
+    <div style="font-size: 0.8rem;" class="w-100">
+        <div class="profile mb-3 mt-2 d-inline-block p-1">
+            <i class="icon-profile-male border p-2 rounded-circle"></i>
+        </div>
+        <strong class="p-1">{{ response.user_name }}</strong> <span class="p-1">respondeu</span><span class="p-1">&bull;</span>
+        <output class="text-black-50 d-inline-block p-1" id="comment-repply-{{ response.id }}">{{ response.text }}</output>
+        <div class="w-100 d-flex justify-content-end gap-1 d-none">
+            <button id="btn-coment-reppy-send-{{ response.id }}">Ok</button>
+            <button id="btn-coment-reppy-cancel-{{ response.id }}">Cancel</button>
+        </div>
+    </div>
+</div>

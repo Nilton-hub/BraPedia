@@ -1,0 +1,54 @@
+<div class="border rounded col-12 col-md-8 col-xl-6 m-auto mb-3 article-card-{{ article.id }}">
+    <header class="card-header p-2">
+        <div class="d-flex align-items-center gap-2">
+            <div class="profile">
+                <i class="icon-profile-male border p-2 rounded-circle"></i>
+            </div>
+            <div class="p-3">
+                <strong>{{ article.name }}</strong>
+                <div class="text-secondary"
+                     style="font-size: 0.85rem;">{{ article.created_at|date( "d/m/Y H:i", 'America/Sao_Paulo') }}</div>
+            </div>
+        </div>
+        <h2 class="text-primary"><a href="{{ BASE_URL }}/artigo/{{ article.id }}"
+                                    class="text-primary text-decoration-none">{{ article.title }}</a></h2>
+    </header>
+    <div class="articlebody p-3 d-flex align-items-center justify-content-center position-relative"
+         style="background-image: url({{ cover }}), linear-gradient(black, black);">
+        <h4 class="text-center text-white article-card-title" style="z-index: 5;">
+            <a href="{{ BASE_URL }}/artigo/{{ article.id }}" class="text-white">{{ article.subtitle }}</a>
+        </h4>
+        {% if article.cover is not defined %}
+            <div class="article-background"></div>
+        {% endif %}
+    </div>
+    {% if comments is defined and comments|length > 0 %}
+        <p class="btn btn-link btn-toggle-comments" id="btn-toggle-comments-{{ article.id }}"></p>
+        <div id="comments-container-{{ article.id }}">
+            {% set cont = 1 %}
+            {% for comment in comments %}
+                {% if article.id == comment.post_id %}
+                    {% include('fragments/comment.twig') %}
+                {% endif %}
+                {% set cont = cont + 1 %}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <footer class="card-footer">
+        {% if user.id is not null and user.id|length > 0 %}
+            <form action="{{ BASE_URL }}/comment/comment" method="post" class="form-article-commemnt">
+                <label class="btn btn-link p-0" for="field-response-{{ article.id }}">Comentar</label>
+                <div class="input-group">
+                    <input type="hidden" name="article_id" value="{{ article.id }}">
+                    <input type="hidden" name="name" value="{{ article.name }}">
+                    <input type="text" name="comment" id="field-response-{{ article.id }}" required class="form-control">
+                    <button class="icon-send btn btn-primary text-white"></button>
+                </div>
+            </form>
+        {% else %}
+            <div>
+                <p class="bg-primary text-white p-1"><b>Faça Login para adicionar um comentário.</b></p>
+            </div>
+        {% endif %}
+    </footer>
+</div>

@@ -1,0 +1,77 @@
+{% extends('__theme.twig') %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ BASE_ULR }}/assets/styles/search.css">
+{% endblock %}
+{% block title %}Pesquisa{% endblock %}
+{% block message %}{{ message }}{% endblock %}
+{% block body %}
+    <section class="container">
+        <h2 style="color: #2a0505">Você pesquisou por <em style="color: #0a53be">{{ searchTerms }}</em></h2>
+        <p>Total de {{ total }} resultados</p>
+    </section>
+    <hr>
+    <section class="col-11 col-md-8 col-lg-6 mx-auto">
+        {% for result in results %}
+            <figure class="mb-5">
+                <article class="article-search-result border rounded p-2 mt-3 mb-1">
+                    <!--  d-flex flex-column  flex-md-row -->
+                    {% set cover = (result.cover|length > 0 ? "#{BASE_URL}/#{result.cover}" : "#{ BASE_URL }/assets/images/article-back-cover-rectangle.svg") %}
+                    <div class="order-1 order-md-0 cover-container border" style="background-image: url({{ cover }});">
+                        <a href="{{ BASE_URL }}/artigo/{{ result.id }}"></a>
+                        <!--     cover area       -->
+                    </div>
+                    <div class="order-0 order-md-1">
+                        <!--                     desc area       -->
+                        <h3 class="border-bottom pb-1"><a href="{{ BASE_URL }}/artigo/{{ result.id }}"
+                                                          class="text-primary text-decoration-none">{{ result.title }}</a>
+                        </h3>
+                        <h4 style="font-size: 1.2rem;"><a href="{{ BASE_URL }}/artigo/{{ result.id }}"
+                                                          class="text-secondary text-decoration-none">{{ result.subtitle }}</a>
+                        </h4>
+                    </div>
+                </article>
+                <figcaption class="blockquote mt-3">
+                    <p class="blockquote-footer" style="font-size: 1.0rem;">Por <cite
+                                class="text-secondary">{{ result.user_name }}</cite></p>
+                </figcaption>
+            </figure>
+        {% endfor %}
+    </section>
+
+    {#  pager  #}
+    <div class="mx-auto">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if pages > 1 %}
+                    <li class="page-item"><a href="{{ page == 1 ? 'javascript:void(0)' : "#{ URL_BASE }/search/#{ searchTerms }/1" }}" class="page-link">Início</a></li>
+                    <li class="page-item">
+                        {{ 1 < page ?
+                        "<a href=\"#{ URL_BASE }/search/#{ searchTerms }/#{ page - 1 }\" class=\"page-link\" aria-label=\"Previous\">&laquo;</a>" :
+                        "<span class=\"page-link\" aria-hidden=\true\">&laquo;</span>" }}
+                    </li>
+
+                    {% for i in range(1, pages) %}
+                        {% if i != page %}
+                            <li class="page-item"><a href="{{ URL_BASE }}/search/{{ searchTerms }}/{{ i }}"
+                                                     class="page-link">{{ i }}</a></li>
+                        {% else %}
+                            <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    <li class="page-item">
+                        {{ page < pages ?
+                        "<a href=\"#{ BASE_URL }/search/#{ searchTerms }/#{ page + 1 }\" class=\"page-link\" aria-label=\"Previous\"><span aria-hidden=\"true\">&raquo;</span></a>" :
+                        "<span class=\"page-link\" aria-label=\"Previous\" aria-hidden=\"true\">&raquo;</span>" }}
+                    </li>
+                    <li class="page-item"><a href="{{ page == pages ?
+                        'javascript:void(0)' :
+                        "#{ URL_BASE }/search/#{ searchTerms }/#{ pages }" }}" class="page-link">Final</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    {#  end pager  #}
+{% endblock %}
+{% block scripts %}
+{% endblock %}

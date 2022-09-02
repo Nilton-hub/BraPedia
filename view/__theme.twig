@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" data-noremove="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" data-noremove="true">
+    <link rel="stylesheet" href="{{ BASE_URL }}/assets/styles/main.css">
+    <link rel="stylesheet" href="{{ BASE_URL }}/assets/icons/style.css">
+    <link rel="stylesheet" href="{{ BASE_URL }}/assets/bootstrap-5.1.3-dist/css/bootstrap.css">
+    <link rel="icon" sizes="8x8" type="image/png" href="{{ BASE_URL }}/assets/favicons/favicon-8x8.png">
+    <link rel="icon" sizes="16x16" type="image/png" href="{{ BASE_URL }}/assets/favicons/favicon-16x16.png">
+    <link rel="icon" sizes="32x32" type="image/png" href="{{ BASE_URL }}/assets/favicons/favicon-32x32.png">
+    <link rel="icon" sizes="48x48" type="image/png" href="{{ BASE_URL }}/assets/favicons/favicon-48x48.png">
+    <link rel="icon" sizes="64x64" type="image/png" href="{{ BASE_URL }}/assets/favicons/favicon-64x64.png">
+    {% block styles %}{% endblock %}
+    <title>Blog366 - {% block title %}{% endblock %}</title>
+</head>
+<body class="bg-light d-flex flex-column justify-content-between">
+<header class="w-100 main-header" id="main-header">
+    <div class="px-3 py-2 bg-dark text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="{{ BASE_URL }}" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                    <img src="{{ BASE_URL }}/assets/images/logo.svg" alt="">
+                </a>
+
+                <ul class="nav col-12 col-lg-auto my-2 justify-content-between my-md-0 text-small position-relative"
+                    id="main-nav-menu">
+                    <li id="btn-search">
+                        <a href="javascript:void(0)" title="pesquisar" class="nav-link text-white"><!-- SEARCH -->
+                            <i class="icon-search" id="toggle-search-container"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ BASE_URL }}" title="início" class="nav-link text-white">
+                            <i class="icon-home"></i>
+                        </a>
+                    </li>
+                    {% if user %}
+                    <li>
+                        <a href="{{ BASE_URL }}/perfil" title="perfil" class="nav-link text-white">
+                            {% if userPhoto is null or userPhoto|length == 0 %}
+                                <i class="icon-profile-male"></i>
+                            {% else %}
+                                <img src="{{ BASE_URL }}/{{ userPhoto }}" width="30px" height="30px" alt="" style="border-radius: 50%;">
+                            {% endif %}
+                        </a>
+                    </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ BASE_URL }}/login" title="entrar" class="nav-link text-white">
+                                <i class="icon-in-alt"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <a href="javascript:void(0)" title="menu" class="nav-link text-white">
+                            <button class="icon-menu" id="btn-toggle-menu"></button>
+                        </a>
+                        <ul class="position-fixed top-1 bg-info list-unstyled col-10 col-md-5 col-sm-6 col-lg-4" id="main-sidebar-menu" style="z-index: 25;">
+                            <li><h3 class="text-center">Menu</h3></li>
+                            <li><a href="{{ BASE_URL }}" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Início</a></li>
+                            <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Termos de uso</a></li>
+                            {% if user %}
+                                <li><a href="{{ BASE_URL }}/sair" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Sair</a></li>
+                            {% else %}
+                                <li><a href="{{ BASE_URL }}/login" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Entre na sua conta</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="rounded-3 bg-info position-relative p-1 col-11 col-sm-11 col-md-6 col-lg-4 d-inline-block ms-auto me-3 my-2 float-end p-0 search-container">
+    <form action="{{ BASE_URL }}/search" method="get" class="form-search p-0">
+        <label class="rounded-2 d-flex w-100 p-0">
+            <input type="search" name="search" placeholder="Encontre um Artigo..." disabled class="col-10 p-2" id="input-article-search">
+            <button type="submit" class="col-2 icon-search"></button>
+        </label>
+    </form>
+</div>
+<div id="liveAlertPlaceholder" style="width: 90%; margin: auto; position: fixed; top: 80px; left: 5%; opacity: 1; z-index: 10;">{% block message %}{% endblock %}</div>
+<!-- messages -->
+{% block body %}{% endblock %}
+<p id="test-jquery"></p>
+<footer class="mt-3">
+    <p class="text-center">
+        Por <a href="https://instagram.com/n.i.l.t.o.n.1" title="Página do Autor">Nilton Duarte</a>
+    </p>
+</footer>
+<script src="{{ BASE_URL }}/assets/scripts/main.js"></script>
+<script src="{{ BASE_URL }}/assets/bootstrap-5.1.3-dist/js/bootstrap.bundle.js"></script>
+<script src="{{ BASE_URL }}/assets/bootstrap-5.1.3-dist/js/bootstrap.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

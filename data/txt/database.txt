@@ -1,0 +1,45 @@
+USER
+    - id [key]
+    - name
+    - email
+    - token
+	- date_token
+    - created_at
+    - updated_at
+
+POST
+    - id [key]
+    - user_id [pk]
+    - title
+    - subtitle
+    - content
+    - created_at
+    - updated_at
+
+COMMENTS
+    - id [key]
+    - user_id [pk]
+    - post_id [pk]
+    - text
+    - created_at
+    - updated_at
+
+COMMENTS_REPPLY
+    - id [key]
+    - user_id [pk]
+    - comment_id [pk]
+    - text
+    - created_at
+    - updated_at
+
+MAIL_QUEUE
+	- id [key]
+	- bubject
+	- body
+	- recipient_email
+	- recipient_name
+	- sent_at
+	- from_email
+	- from_name
+	- created_at
+	- updated_at

@@ -1,0 +1,8 @@
+{% extends('__theme.twig') %}
+{% block message %}{{ message }}{% endblock %}
+{% block title %} mensagem flash {% endblock %}
+{% block body %}
+<form method="post" action="/test-flashmessage" enctype="multipart/form-data">
+    <input type="submit" value="Redirecionar" name="redirect">
+</form>
+{% endblock %}

@@ -1,0 +1,48 @@
+
+<div class="d-block w-100 comment-item" id="container-of-comment-{{ comment.id }}">
+    <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100 comment-item-inner" style="position: relative;">
+        {% if comment.user_id ==  user.id %}
+            <div class="btn-comment-actions-{{ comment.id }}">...</div><!-- btn -->
+            <div class="comment-actions-{{ comment.id }} no-close-comment-opts d-none"><!-- Comment Options -->
+                <ul class="no-close-comment-opts">
+                    <li class="opt-edit no-close-comment-opts" onclick="commentActionEdit({{ comment.id }})">Editar</li>
+                    <li class="opt-delete no-close-comment-opts" onclick="commentActionDelete({{ comment.id }})">Apagar</li>
+                </ul>
+            </div>
+        {% endif %}
+        <div class="borders rounded-circle align-self-start comment-cover" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+            {% if comment.user.photo and comment.user.photo|length > 0 %}
+                <div class="bg-user-cover"
+                     style="background-image: url({{ BASE_URL }}/{{ user.photo }}); background-size: cover; border-radius: 50%; width: 45px; height: 45px;"></div>
+            {% else %}
+                <i class="icon-profile-male"></i>
+            {% endif %}
+        </div>
+        <div class="comment-content">
+            <strong>{{ comment.user.name }}</strong>
+            <p id="post-comment-{{ comment.id }}">
+                {{ comment.text }}
+            </p>
+            <div class="comment-actions-div d-none">
+                <button id="btn-comment-update-{{ comment.id }}">Salvar</button>
+                <button id="btn-comment-delete-{{ comment.id }}">Cancelar</button>
+            </div>
+            <!-- INICÍCIO RESPOSTA -->
+            <div id="response-list-container-{{ comment.id }}">
+                {% for response in comment.responses %}
+                    {% include('fragments/article-comment-response.twig') %}
+                {% endfor %}
+            </div>
+            <!-- FIM RESPOSTA -->
+            <form action="{{ BASE_URL }}/comment/repply" method="POST" class="line" id="form-comment-response-{{ comment.id }}">
+                <label for="comment-{{ comment.id }}" class="btn btn-link p-0">Responder</label>
+                <div class="input-group w-100 text-break">
+                    <input type="text" name="response" placeholder="Responder..." id="comment-{{ comment.id }}" class="form-control">
+                    <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                    <input type="hidden" name="page" value="article_page">
+                    <button class="icon-send btn btn-outline-info"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

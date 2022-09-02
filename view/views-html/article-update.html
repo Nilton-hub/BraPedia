@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="assets/icons/style.css">
+    <link rel="stylesheet" href="assets/bootstrap-5.1.3-dist/css/bootstrap.css">
+    <style>
+        div.tox-notifications-container,
+        span.tox-statusbar__branding {
+            display: none;
+        }
+        .accordion-button::after {
+            transition: all .3s;
+        }
+        .rotate-icon.accordion-button::after {
+            transform: rotate(-45deg);
+        }
+        #collapseOne {
+            transition: all .3s;
+            height: 0;
+            overflow: hidden;
+        }
+        #collapseOne:not(.hidden-cover) {
+            height: auto;
+        }
+    </style>
+    <title>Blog366 - Login</title>
+</head>
+<body class="bg-light d-flex flex-column justify-content-between">
+    <header class="w-100 main-header" id="main-header">
+        <div class="px-3 py-2 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        Logo
+                    </a>
+    
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-between my-md-0 text-small position-relative" id="main-nav-menu">
+                        <li id="btn-search">
+                            <a href="javascript:void(0)" class="nav-link text-white"><!-- SEARCH -->
+                                <i class="icon-search" id="toggle-search-container"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./feed.html" class="nav-link text-white">
+                                <i class="icon-home"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./profile.html" class="nav-link text-white">
+                                <i class="icon-profile-male"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="nav-link text-white">
+                                <button class="icon-menu" id="btn-toggle-menu"></button>
+                            </a>
+                            <ul class="position-fixed top-1 bg-info list-unstyled col-10 col-md-5 col-sm-6 col-lg-4" id="main-sidebar-menu">
+                                <li><h3 class="text-center">Menu</h3></li>
+                                <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Link 1</a></li>
+                                <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Link 2</a></li>
+                                <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Link 3</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="rounded-3 bg-info position-relative p-1 col-11 col-sm-11 col-md-6 col-lg-4 d-inline-block ms-auto me-3 my-2 float-end p-0 search-container">
+        <form action="" method="get" class="p-0">
+            <label class="rounded-2 d-flex w-100 p-0">
+            <input type="search" name="search" placeholder="Encontre um Artigo..." class="col-10 p-2" id="">
+            <button type="submit" class="col-2 icon-search"></button>
+            </label>
+        </form>
+    </div>
+
+    <main class="flex-grow-1 container mb-5">
+        <h1 class="mb-3">Publique um Artigo</h1>
+        <form action="" method="post" class="m-auto col-12 col-lg-10">
+            <div class="mb-3">
+                <label for="form-article-title" class="form-label">Título do Artigo</label>
+                <input type="text" class="form-control" value="Título do Artigo" id="form-article-title" placeholder="Título">
+            </div>
+            <div class="mb-3">
+                <label for="form-article-subtitle" class="form-label">Subtítulo do Artigo</label>
+                <input type="text" class="form-control" value="Subtítulo do Artigo" id="form-article-subtitle" placeholder="Subtítulo">
+            </div>
+            <div class="accordion mb-3" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" aria-expanded="true" aria-controls="collapseOne" id="btn-toggle-cover">
+                      Visualizar Capa
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show hidden-cover" aria-labelledby="headingOne">
+                    <div class="accordion-body text-center">
+                      <img src="assets/images/bridge.jpg" class="img-fluid" alt="" srcset="" id="img-cover">
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="form-article-cover" class="form-label">Selecione uma Image de Capa</label>
+                <input class="form-control" type="file" id="form-article-cover">
+              </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Escreva o Seu Artigo</label>
+                <textarea class="form-control" id="article-text" placeholder="Texto do seu artigo...">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempor nisi eu tempor ultricies. Etiam luctus erat nisi, id blandit mi iaculis sit amet. Suspendisse potenti. Etiam gravida diam et efficitur tempus. Vestibulum nec justo quis risus egestas accumsan ac sit amet diam. Quisque iaculis lorem id felis dignissim, vel molestie arcu ullamcorper. Suspendisse sed diam at purus sollicitudin ullamcorper ac vitae est. Sed ex purus, iaculis ac lacinia rhoncus, venenatis eu dolor. Nam commodo, augue at sollicitudin malesuada, est lacus pellentesque tortor, eget rutrum lacus nisi quis sem.</p>
+
+                    <p>Sed auctor sit amet eros nec efficitur. Etiam suscipit pellentesque mollis. Praesent a sodales augue. Duis ac pulvinar nisi. Fusce euismod eros at nisl maximus facilisis. Nullam dignissim faucibus est, nec consectetur nulla. Curabitur ornare dignissim ante, in aliquam risus blandit nec. Proin eget vehicula quam, eu tristique felis. Phasellus odio mi, rhoncus semper pulvinar nec, pretium non est. Morbi ut vehicula nisi. Integer mollis sit amet nulla id venenatis. Vivamus mattis ac justo vitae viverra. Mauris mollis quam lectus, ut dictum nulla convallis sed. Cras accumsan in neque ut suscipit.</p>
+
+                    <p>Nullam eu dignissim augue. Nam commodo quam molestie fermentum ultrices. Vestibulum id imperdiet lectus. Pellentesque sit amet posuere elit. Donec quis malesuada urna. Nullam varius suscipit velit eu porta. Vestibulum id sem ipsum. Vivamus a ante tristique, vulputate massa ut, ornare velit. Integer hendrerit, ligula a semper posuere, nunc erat sodales nibh, id posuere velit tortor pellentesque tellus. Aenean iaculis rhoncus porta. Sed justo odio, volutpat sit amet eros et, vestibulum posuere eros. Mauris sed sem vitae lectus bibendum auctor et a tortor.</p>
+
+                    <p>Nunc tempus tortor quis nulla euismod vestibulum. Integer aliquam orci ut risus viverra, non laoreet metus condimentum. Vestibulum convallis erat at malesuada bibendum. Nunc at dapibus magna. Suspendisse semper tincidunt mauris eget consectetur. Aenean ut eleifend massa, at scelerisque purus. Nam nulla enim, pulvinar eget velit id, dapibus varius ipsum. Quisque in suscipit ante, non aliquam orci. Etiam et nunc sit amet sapien tempus euismod condimentum viverra justo. Donec vel velit non nunc aliquam sagittis. Vestibulum luctus blandit justo, sit amet tincidunt nisl. Cras consectetur sem ac lorem pulvinar, id gravida lorem hendrerit. Sed est diam, commodo quis lectus non, volutpat porttitor nisi.</p>
+
+                    <p>Nunc imperdiet nibh risus, vitae commodo urna varius et. Duis mi tellus, varius vitae placerat tempor, porta ut diam. Ut rutrum finibus ornare. Vestibulum quis nulla ipsum. Nunc mattis arcu et mollis iaculis. Maecenas vitae maximus eros, sit amet congue orci. Donec egestas, dui ut faucibus tempus, elit tellus egestas sem, eu auctor nisl augue non dolor. Duis hendrerit eleifend nunc et fringilla. Sed vitae neque semper, imperdiet quam ut, tempor nisi. Pellentesque finibus, ex vel maximus efficitur, est odio placerat ante, vitae fermentum sapien nunc ut justo. Nulla tincidunt quam ut leo ultricies accumsan. Vestibulum mollis neque vitae lacinia pharetra. Morbi accumsan leo vel ipsum molestie, eu maximus tortor pharetra.</p>
+                </textarea>
+            </div>
+            <button class="btn btn-outline-primary w-100" type="submit">Publicar</button>
+        </form>
+    </main>
+    <footer class="mt-3">
+        <p class="text-center">Por <a href="https://instagram.com/n.i.l.t.o.n.1" title="Página do Autor">Nilton Duarte</a></p>
+    </footer>
+    <script src="assets/scripts/main.js"></script>
+    <script src="assets/scripts/tinymce.min.js"></script>
+    <script>
+        const tinymceConfig = {
+            selector: 'textarea#article-text',
+            autosave_ask_before_unload: false,
+            powerpaste_allow_local_images: true,
+            menubar: false,
+            plugins: [
+                'a11ychecker', 'advcode', 'advlist', 'anchor', 'autolink', 'codesample', 'fullscreen', 'help',
+                'image', 'editimage', 'tinydrive', 'lists', 'link', 'media', 'powerpaste', 'preview',
+                'searchreplace', 'table', 'template', 'tinymcespellchecker', 'visualblocks', 'wordcount'
+            ],
+            toolbar: 'insertfile a11ycheck undo redo | bold italic underline | forecolor backcolor |  codesample | alignleft aligncenter alignright alignjustify | bullist numlist | link image',
+            spellchecker_dialog: true,
+            spellchecker_ignore_list: ['Ephox', 'Moxiecode'],
+            tinydrive_demo_files_url: '../_images/tiny-drive-demo/demo_files.json',
+            tinydrive_token_provider: (success, failure) => {
+                success({ token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Ks_BdfH4CWilyzLNk8S2gDARFhuxIauLa8PwhdEQhEo' });
+            },
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+        };
+
+        tinymce.init(tinymceConfig);
+
+        const toggleCoverElement = document.getElementById('headingOne');
+        let show = false;
+        const toggleCover = () => {
+            const coverContainer = document.querySelector('#collapseOne');
+            coverContainer.classList.toggle('hidden-cover');
+            const accordionBtn = document.querySelector('.accordion-button');
+            accordionBtn.classList.toggle('rotate-icon');
+            if (show) {
+                accordionBtn.innerText = 'Visualizar Capa';
+                show = false;
+            } else {
+                accordionBtn.innerText = 'Ocultar Capa';
+                show = true;
+            }
+        }
+        toggleCoverElement.addEventListener('click', toggleCover);
+    </script>
+</body>
+</html>

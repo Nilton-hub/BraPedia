@@ -1,0 +1,28 @@
+<div class="d-block w-100 response-container" style="position: relative; margin-top: 30px;" id="response-container-{{ response.id }}">
+    {% if response.user_id == user.id %}
+        <div class="btn-response-actions-{{ response.id }}">...</div><!-- btn -->
+        <div class="response-actions-{{ response.id }} no-close-comment-opts d-none">
+            <ul class="no-close-comment-opts">
+                <li class="opt-edit no-close-comment-opts" onclick="responseActionEdit({{ response.id }})">Editar</li>
+                <li class="opt-delete no-close-comment-opts" onclick="responseActionDelete({{ response.id }})">Apagar</li>
+            </ul>
+        </div>
+    {% endif %}
+    <div class="d-block w-100">
+        <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100">
+            <p class="d-flex flex-row align-items-start justify-content-start">
+                <div class="border rounded-circle p-3 align-self-start" style="width: 50px; height: 50px;">
+                    <i class="icon-profile-male"></i>
+                </div>
+                <div>
+                    <strong>{{ response.user_name }}</strong> respondeu
+                    <span id="comment-response-{{ response.id }}">&bull; <span>{{ response.text }}</span></span>
+                    <div id="div-response-actions-{{ response.id }}" class="d-none">
+                        <button class="btn-response-action-save">Salvar</button>
+                        <button class="btn-response-action-cancel">Cancelar</button>
+                    </div>
+                </div>
+            </p>
+        </div>
+    </div>
+</div>

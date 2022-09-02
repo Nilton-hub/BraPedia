@@ -1,0 +1,43 @@
+
+<article class="border mt-3 col-12 col-md-8 m-auto" data-post-id="1" id="post-{{ article.id }}">
+    <div class="p-3">
+        <div>
+            <ul class="nav nav-tabs justify-content-center header-nav-post-list">
+                <li class="nav-item">
+                    <a class="nav-link border" title="Editar" aria-current="page" href="{{ BASE_URL }}/artigo/editar/{{ article.id }}"><i class="icon-create"></i></a>
+                </li>
+                <li class="nav-item post-hide">
+                    <a class="nav-link border" title="{{ article.hidden == '0' ? 'Ocultar' : 'Não ocultar' }}" data-article-id="{{ article.id }}" data-status="{{ article.hidden }}" aria-current="page" href="javascript:void(0)"><i class="{{ article.hidden == '1' ? 'icon-eye' : 'icon-blocked' }} "></i></a>
+                </li>
+                <li class="nav-item post-delete">
+                    <a class="nav-link border" title="Deletar" data-article-id="{{ article.id }}" aria-current="page" href="javascript:void(0)"><i class="icon-trash"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link border" title="Visualizar" aria-current="page" href="{{ BASE_URL }}/artigo/{{ article.id }}"><i class="icon-launch"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="text-primary">{{ article.title}}</h3>
+            <h4 class="text-secondary mb-4">{{ article.subtitle }}</h4>
+            {% set cover = (article.cover ?? "#{BASE_URL}/assets/images/article-back-cover-rectangle.svg") %}
+
+            <a href="{{ BASE_URL }}/artigo/{{ article.id }}" title="Ver artigo" class="text-center w-100 article-cover-container position-relative">
+                {% if article.cover is null %}
+                    <h3 class="position-absolute text-white text-center w-100" style="top: calc(50% - 1rem);">Artigo sem capa</h3>
+                    <img src="{{ cover }}" alt="" srcset="" class="w-100 article-cover" style="">
+                {% else %}
+                    <img src="{{ cover }}" alt="" srcset="" class="w-100 article-cover">
+                {% endif %}
+            </a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <form action="" method="post">
+            <div class="input-group">
+                <input type="text" name="comment" placeholder="Digite um comentário..." class="form-control">
+                <button class="btn btn-info"><span class="icon-send text-white"  style="z-index: 5;"></span></button>
+            </div>
+        </form>
+    </footer>
+</article>

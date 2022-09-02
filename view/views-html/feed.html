@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/bootstrap-5.1.3-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/styles/main.css">
+    <link rel="stylesheet" href="./assets/icons/style.css">
+    <link rel="stylesheet" href="./assets/styles/feed.css">
+    <title>Blog366 - Feed</title>
+</head>
+<body class="bg-light d-flex flex-column justify-content-between" style="background: red;">
+    <header class="w-100 main-header" id="main-header">
+        <div class="px-3 py-2 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        Logo
+                    </a>
+    
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-between my-md-0 text-small position-relative" id="main-nav-menu">
+                        <li id="btn-search">
+                            <a href="javascript:void(0)" class="nav-link text-white"><!-- SEARCH -->
+                                <i class="icon-search" id="toggle-search-container"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./feed.html" class="nav-link text-white">
+                                <i class="icon-home"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./profile.html" class="nav-link text-white">
+                                <i class="icon-profile-male"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="nav-link text-white">
+                                <button class="icon-menu" id="btn-toggle-menu"></button>
+                            </a>
+                            <ul class="position-fixed top-1 bg-info list-unstyled col-10 col-md-5 col-sm-6 col-lg-4" id="main-sidebar-menu">
+                                <li><h3 class="text-center">Menu</h3></li>
+                                <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Link 1</a></li>
+                                <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Link 2</a></li>
+                                <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Link 3</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="rounded-3 bg-info position-relative p-1 col-11 col-sm-11 col-md-6 col-lg-4 d-inline-block ms-auto my-2 float-end p-0 search-container">
+        <form action="" method="get" class="p-0">
+            <label class="rounded-2 d-flex w-100 p-0">
+                <input type="search" name="search" placeholder="Encontre um Artigo..." class="col-10 p-2" id="">
+                <button type="submit" class="col-2 icon-search"></button>
+            </label>
+        </form>
+    </div>
+
+    <main class="container flex-grow-1">
+        <article class="border rounded-3 col-12 col-md-8  m-auto mt-3">
+            <header class=" p-1">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="icon-profile-male border p-2 rounded-circle"></i>
+                    <div>
+                        <strong>User Name</strong>
+                        <div style="color: rgb(161, 150, 150); font-size: 0.8rem;">25/04/2022 15:45</div>
+                    </div>
+                </div>
+        
+                <h3 class="text-primary text-uppercase mt-2">Título do Artigo</h3>
+                <h4 class="text-black-50">Subtitulo do Artigo</h4>
+            </header>
+
+            <div class="card rounded-3">
+                <img src="assets/images/bridge.jpg" alt="" srcset="" class="card-image-bottom">
+                <div class="card-img-overlay">
+                    <p class="card-tect text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores odit quae veritatis odio quas sint nobis et nulla ad. Beatae.</p>
+                    <p class="card-tect text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores odit quae veritatis odio quas sint nobis et nulla ad. Beatae.</p>
+                    <a href="" class="btn btn-outline-info">Leia mais...</a>
+                </div>
+            </div>
+            <footer class="card-footer">
+                <!-- INÍCIO COMENTÁRIOS -->
+                <p class="btn btn-link btn-toggle-comments" id="btn-toggle-comments-1"></p>
+                <!-- 1 -->
+                <div class="d-block w-100" id="comments-container-1">
+                    <div class="d-block w-100 comment-item">
+                        <div class="d-flex align-items-center flex-nowrap gap-3 p-2 bg-light mb-5 w-100 comment-item-inner">
+                            <div class="border rounded-circle align-self-start comment-cover"
+                            style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                <i class="icon-profile-male"></i>
+                            </div>
+                            <div class="comment-content">
+                                <strong>User Name</strong>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores obcaecati aspernatur perspiciatis similique aperiam beatae, assumenda cum ratione, dignissimos omnis repellendus soluta ex non in eveniet quisquam, vero iure! Quia.150</p>
+                                <!-- INICIO RESPOSTA -->
+                                <!-- 1 -->
+                                <div class="d-block w-100 response-container">
+                                    <div class="d-block w-100">
+                                        <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100">
+                                            <p class="d-flex flex-row align-items-start justify-content-start">
+                                                <div class="border rounded-circle p-3 align-self-start" style="width: 50px; height: 50px;">
+                                                    <i class="icon-profile-male"></i>
+                                                </div>
+                                                <div>
+                                                    <strong>User Name</strong> respondeu
+                                                    <span class="comment-response">&bull; Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum nobis eveniet amet!</span>
+                                                </div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 2 -->
+                                <div class="d-block w-100 response-container">
+                                    <div class="d-block w-100">
+                                        <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100">
+                                            <p class="d-flex flex-row align-items-start justify-content-start">
+                                                <div class="border rounded-circle p-3 align-self-start" style="width: 50px; height: 50px;">
+                                                    <i class="icon-profile-male"></i>
+                                                </div>
+                                                <div>
+                                                    <strong>User Name</strong> respondeu
+                                                    <span class="comment-response">&bull; Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum nobis eveniet amet!</span>
+                                                </div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <form action="" method="post" class="line">
+                                        <label class="btn btn-link p-0" for="field-response-1">Responder</label>
+                                        <div class="d-flex align-items-start justify-content-start gap-1 border-bottom  border-top-0 border-left-0 border-right-0">
+                                            <input type="text" name="comment" placeholder="Responder..." class="d-block flex-grow-1 border-0 p-3" id="field-response-1">
+                                            <button class="icon-send border border-1 rounded-circle text-white"></button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- FIM RESPOSTA -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 2 -->
+                    <div class="d-block w-100 comment-item">
+                        <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100 comment-item-inner">
+                            <div class="border rounded-circle align-self-start comment-cover"
+                            style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                <i class="icon-profile-male"></i>
+                            </div>
+                            <div class="comment-content">
+                                <strong>User Name</strong>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus doloremque quia officia inventore deserunt? Neque consectetur consequatur dicta unde, dolores minus quibusdam fugiat perferendis magni veniam beatae deserunt repellendus maxime dolore, nostrum amet. Deserunt, praesentium eaque? Esse adipisci, reprehenderit eligendi quidem doloribus iusto facilis, corrupti, vitae atque cumque libero quos nemo tenetur blanditiis explicabo minus laboriosam magnam! Sunt necessitatibus magni excepturi eveniet sapiente error quos doloribus commodi cupiditate, velit doloremque consequuntur veritatis eaque aliquam tempore fugit quo nam quia veniam? Iusto facere et labore consectetur ut, nulla ea hic minus, sequi qui perferendis eligendi, doloremque reprehenderit pariatur eaque! Doloremque alias magni dignissimos distinctio incidunt ad quasi quibusdam impedit deserunt, quis nam consequatur quod officia soluta sed accusantium ducimus tempora, magnam expedita minus earum hic architecto. Qui sapiente quae quibusdam? Eligendi veniam facere iusto earum magnam incidunt recusandae nihil nulla! Ad natus ex suscipit perspiciatis, incidunt a quibusdam. Repellendus impedit nihil quaerat iste sunt in esse minus molestiae dicta, nostrum, ad, doloribus iusto ipsa magnam nobis explicabo possimus rerum laudantium? Sapiente accusantium tempore maiores facere quam ducimus et amet, aliquid reiciendis doloremque, corrupti accusamus, explicabo libero iusto eligendi minus deleniti? Veritatis laborum facere vitae maiores perspiciatis laudantium inventore doloribus a ipsam unde enim, ullam quod tempore quis fuga obcaecati dignissimos quas. Aperiam amet sint in ut, quod tenetur expedita, iste similique asperiores aliquam commodi illo placeat optio molestias sunt odio porro facilis veniam! Aliquam quas ea voluptas voluptatum consequuntur, laudantium incidunt voluptatibus quae hic unde reprehenderit asperiores quasi esse, maiores possimus libero dolores aut voluptatem. Tempore velit non maiores magni quae rerum, minima molestias ea ad perspiciatis temporibus ut cumque molestiae expedita corporis excepturi ullam facilis et deleniti exercitationem consequuntur inventore numquam tempora. Quidem ut repudiandae nisi eum, in similique a officiis at itaque cupiditate! Qui earum nihil deleniti laborum nulla!</p>
+                                <form action="" method="post" class="line">
+                                    <label for="comment-2" class="btn btn-link p-0">Responder</label>
+                                    <div class="input-group w-100 text-break">
+                                        <input type="text" name="comment" placeholder="Responder..." id="comment-2" class="form-control">
+                                        <button class="icon-send btn btn-outline-info"></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 3 -->
+                    <div class="d-block w-100 comment-item">
+                        <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100 comment-item-inner">
+                            <div class="border rounded-circle align-self-start comment-cover"
+                            style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                <i class="icon-profile-male"></i>
+                            </div>
+                            <div class="comment-content">
+                                <strong>User Name</strong>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus doloremque quia officia inventore deserunt? Neque consectetur consequatur dicta unde, dolores minus quibusdam fugiat perferendis magni veniam beatae deserunt repellendus maxime dolore, nostrum amet. Deserunt, praesentium eaque? Esse adipisci, reprehenderit eligendi quidem doloribus iusto facilis, corrupti, vitae atque cumque libero quos nemo tenetur blanditiis explicabo minus laboriosam magnam! Sunt necessitatibus magni excepturi eveniet sapiente error quos doloribus commodi cupiditate, velit doloremque consequuntur veritatis eaque aliquam tempore fugit quo nam quia veniam? Iusto facere et labore consectetur ut, nulla ea hic minus, sequi qui perferendis eligendi, doloremque reprehenderit pariatur eaque! Doloremque alias magni dignissimos distinctio incidunt ad quasi quibusdam impedit deserunt, quis nam consequatur quod officia soluta sed accusantium ducimus tempora, magnam expedita minus earum hic architecto. Qui sapiente quae quibusdam? Eligendi veniam facere iusto earum magnam incidunt recusandae nihil nulla! Ad natus ex suscipit perspiciatis, incidunt a quibusdam. Repellendus impedit nihil quaerat iste sunt in esse minus molestiae dicta, nostrum, ad, doloribus iusto ipsa magnam nobis explicabo possimus rerum laudantium? Sapiente accusantium tempore maiores facere quam ducimus et amet, aliquid reiciendis doloremque, corrupti accusamus, explicabo libero iusto eligendi minus deleniti? Veritatis laborum facere vitae maiores perspiciatis laudantium inventore doloribus a ipsam unde enim, ullam quod tempore quis fuga obcaecati dignissimos quas. Aperiam amet sint in ut, quod tenetur expedita, iste similique asperiores aliquam commodi illo placeat optio molestias sunt odio porro facilis veniam! Aliquam quas ea voluptas voluptatum consequuntur, laudantium incidunt voluptatibus quae hic unde reprehenderit asperiores quasi esse, maiores possimus libero dolores aut voluptatem. Tempore velit non maiores magni quae rerum, minima molestias ea ad perspiciatis temporibus ut cumque molestiae expedita corporis excepturi ullam facilis et deleniti exercitationem consequuntur inventore numquam tempora. Quidem ut repudiandae nisi eum, in similique a officiis at itaque cupiditate! Qui earum nihil deleniti laborum nulla!</p>
+                                <form action="" method="post" class="line">
+                                    <label for="comment-3" class="btn btn-link p-0">Responder</label>
+                                    <div class="input-group w-100 text-break">
+                                        <input type="text" name="comment" placeholder="Responder..." id="comment-3" class="form-control">
+                                        <button class="icon-send btn btn-outline-info"></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- FIM COMENTÁRIOS -->
+                <form action="" method="post">
+                    <div class="input-group">
+                        <input type="text" name="comment" placeholder="Digite um comentário..." class="form-control">
+                        <button class="btn btn-info"><span class="icon-send text-white"></span></button>
+                    </div>
+                </form>
+            </footer>
+        </article>
+        
+        <article class="border rounded-3 col-12 col-md-8  m-auto mt-3">
+            <header class=" p-1">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="icon-profile-male border p-2 rounded-circle"></i>
+                    <div>
+                        <strong>User Name</strong>
+                        <div style="color: rgb(161, 150, 150); font-size: 0.8rem;">25/04/2022 15:45</div>
+                    </div>
+                </div>
+        
+                <h3 class="text-primary text-uppercase mt-2">Título do Artigo</h3>
+                <h4 class="text-black-50">Subtitulo do Artigo</h4>
+            </header>
+            
+            <div class="card rounded-3">
+                <img src="assets/images/bridge.jpg" alt="" srcset="" class="card-image-bottom">
+                <div class="card-img-overlay">
+                    <p class="card-tect text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores odit quae veritatis odio quas sint nobis et nulla ad. Beatae.</p>
+                    <p class="card-tect text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores odit quae veritatis odio quas sint nobis et nulla ad. Beatae.</p>
+                    <a href="" class="btn btn-outline-info">Leia mais...</a>
+                </div>
+            </div>
+            <footer class="card-footer">
+
+                <!-- INÍCIO COMENTÁRIOS -->
+                <p class="btn btn-link btn-toggle-comments" id="btn-toggle-comments-2"></p>
+                <!-- 1 -->
+                <div class="d-block w-100" id="comments-container-2">
+                    <div class="d-block w-100 comment-item">
+                        <div class="d-flex align-items-center flex-nowrap gap-3 p-2 bg-light mb-5 w-100 comment-item-inner">
+                            <div class="border rounded-circle align-self-start comment-cover"
+                                 style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                <i class="icon-profile-male"></i>
+                            </div>
+                            <div class="comment-content">
+                                <strong>User Name</strong>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores obcaecati aspernatur perspiciatis similique aperiam beatae, assumenda cum ratione, dignissimos omnis repellendus soluta ex non in eveniet quisquam, vero iure! Quia.150</p>
+                                <!-- INICIO RESPOSTA -->
+                                <!-- 1 -->
+                                <div class="d-block w-100 response-container">
+                                    <div class="d-block w-100">
+                                        <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100">
+                                            <p class="d-flex flex-row align-items-start justify-content-start">
+                                            <div class="border rounded-circle p-3 align-self-start" style="width: 50px; height: 50px;">
+                                                <i class="icon-profile-male"></i>
+                                            </div>
+                                            <div>
+                                                <strong>User Name</strong> respondeu
+                                                <span class="comment-response">&bull; Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum nobis eveniet amet!</span>
+                                            </div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 2 -->
+                                <div class="d-block w-100 response-container">
+                                    <div class="d-block w-100">
+                                        <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100">
+                                            <p class="d-flex flex-row align-items-start justify-content-start">
+                                            <div class="border rounded-circle p-3 align-self-start" style="width: 50px; height: 50px;">
+                                                <i class="icon-profile-male"></i>
+                                            </div>
+                                            <div>
+                                                <strong>User Name</strong> respondeu
+                                                <span class="comment-response">&bull; Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum nobis eveniet amet!</span>
+                                            </div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <form action="" method="post" class="line">
+                                        <label class="btn btn-link p-0" for="field-response-1">Responder</label>
+                                        <div class="d-flex align-items-start justify-content-start gap-1 border-bottom  border-top-0 border-left-0 border-right-0">
+                                            <input type="text" name="comment" placeholder="Responder..." class="d-block flex-grow-1 border-0 p-3" id="field-response-1">
+                                            <button class="icon-send border border-1 rounded-circle text-white"></button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- FIM RESPOSTA -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 2 -->
+                    <div class="d-block w-100 comment-item">
+                        <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100 comment-item-inner">
+                            <div class="border rounded-circle align-self-start comment-cover"
+                                 style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                <i class="icon-profile-male"></i>
+                            </div>
+                            <div class="comment-content">
+                                <strong>User Name</strong>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus doloremque quia officia inventore deserunt? Neque consectetur consequatur dicta unde, dolores minus quibusdam fugiat perferendis magni veniam beatae deserunt repellendus maxime dolore, nostrum amet. Deserunt, praesentium eaque? Esse adipisci, reprehenderit eligendi quidem doloribus iusto facilis, corrupti, vitae atque cumque libero quos nemo tenetur blanditiis explicabo minus laboriosam magnam! Sunt necessitatibus magni excepturi eveniet sapiente error quos doloribus commodi cupiditate, velit doloremque consequuntur veritatis eaque aliquam tempore fugit quo nam quia veniam? Iusto facere et labore consectetur ut, nulla ea hic minus, sequi qui perferendis eligendi, doloremque reprehenderit pariatur eaque! Doloremque alias magni dignissimos distinctio incidunt ad quasi quibusdam impedit deserunt, quis nam consequatur quod officia soluta sed accusantium ducimus tempora, magnam expedita minus earum hic architecto. Qui sapiente quae quibusdam? Eligendi veniam facere iusto earum magnam incidunt recusandae nihil nulla! Ad natus ex suscipit perspiciatis, incidunt a quibusdam. Repellendus impedit nihil quaerat iste sunt in esse minus molestiae dicta, nostrum, ad, doloribus iusto ipsa magnam nobis explicabo possimus rerum laudantium? Sapiente accusantium tempore maiores facere quam ducimus et amet, aliquid reiciendis doloremque, corrupti accusamus, explicabo libero iusto eligendi minus deleniti? Veritatis laborum facere vitae maiores perspiciatis laudantium inventore doloribus a ipsam unde enim, ullam quod tempore quis fuga obcaecati dignissimos quas. Aperiam amet sint in ut, quod tenetur expedita, iste similique asperiores aliquam commodi illo placeat optio molestias sunt odio porro facilis veniam! Aliquam quas ea voluptas voluptatum consequuntur, laudantium incidunt voluptatibus quae hic unde reprehenderit asperiores quasi esse, maiores possimus libero dolores aut voluptatem. Tempore velit non maiores magni quae rerum, minima molestias ea ad perspiciatis temporibus ut cumque molestiae expedita corporis excepturi ullam facilis et deleniti exercitationem consequuntur inventore numquam tempora. Quidem ut repudiandae nisi eum, in similique a officiis at itaque cupiditate! Qui earum nihil deleniti laborum nulla!</p>
+                                <form action="" method="post" class="line">
+                                    <label for="comment-2" class="btn btn-link p-0">Responder</label>
+                                    <div class="input-group w-100 text-break">
+                                        <input type="text" name="comment" placeholder="Responder..." id="comment-2" class="form-control">
+                                        <button class="icon-send btn btn-outline-info"></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 3 -->
+                    <div class="d-block w-100 comment-item">
+                        <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100 comment-item-inner">
+                            <div class="border rounded-circle align-self-start comment-cover"
+                                 style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                <i class="icon-profile-male"></i>
+                            </div>
+                            <div class="comment-content">
+                                <strong>User Name</strong>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus doloremque quia officia inventore deserunt? Neque consectetur consequatur dicta unde, dolores minus quibusdam fugiat perferendis magni veniam beatae deserunt repellendus maxime dolore, nostrum amet. Deserunt, praesentium eaque? Esse adipisci, reprehenderit eligendi quidem doloribus iusto facilis, corrupti, vitae atque cumque libero quos nemo tenetur blanditiis explicabo minus laboriosam magnam! Sunt necessitatibus magni excepturi eveniet sapiente error quos doloribus commodi cupiditate, velit doloremque consequuntur veritatis eaque aliquam tempore fugit quo nam quia veniam? Iusto facere et labore consectetur ut, nulla ea hic minus, sequi qui perferendis eligendi, doloremque reprehenderit pariatur eaque! Doloremque alias magni dignissimos distinctio incidunt ad quasi quibusdam impedit deserunt, quis nam consequatur quod officia soluta sed accusantium ducimus tempora, magnam expedita minus earum hic architecto. Qui sapiente quae quibusdam? Eligendi veniam facere iusto earum magnam incidunt recusandae nihil nulla! Ad natus ex suscipit perspiciatis, incidunt a quibusdam. Repellendus impedit nihil quaerat iste sunt in esse minus molestiae dicta, nostrum, ad, doloribus iusto ipsa magnam nobis explicabo possimus rerum laudantium? Sapiente accusantium tempore maiores facere quam ducimus et amet, aliquid reiciendis doloremque, corrupti accusamus, explicabo libero iusto eligendi minus deleniti? Veritatis laborum facere vitae maiores perspiciatis laudantium inventore doloribus a ipsam unde enim, ullam quod tempore quis fuga obcaecati dignissimos quas. Aperiam amet sint in ut, quod tenetur expedita, iste similique asperiores aliquam commodi illo placeat optio molestias sunt odio porro facilis veniam! Aliquam quas ea voluptas voluptatum consequuntur, laudantium incidunt voluptatibus quae hic unde reprehenderit asperiores quasi esse, maiores possimus libero dolores aut voluptatem. Tempore velit non maiores magni quae rerum, minima molestias ea ad perspiciatis temporibus ut cumque molestiae expedita corporis excepturi ullam facilis et deleniti exercitationem consequuntur inventore numquam tempora. Quidem ut repudiandae nisi eum, in similique a officiis at itaque cupiditate! Qui earum nihil deleniti laborum nulla!</p>
+                                <form action="" method="post" class="line">
+                                    <label for="comment-3" class="btn btn-link p-0">Responder</label>
+                                    <div class="input-group w-100 text-break">
+                                        <input type="text" name="comment" placeholder="Responder..." id="comment-3" class="form-control">
+                                        <button class="icon-send btn btn-outline-info"></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- FIM COMENTÁRIOS -->
+
+                <form action="" method="post">
+                    <div class="input-group">
+                        <input type="text" name="comment" placeholder="Digite um comentário..." class="form-control">
+                        <button class="btn btn-info"><span class="icon-send text-white"></span></button>
+                    </div>
+                </form>
+            </footer>
+        </article>
+        </main>
+        <div class="position-absolute" id="bottom-reference">AAA</div>
+        <a href="#main-header" class="btn btn-primary d-inline-block m-4 ms-auto rounded-circle" style="z-index: 10;">
+            <span></span>
+        </a>
+
+    <footer class="mt-3">
+        <p class="text-center">Por <a href="https://instagram.com/n.i.l.t.o.n.1" title="Página do Autor">Nilton Duarte</a></p>
+    </footer>
+    <script src="assets/scripts/feed.js"></script>
+    <script src="assets/scripts/main.js"></script>
+</body>
+</html>

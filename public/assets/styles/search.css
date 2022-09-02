@@ -1,0 +1,46 @@
+article.article-search-result {
+    box-shadow: 0 0 5px 1px rgba(160, 156, 156, 0.44);
+}
+article.article-search-result .cover-container a {
+    width: 100%;
+    height: 100%;
+    display: block;
+    min-height: 12.5rem;
+    background: transparent;
+    transition: background 0.3s;
+}
+article.article-search-result .cover-container a:hover {
+    background: rgba(0,0,0,0.5);
+}
+article .cover-container {
+    background-image: url(https://via.placeholder.com/450);
+    background-size: cover;
+    background-position: center;
+    min-height: 12.5rem;
+}
+@media (min-width: 576px) {
+    article div.cover-container {
+        width: 100%;
+        height: 15.5rem;
+    }
+    article.article-search-result div:nth-child(1) {
+        width: 100%;
+        height: 100%;
+    }
+}
+@media (min-width: 768px) {
+    article.article-search-result {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+    }
+    article.article-search-result div:nth-child(1) {
+        width: 40%;
+    }
+    article.article-search-result div:nth-child(2) {
+        width: 60%;
+    }
+    article .cover-container {
+        height: 8rem;
+    }
+}

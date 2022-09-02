@@ -1,0 +1,42 @@
+# Method from class src\controllers\App
+
+public function articleCreate(): void
+    {
+        $post = filter_input_array(INPUT_POST, [
+            'title' => FILTER_SANITIZE_ADD_SLASHES,
+            'subtitle' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+            'text' => FILTER_DEFAULT
+        ]);
+        if ($post) {
+            $fields = " user_id, title, subtitle, content";
+            $data = [
+                'user_id' => $this->user->id(),
+                'title' => $post['title'],
+                'subtitle' => $post['subtitle'],
+                'content' => $post['text']
+            ];
+            if (!empty($_FILES['cover']) && !empty($_FILES['cover']['type'])) {
+                $cover = $_FILES['cover'];
+                $upload = new Image($cover);
+                if (!$upload->upload()) {
+                    $json['message'] = (new Message())->danger($upload->error());
+                    echo json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                    return;
+                }
+                $fields .= ", cover";
+                $data['cover'] = $upload->relativePath();
+            }
+            $article = new Post();
+            if ($c = $article->create($fields, $data)) {
+                var_dump($c);
+                $json['message'] = (new Message())->success('Artigo criado com sucesso!')->render();
+                echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+//                echo json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                return;
+            }
+            $json['message'] = (new Message())->danger('Erro ao enviar, verifique os dados')->render();
+            echo json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            return;
+        }
+        echo $this->view->load('new-article');
+    }

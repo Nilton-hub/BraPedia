@@ -1,0 +1,36 @@
+
+<article class="border mt-3 col-12 col-md-8 m-auto" data-post-id="1" id="post-1">
+    <div class="p-3">
+        <div>
+            <ul class="nav nav-tabs justify-content-center header-nav-post-list">
+                <li class="nav-item">
+                    <a class="nav-link border" title="Editar" aria-current="page" href="./article-update.html"><i class="icon-create"></i></a>
+                </li>
+                <li class="nav-item post-hide">
+                    <a class="nav-link border" title="Ocultar" aria-current="page" href="javascript:void(0)"><i class="icon-blocked"></i></a>
+                </li>
+                <li class="nav-item post-delete">
+                    <a class="nav-link border" title="Deletar" aria-current="page" href="javascript:void(0)"><i class="icon-trash"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link border" title="Visualizar" aria-current="page" href="./article.html"><i class="icon-launch"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="text-primary">Título do Artigo</h3>
+            <h4 class="text-secondary mb-4">Subtitulo do Artigo</h4>
+            <a href="./article.html" title="Ver artigo" class="text-center w-100 article-cover-container">
+                <img src="assets/images/bridge.jpg" alt="" srcset="" class="w-100 article-cover">
+            </a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <form action="" method="post">
+            <div class="input-group">
+                <input type="text" name="comment" placeholder="Digite um comentário..." class="form-control">
+                <button class="btn btn-info"><span class="icon-send text-white"></span></button>
+            </div>
+        </form>
+    </footer>
+</article>

@@ -1,0 +1,133 @@
+{% extends('__theme.twig') %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ BASE_URL }}/assets/styles/profile.css">
+{% endblock %}
+{% block title %}{{ user.name }}{% endblock %}
+{% block message %}{{ message }}{% endblock %}
+{% block body %}
+    <main class="container">
+        <section class="user-profile col-10 col-lg-8 m-auto">
+            <div class="d-md-flex align-items-center gap-3">
+                <div class="text-center">
+                    {% if userPhoto is null or userPhoto|length == 0 %}
+                        <i class="icon-profile-male border rounded-circle p-4 d-inline-block m-auto"
+                           style="font-size: 4em;"></i>
+                    {% else %}
+                        {# <div class="profile-picture" style="background-image: url(assets/images/icon-profile-png.png);"></div> #}
+                        <div class="profile-picture"
+                             style="background-image: url('{{ BASE_URL }}/{{ userPhoto }}'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+                    {% endif %}
+                    <form action="{{ BASE_URL }}/profile-picture" method="post" enctype="multipart/form-data"
+                          class="text-center profile-picture-update-form">
+                        <input type="file" name="" id="image-profile">
+                        <label for="image-profile" class="icon-camera"></label>
+                    </form>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Nome</th>
+                        <td id="main-user-name">{{ user.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td id="main-user-email">{{ user.email }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="mt-3 d-flex justify-content-between gap-3">
+                <button class="btn btn-success" id="btn-profile-edit">Editar Perfil</button>
+                <a href="javascript:void(0)" class="btn-change-password">Alterar Senha</a>
+                <a href="{{ BASE_URL }}/artigo/novo" title="Criar novo artigo" class="">Novo Artigo</a>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-center my-5">Seus Artigos</h2>
+            <!-- INICIO -->
+            {% if articles|length > 0 %}
+                {% for article in articles %}
+                    {% include('fragments/article-profile.twig') %}
+                {% endfor %}
+            {% else %}
+                <div class="text-center">
+                    <h2 class="display-3 text-opacity-50 text-black">Você não tem artigos</h2>
+                    <h3 class="text-secondary" style="font-size: 1.2rem;">Quando você publicar artigos, eles aparecerão aqui.</h3>
+                </div>
+            {% endif %}
+            <!-- FIM -->
+        </section>
+    </main>
+    <!-- MODAL -->
+    <div class="modal-bg-show d-none" id="modals">
+        <div id="btn-close-modal">
+            &plus;
+        </div>
+        <!-- profile edit -->
+        <div class="m-auto bg-light rounded-3 border p-3 d-none modal-content-edit modal-hidden">
+            <form action="{{ BASE_URL }}/perfil" method="post" class="user-profile-edit">
+                <p class="text-center">Informe seus dados e clique em <b>Atualizar</b>.</p>
+                <div class="input-group mb-3">
+                    <label for="user-name" class="input-group-text">Nome</label>
+                    <input type="text" name="name" value="{{ user.name }}" id="user-name" placeholder=""
+                           class="form-control" aria-label="Seu nome" aria-describedby="Digite o seu nome de usuário">
+                </div>
+                <div class="input-group mb-3">
+                    <label for="user-email" class="input-group-text">Email</label>
+                    <input type="email" name="email" value="{{ user.email }}" id="user-email"
+                           placeholder="seu_email@exemplo.com" class="form-control" aria-label="Seu email"
+                           aria-describedby="Digite o seu email para altera-lo">
+                </div>
+                <button type="submit" class="btn btn-primary d-block ms-auto px-4" style="letter-spacing: 0.3px;">
+                    Atualizar
+                </button>
+            </form>
+        </div>
+        <!-- change password -->
+        <div class="m-auto bg-light rounded-3 border p-3 d-none modal-content-change-password modal-hidden"
+             style="z-index: 25;">
+            <form action="{{ BASE_URL }}/atualizar-senha" method="post" class="form-change-password">
+                <p class="text-center">Preencha os campos abaixo para alterar sua senha.</p>
+                <div class="input-group mb-3">
+                    <label for="user-current-password" class="input-group-text">Senha atual</label>
+                    <input type="password" name="current-password" id="user-current-password"
+                           placeholder="Informe sua senha atual" class="form-control" aria-label="Sua senha atual"
+                           aria-describedby="Digite a sua senha atual">
+                </div>
+                <div class="input-group mb-3">
+                    <label for="new-password" class="input-group-text">Nova senha</label>
+                    <input type="password" name="new-password" id="new-password" placeholder="Crie uma nova senha"
+                           class="form-control" aria-label="Sua nova senha" aria-describedby="Informe sua nova senha">
+                </div>
+                <div class="input-group mb-3">
+                    <label for="new-password-repeat" class="input-group-text">Nova senha</label>
+                    <input type="password" name="new-password-repeat" id="new-password-repeat"
+                           placeholder="Repita a nova senha" class="form-control" aria-label="Seu email"
+                           aria-describedby="Informe sua nova senha">
+                </div>
+                <button type="submit" class="btn btn-primary d-block ms-auto px-4" style="letter-spacing: 0.3px;">
+                    Alterar
+                </button>
+            </form>
+        </div>
+        <!-- hide post -->
+        <div class="m-auto bg-light rounded-3 border p-3 d-none modal-content-hide-post modal-hidden">
+            <p class="text-center lead"></p>
+            <div class="d-flex gap-2 justify-content-end">
+                <button class="btn btn-primary" id="btn-hidde-article-confirm">Ocultar</button>
+                <button class="btn btn-outline-primary" id="btn-hidde-article-cancel">Cancelar</button>
+            </div>
+        </div>
+        <!-- delete post -->
+        <div class="m-auto bg-light rounded-3 border p-3 d-none modal-content-delete-post modal-hidden">
+            <p class="text-center lead">Deseja deletar este artigo permanentemente?</p>
+            <div class="d-flex gap-2 justify-content-end">
+                <button class="btn btn-primary" id="btn-delete-article-confirm">Deletar</button>
+                <button class="btn btn-outline-primary" id="btn-delete-article-cancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <!-- FIM MODAL -->
+{% endblock %}
+{% block scripts %}
+    <script src="{{ BASE_URL }}/assets/scripts/profile.js"></script>
+{% endblock %}

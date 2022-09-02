@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="assets/icons/style.css">
+    <link rel="stylesheet" href="assets/bootstrap-5.1.3-dist/css/bootstrap.css">
+    <style>
+        form button {
+          letter-spacing: 1.5px;
+          font-size: 1.12em !important;
+        }
+    </style>
+    <title>Blog366 - Login</title>
+</head>
+<body class="bg-light d-flex flex-column justify-content-between">
+    <header class="w-100 main-header" id="main-header">
+        <div class="px-3 py-2 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        Logo
+                    </a>
+    
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-between my-md-0 text-small position-relative" id="main-nav-menu">
+                        <li id="btn-search">
+                            <a href="javascript:void(0)" class="nav-link text-white"><!-- SEARCH -->
+                                <i class="icon-search" id="toggle-search-container"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./feed.html" class="nav-link text-white">
+                                <i class="icon-home"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./profile.html" class="nav-link text-white">
+                                <i class="icon-profile-male"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="nav-link text-white">
+                                <button class="icon-menu" id="btn-toggle-menu"></button>
+                            </a>
+                            <ul class="position-fixed top-1 bg-info list-unstyled col-10 col-md-5 col-sm-6 col-lg-4" id="main-sidebar-menu">
+                                <li><h3 class="text-center">Menu</h3></li>
+                                <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Link 1</a></li>
+                                <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Link 2</a></li>
+                                <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Link 3</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="rounded-3 bg-info position-relative p-1 col-11 col-sm-11 col-md-6 col-lg-4 d-inline-block ms-auto me-3 my-2 float-end p-0 search-container">
+        <form action="" method="get" class="p-0">
+            <label class="rounded-2 d-flex w-100 p-0">
+            <input type="search" name="search" placeholder="Encontre um Artigo..." class="col-10 p-2" id="">
+            <button type="submit" class="col-2 icon-search"></button>
+            </label>
+        </form>
+    </div>
+    
+    <main class="flex-grow-1">
+        <div class="d-flex col-sm-11 col-md-6 col-lg-6 m-auto mt-5 border border-1 border-info border-bottom-0 rounded-top header-form" id="form-header">
+            <div class="bg-warning w-50 text-center p-1 text-white">Entre</div>
+            <div class="bg-light w-50 text-center p-1">Cadastre-se</div>
+        </div>
+
+        <div class="border border-1 border-info border-top-0 col-sm-11 col-md-6 col-lg-6 m-auto p-md-5  p-2 text-black-50  rounded-bottom">
+            <form action="" method="post" id="form-login">
+                <div class="mb-3">
+                    <label for="email-login" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="exemplo@email.com" id="email-login">
+                </div>
+                <div class="mb-3">
+                    <label for="password-login" class="form-label">Senha</label>
+                    <div class="d-flex border rounded bg-white align-items-center">
+                    <input type="password" name="password" class="form-control border-0 flex-grow-1" id="password-login">
+                    <i class="icon-eye px-3" id="icon-toggle-password"></i>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input type="checkbox" name="remember" id="remember">
+                    <label for="remember">Lembrar dados</label>
+                </div>
+                <button type="submit" class="btn btn-dark d-block w-100">Entrar</button>
+                <p class="mt-2">
+                    <span href="javascript:void(0)" class="btn btn-link" id="btn-toggle-modal">Esqueci a senha</span>
+                </p>
+            </form>
+            
+            <form action="" method="post" id="form-register" class="d-none">
+                <div class="mb-3">
+                    <label for="email-register" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="exemplo@email.com" id="email-register">
+                </div>
+                <div class="mb-3">
+                    <label for="password-register" class="form-label">Senha</label>
+                    <input type="password" name="password" class="form-control" id="password-register">
+                </div>
+                <div class="mb-3">
+                    <label for="password-register_re" class="form-label">Repita sua senha</label>
+                    <input type="password" name="password" class="form-control" id="password-register_re">
+                </div>
+                <button type="submit" class="btn btn-dark d-block w-100">Criar Conta</button>
+            </form>
+        </div>
+        
+        <div class="modal-bg-show d-none" id="modals">
+            <div id="btn-close-modal">
+                &plus;
+            </div>
+            <div class="m-auto bg-light rounded-3 border p-3 modal-content modal-hidden" style="width: 90%;">
+                <form action="" method="post" class="">
+                    <p class="text-center">Informe seu email e clique em <b>enviar</b> para recuperar sua senha.</p>
+                    <div class="input-group">
+                        <label for="email-forget" class="input-group-text">Email</label>
+                        <input type="email" name="email" id="email-forget" placeholder="seu_email@exemplo.com" class="form-control" aria-label="Email de recuperação" aria-describedby="Digite o seu email para recuperar a sua senha">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="mt-3">
+        <p class="text-center">Por <a href="https://instagram.com/n.i.l.t.o.n.1" title="Página do Autor">Nilton Duarte</a></p>
+    </footer>
+    <script src="assets/scripts/auth.js"></script>
+    <script src="assets/scripts/main.js"></script>
+</body>
+</html>

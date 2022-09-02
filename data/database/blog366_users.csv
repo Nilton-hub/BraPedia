@@ -1,0 +1,4 @@
+#,id,name,email,password,token,photo,forget,forget_data,updated_at,created_at
+1,3,Nilton L. Duarte,tvirapegubeco@gmail.com,$2y$10$RsC9e6zZTHdQpy53BZpbcOJcrE2IOUd4BykbUlmmXAUuCzm0baLB6,c7587237f49a63c3cdead9d753e5fe0a26b5763b62f3373d04f234.85903142,uploads/profile/1658186762-eu-pb.jpg,,,2022-08-10 01:42:37,2022-06-11 22:17:16
+2,4,Jos&eacute; Nilton,joseniltonduarte3@gmail.com,$2y$10$emYos91J3u0W9ysi2J2NzOjq/iilkv5Smt4rOmB.xnxgB.7aP5cDm,,,"",,2022-08-09 03:51:26,2022-06-25 12:39:19
+3,5,Jo&atilde;o,jose@email.comm,$2y$10$3W05KBC7vAnYDaA5i4hjWuLruiTyAB.bKn1d/ndvCXQxDIy/rYdBC,,,,,2022-08-09 03:51:26,2022-06-27 09:53:19

@@ -1,0 +1,118 @@
+{% extends('__theme.twig') %}
+{% block styles %}
+    <style>
+        form button {
+            letter-spacing: 1.5px;
+            font-size: 1.12em !important;
+        }
+    </style>
+{% endblock %}
+{% block title %}Login{% endblock %}
+{% block message %}{{ message }}{% endblock %}
+{% block body %}
+    <main class="flex-grow-1">
+        <div class="d-flex col-sm-11 col-md-6 col-lg-6 m-auto mt-5 border border-1 border-info border-bottom-0 rounded-top header-form"
+             id="form-header">
+            <div class="bg-warning w-50 text-center p-1 text-white">Entre</div>
+            <div class="bg-light w-50 text-center p-1">Cadastre-se</div>
+        </div>
+
+        <div class="border border-1 border-info border-top-0 col-sm-11 col-md-6 col-lg-6 m-auto p-md-5  p-2 text-black-50  rounded-bottom">
+            <form action="{{ BASE_URL }}/login" method="post" id="form-login">
+                <div class="mb-3">
+                    <label for="email-login" class="form-label">Email</label>
+                    <input type="email" name="email" value="{{ userEmailCookie }}" class="form-control" placeholder="exemplo@email.com" id="email-login">
+                </div>
+                <div class="mb-3">
+                    <label for="password-login" class="form-label">Senha</label>
+                    <div class="d-flex border rounded bg-white align-items-center">
+                        <input type="password" name="password" class="form-control border-0 flex-grow-1" id="password-login">
+                        <i class="icon-eye px-3" id="icon-toggle-password"></i>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input type="checkbox" name="remember" {{ userEmailCookie is not null ? "checked" : "" }} id="remember">
+                    <label for="remember">Lembrar dados</label>
+                </div>
+                <button type="submit" class="btn btn-dark d-block w-100">Entrar</button>
+                <p class="mt-2">
+                    <span href="javascript:void(0)" class="btn btn-link" id="btn-toggle-modal">Esqueci a senha</span>
+                </p>
+            </form>
+
+            <form action="{{ BASE_URL }}/cadastro" method="post" id="form-register" class="d-none">
+                <div class="mb-3">
+                    <label for="name-register" class="form-label">Nome</label>
+                    <input type="text" name="name" class="form-control" placeholder="Como você quer ser chamado" id="name-register">
+                </div>
+                <div class="mb-3">
+                    <label for="email-register" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="exemplo@email.com"
+                           id="email-register">
+                </div>
+                <div class="mb-3">
+                    <label for="password-register" class="form-label">Senha</label>
+                    <input type="password" name="password" pattern=".{8,40}" minlength="8" maxlength="40" class="form-control"
+                           id="password-register">
+                </div>
+                <div class="mb-3">
+                    <label for="password-register_re" class="form-label">Repita sua senha</label>
+                    <input type="password" name="password_re" pattern=".{8,40}" class="form-control"
+                           id="password-register_re">
+                </div>
+                <p id="passwordVerifyText"></p>
+                <button type="submit" class="btn btn-dark d-block w-100">Criar Conta</button>
+            </form>
+        </div>
+
+        <div class="modal-bg-show d-none" id="modals">
+            <div id="btn-close-modal">
+                &plus;
+            </div>
+            <div class="m-auto bg-light rounded-3 border p-3 modal-content modal-hidden" style="width: 90%;">
+                <form action="{{ "#{BASE_URL}/recuperar-senha" }}" method="POST" class="form-account-forget">
+                    <p class="text-center">Informe seu email e clique em <b>enviar</b> para recuperar sua senha.</p>
+                    <div class="input-group">
+                        <label for="email-forget" class="input-group-text">Email</label>
+                        <input type="email" name="email" id="email-forget" placeholder="seu_email@exemplo.com"
+                               class="form-control" aria-label="Email de recuperação"
+                               aria-describedby="Digite o seu email para recuperar a sua senha">
+                        <button type="submit" class="btn btn-primary" name="btn_forget">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+{% block scripts %}
+    <script src="{{ BASE_URL }}/assets/scripts/auth.js"></script>
+    <script>
+        const formForget = document.querySelector('form.form-account-forget');
+        const accountForget = (evt) => {
+            evt.preventDefault();
+            const formData = new FormData(formForget);
+            const btnForget = formForget.btn_forget;
+            btnForget.innerText = 'Aguarde...';
+            btnForget.setAttribute('disabled', '');
+            fetch(`${formForget.getAttribute('action')}`, {
+                method: formForget.getAttribute('method'),
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.message) {
+                        message(data.message, data.type);
+                    }
+                    if (!data.success) {
+                        btnForget.removeAttribute('disabled');
+                    }
+                    btnForget.innerText = 'Pronto';
+                })
+                .catch(error => {
+                    message('Erro ao enviar, tente novamente mais tarde', 'warning');
+                    console.log(error)
+                });
+        }
+        formForget.addEventListener('submit', accountForget);
+    </script>
+{% endblock %}

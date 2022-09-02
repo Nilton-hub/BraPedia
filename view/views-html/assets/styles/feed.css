@@ -1,0 +1,53 @@
+[id^="comments-container-"] {
+    height: 0;
+    overflow-y: auto;
+    transition: all .3s;
+}
+[id^="comments-container-"].comments-show {
+    height: 30rem;
+}
+.comment-content {
+    width: 72%;
+}
+.comment-response {
+    color: rgb(159, 151, 151);
+}
+.response-container form div {
+    height: 40px;
+}
+.response-container form input {
+    outline: none;
+    height: 100%;
+    background-color: transparent;
+}
+.response-container button {
+    background-color: #0dcaf0;
+    width: 40px;
+    height: 40px;
+}
+a[href="#main-header"] {
+    position: fixed;
+    bottom: 30px;
+    right: 10px;
+    box-shadow: 0 0 5px 12px rgba(0, 0, 0, 0.03),
+                0 0 5px 8px rgba(0, 0, 0, 0.08),
+                0 0 5px 4px rgba(0, 0, 0, 0.1),
+                0 0 5px 2px rgba(0, 0, 0, 0.1);
+}
+
+a[href="#main-header"] span::before {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    margin-left: 5px;
+    display: inline-block;
+    transform: rotate(45deg) translate(2px, 5px);
+    border-top-left-radius: 5px;
+}
+@media (min-width: 768px) {
+    .comment-content {
+        width: 85%;
+    }
+}

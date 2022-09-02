@@ -1,0 +1,79 @@
+{% extends('__theme.twig') %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ BASE_URL }}/assets/styles/article.css">
+{% endblock %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block body %}
+    <main class="flex-grow-1 container mb-5">
+        <header class="d-flex flex-column align-items-center">
+            <h1 class="text-primary">{{ article.title }}</h1>
+            <h2 class="text-secondary">{{ article.subtitle }}</h2>
+            {% if article.cover is defined %}
+                <img src="{{ BASE_URL }}/{{ article.cover }}" alt="" srcset="" class="rounded-3 mb-3 img-fluid">
+            {% endif %}
+            <div class="col-9 col-lg-9 m-auto mt3">
+                <span class="opacity-50">Por</span> <span class="border rounded-circle p-2 icon-profile-male"></span>
+                <strong>{{ userPost.name }}</strong> <span
+                        class="opacity-50"> &bull; {{ article.created_at|date('d/m/Y h:i', 'America/Sao_Paulo') }}</span>
+            </div>
+        </header>
+
+        {% if user and user.id == article.user_id %}
+        <!-- ARTICLE OPTIONS -->
+            <div class="btn-group-vertical d-inline-block position-fixed me-auto  toggle-opt-hidden"
+                 style="width: 75px; right: 20px; top: calc(50vh - 85px); z-index: 15;" id="article-options">
+                <a href="./article-update.html" title="Editar artigo" class="btn btn-outline-success float-end">Editar</a>
+                <button class="btn btn-outline-success float-end" id="btn-article-delete">Deletar</button>
+                <button class="btn btn-outline-success float-end" id="btn-article-hide">Ocultar</button>
+            </div>
+        {% endif %}
+        <article class="mt-4 m-auto col-9 col-lg-9 lead">
+            {{ article.content }}
+        </article>
+
+        <!-- INÍCIO COMENTÁRIOS -->
+        <section>
+            <form action="{{ BASE_URL }}/comment/comment" method="post" class="container-fluid" id="form-comment">
+                <div class="input-group mb-3 mt-5 w-75 m-auto">
+                    <input type="hidden" name="article_id" value="{{ article.id }}">
+                    <input type="hidden" name="name" value="{{ user.name }}">
+                    <input type="hidden" name="page" value="article_page">
+                    <input type="text" name="comment" placeholder="Deixe um momentário" required class="form-control">
+                    <button class="btn btn-primary">Comentar</button>
+                </div>
+            </form>
+            <div class="comment-list-container">
+            {% for comment in comments %}
+                {% include("fragments/article-comment.twig") %}
+            {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-bg-show d-none" id="modals">
+        <div id="btn-close-modal">
+            &plus;
+        </div>
+        <!-- hide post -->
+        <div class="m-auto bg-light rounded-3 border p-3 d-none modal-content-hide-post modal-hidden">
+            <p class="text-center lead">Ao ocultar um artigo, ele não aparecerá mais no feed para os outros usuários.
+                Mas você ainda poderá vê-lo no seu Perfil.</p>
+            <div class="d-flex gap-2 justify-content-end">
+                <button class="btn btn-primary">Ocultar</button>
+                <button class="btn btn-outline-primary">Cancelar</button>
+            </div>
+        </div>
+        <!-- delete post -->
+        <div class="m-auto bg-light rounded-3 border p-3 d-none modal-content-delete-post modal-hidden">
+            <p class="text-center lead">Deseja deletar este artigo permanentemente?</p>
+            <div class="d-flex gap-2 justify-content-end">
+                <button class="btn btn-primary">Deletar</button>
+                <button class="btn btn-outline-primary">Cancelar</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ BASE_URL }}/assets/scripts/article.js"></script>
+{% endblock %}

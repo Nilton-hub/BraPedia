@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/bootstrap-5.1.3-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/styles/main.css">
+    <link rel="stylesheet" href="./assets/icons/style.css">
+    <link rel="stylesheet" href="./assets/styles/article.css">
+    <title>Blog366 - {Artigo}</title>
+</head>
+<body class="bg-light d-flex flex-column justify-content-between">
+    <header class="w-100 main-header" id="main-header">
+        <div class="px-3 py-2 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        Logo
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-between my-md-0 text-small position-relative" id="main-nav-menu">
+                        <li id="btn-search">
+                            <a href="javascript:void(0)" class="nav-link text-white"><!-- SEARCH -->
+                                <i class="icon-search" id="toggle-search-container"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./feed.html" class="nav-link text-white">
+                                <i class="icon-home"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./profile.html" class="nav-link text-white">
+                                <i class="icon-profile-male"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="nav-link text-white">
+                                <button class="icon-menu" id="btn-toggle-menu"></button>
+                            </a>
+                            <ul class="position-fixed top-1 bg-info list-unstyled col-10 col-md-5 col-sm-6 col-lg-4" id="main-sidebar-menu">
+                                <li><h3 class="text-center">Menu</h3></li>
+                                <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Link 1</a></li>
+                                <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Link 2</a></li>
+                                <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Link 3</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="rounded-3 bg-info position-relative p-1 col-11 col-sm-11 col-md-6 col-lg-4 d-inline-block ms-auto me-3 my-2 float-end p-0 search-container">
+        <form action="" method="get" class="p-0">
+            <label class="rounded-2 d-flex w-100 p-0">
+            <input type="search" name="search" placeholder="Encontre um Artigo..." class="col-10 p-2" id="">
+            <button type="submit" class="col-2 icon-search"></button>
+            </label>
+        </form>
+    </div>
+
+    <main class="flex-grow-1 container mb-5">
+        <header class="d-flex flex-column align-items-center">
+            <h1 class="text-primary">Título do Artigo</h1>
+            <h2 class="text-secondary">Subtítulo do artigo</h2>
+            <img src="./assets/images/bridge.jpg" alt="" srcset="" class="rounded-3 mb-3 img-fluid">
+            <div class="col-9 col-lg-9 m-auto mt3">
+                <span class="opacity-50">Por</span> <span class="border rounded-circle p-2 icon-profile-male"></span>
+                <strong>User Name</strong> <span class="opacity-50"> &bull; 30/01/2022</span>
+            </div>
+        </header>
+
+        <div class="btn-group-vertical d-inline-block position-fixed me-auto  toggle-opt-hidden"
+        style="width: 75px; right: 20px; top: calc(50vh - 85px)" id="article-options">
+            <a href="./article-update.html" title="Editar artigo" class="btn btn-outline-success float-end">Editar</a>
+            <button class="btn btn-outline-success float-end" id="btn-article-delete">Deletar</button>
+            <button class="btn btn-outline-success float-end" id="btn-article-hide">Ocultar</button>
+        </div>
+
+        <article class="mt-4 m-auto col-9 col-lg-9 lead">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempor nisi eu tempor ultricies. Etiam luctus erat nisi, id blandit mi iaculis sit amet. Suspendisse potenti. Etiam gravida diam et efficitur tempus. Vestibulum nec justo quis risus egestas accumsan ac sit amet diam. Quisque iaculis lorem id felis dignissim, vel molestie arcu ullamcorper. Suspendisse sed diam at purus sollicitudin ullamcorper ac vitae est. Sed ex purus, iaculis ac lacinia rhoncus, venenatis eu dolor. Nam commodo, augue at sollicitudin malesuada, est lacus pellentesque tortor, eget rutrum lacus nisi quis sem.</p>
+
+            <p>Sed auctor sit amet eros nec efficitur. Etiam suscipit pellentesque mollis. Praesent a sodales augue. Duis ac pulvinar nisi. Fusce euismod eros at nisl maximus facilisis. Nullam dignissim faucibus est, nec consectetur nulla. Curabitur ornare dignissim ante, in aliquam risus blandit nec. Proin eget vehicula quam, eu tristique felis. Phasellus odio mi, rhoncus semper pulvinar nec, pretium non est. Morbi ut vehicula nisi. Integer mollis sit amet nulla id venenatis. Vivamus mattis ac justo vitae viverra. Mauris mollis quam lectus, ut dictum nulla convallis sed. Cras accumsan in neque ut suscipit.</p>
+
+            <p>Nullam eu dignissim augue. Nam commodo quam molestie fermentum ultrices. Vestibulum id imperdiet lectus. Pellentesque sit amet posuere elit. Donec quis malesuada urna. Nullam varius suscipit velit eu porta. Vestibulum id sem ipsum. Vivamus a ante tristique, vulputate massa ut, ornare velit. Integer hendrerit, ligula a semper posuere, nunc erat sodales nibh, id posuere velit tortor pellentesque tellus. Aenean iaculis rhoncus porta. Sed justo odio, volutpat sit amet eros et, vestibulum posuere eros. Mauris sed sem vitae lectus bibendum auctor et a tortor.</p>
+
+            <p>Nunc tempus tortor quis nulla euismod vestibulum. Integer aliquam orci ut risus viverra, non laoreet metus condimentum. Vestibulum convallis erat at malesuada bibendum. Nunc at dapibus magna. Suspendisse semper tincidunt mauris eget consectetur. Aenean ut eleifend massa, at scelerisque purus. Nam nulla enim, pulvinar eget velit id, dapibus varius ipsum. Quisque in suscipit ante, non aliquam orci. Etiam et nunc sit amet sapien tempus euismod condimentum viverra justo. Donec vel velit non nunc aliquam sagittis. Vestibulum luctus blandit justo, sit amet tincidunt nisl. Cras consectetur sem ac lorem pulvinar, id gravida lorem hendrerit. Sed est diam, commodo quis lectus non, volutpat porttitor nisi.</p>
+
+            <p>Nunc imperdiet nibh risus, vitae commodo urna varius et. Duis mi tellus, varius vitae placerat tempor, porta ut diam. Ut rutrum finibus ornare. Vestibulum quis nulla ipsum. Nunc mattis arcu et mollis iaculis. Maecenas vitae maximus eros, sit amet congue orci. Donec egestas, dui ut faucibus tempus, elit tellus egestas sem, eu auctor nisl augue non dolor. Duis hendrerit eleifend nunc et fringilla. Sed vitae neque semper, imperdiet quam ut, tempor nisi. Pellentesque finibus, ex vel maximus efficitur, est odio placerat ante, vitae fermentum sapien nunc ut justo. Nulla tincidunt quam ut leo ultricies accumsan. Vestibulum mollis neque vitae lacinia pharetra. Morbi accumsan leo vel ipsum molestie, eu maximus tortor pharetra.</p>
+        </article>
+        <!-- INÍCIO COMENTÁRIOS -->
+        <section>
+            <form action="" method="post" class="container-fluid">
+                <div class="input-group mb-3 mt-5 w-75 m-auto">
+                    <input type="text" name="comment" placeholder="Deixe um momentário" class="form-control">
+                    <button class="btn btn-primary">Comentar</button>
+                </div>
+            </form>
+            <!-- um -->
+            <div class="d-block w-100 comment-item">
+                <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100 comment-item-inner">
+                    <div class="border rounded-circle align-self-start comment-cover"
+                    style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                        <i class="icon-profile-male"></i>
+                    </div>
+                    <div class="comment-content">
+                        <strong>User Name</strong>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus doloremque quia officia inventore deserunt? Neque consectetur consequatur dicta unde, dolores minus quibusdam fugiat perferendis magni veniam beatae deserunt repellendus maxime dolore, nostrum amet. Deserunt, praesentium eaque? Esse adipisci, reprehenderit eligendi quidem doloribus iusto facilis, corrupti, vitae atque cumque libero quos nemo tenetur blanditiis explicabo minus laboriosam magnam! Sunt necessitatibus magni excepturi eveniet sapiente error quos doloribus commodi cupiditate, velit doloremque consequuntur veritatis eaque aliquam tempore fugit quo nam quia veniam? Iusto facere et labore consectetur ut, nulla ea hic minus, sequi qui perferendis eligendi, doloremque reprehenderit pariatur eaque! Doloremque alias magni dignissimos distinctio incidunt ad quasi quibusdam impedit deserunt, quis nam consequatur quod officia soluta sed accusantium ducimus tempora, magnam expedita minus earum hic architecto. Qui sapiente quae quibusdam? Eligendi veniam facere iusto earum magnam incidunt recusandae nihil nulla! Ad natus ex suscipit perspiciatis, incidunt a quibusdam.</p>
+                        <!-- INICÍCIO RESPOSTA -->
+                        <!-- 1 -->
+                        <div class="d-block w-100 response-container">
+                            <div class="d-block w-100">
+                                <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100">
+                                    <p class="d-flex flex-row align-items-start justify-content-start">
+                                        <div class="border rounded-circle p-3 align-self-start" style="width: 50px; height: 50px;">
+                                            <i class="icon-profile-male"></i>
+                                        </div>
+                                        <div>
+                                            <strong>User Name</strong> respondeu
+                                            <span class="comment-response">&bull; Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum nobis eveniet amet!</span>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 2 -->
+                        <div class="d-block w-100 response-container">
+                            <div class="d-block w-100">
+                                <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100">
+                                    <p class="d-flex flex-row align-items-start justify-content-start">
+                                        <div class="border rounded-circle p-3 align-self-start" style="width: 50px; height: 50px;">
+                                            <i class="icon-profile-male"></i>
+                                        </div>
+                                        <div>
+                                            <strong>User Name</strong> respondeu
+                                            <span class="comment-response">&bull; Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum nobis eveniet amet!</span>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>                                                
+                        <!-- FIM RESPOSTA -->
+                        <form action="" method="post" class="line">
+                            <label for="comment-3" class="btn btn-link p-0">Responder</label>
+                            <div class="input-group w-100 text-break">
+                                <input type="text" name="comment" placeholder="Responder..." id="comment-3" class="form-control">
+                                <button class="icon-send btn btn-outline-info"></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- dois -->
+            <div class="d-block w-100 comment-item">
+                <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100 comment-item-inner">
+                    <div class="border rounded-circle align-self-start comment-cover"
+                    style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                        <i class="icon-profile-male"></i>
+                    </div>
+                    <div class="comment-content">
+                        <strong>User Name</strong>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus doloremque quia officia inventore deserunt? Neque consectetur consequatur dicta unde, dolores minus quibusdam fugiat perferendis magni veniam beatae deserunt repellendus maxime dolore, nostrum amet.</p>
+                        <form action="" method="post" class="line">
+                            <label for="comment-3" class="btn btn-link p-0">Responder</label>
+                            <div class="input-group w-100 text-break">
+                                <input type="text" name="comment" placeholder="Responder..." id="comment-3" class="form-control">
+                                <button class="icon-send btn btn-outline-info"></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- três -->
+            <div class="d-block w-100 comment-item">
+                <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100 comment-item-inner">
+                    <div class="border rounded-circle align-self-start comment-cover"
+                    style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                        <i class="icon-profile-male"></i>
+                    </div>
+                    <div class="comment-content">
+                        <strong>User Name</strong>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus doloremque quia officia inventore deserunt? Neque consectetur consequatur dicta unde, dolores minus quibusdam fugiat perferendis magni veniam beatae deserunt repellendus maxime dolore, nostrum amet.</p>
+                        <form action="" method="post" class="line">
+                            <label for="comment-3" class="btn btn-link p-0">Responder</label>
+                            <div class="input-group w-100 text-break">
+                                <input type="text" name="comment" placeholder="Responder..." id="comment-3" class="form-control">
+                                <button class="icon-send btn btn-outline-info"></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- FIM COMENTÁRIOS -->
+    </main>
+
+    <div class="modal-bg-show d-none" id="modals">
+        <div id="btn-close-modal">
+            &plus;
+        </div>
+        <!-- hide post -->
+        <div class="m-auto bg-light rounded-3 border p-3 d-none modal-content-hide-post modal-hidden">
+            <p class="text-center lead">Ao ocultar um artigo, ele não aparecerá mais no feed para os outros usuários. Mas você ainda poderá vê-lo no seu Perfil.</p>
+            <div class="d-flex gap-2 justify-content-end">
+                <button class="btn btn-primary">Ocultar</button>
+                <button class="btn btn-outline-primary">Cancelar</button>
+            </div>
+        </div>
+        <!-- delete post -->
+        <div class="m-auto bg-light rounded-3 border p-3 d-none modal-content-delete-post modal-hidden">
+            <p class="text-center lead">Deseja deletar este artigo permanentemente?</p>
+            <div class="d-flex gap-2 justify-content-end">
+                <button class="btn btn-primary">Deletar</button>
+                <button class="btn btn-outline-primary">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-3">
+        <p class="text-center">Por <a href="./https://instagram.com/n.i.l.t.o.n.1" title="Página do Autor">Nilton Duarte</a></p>
+    </footer>
+    <script src="./assets/scripts/main.js"></script>
+    <script src="./assets/scripts/article.js"></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+{% extends('__theme.twig') %}
+{% block title %}Editar {{ title }}{% endblock %}
+{% block styles %}
+    <style>
+        div.tox-notifications-container,
+        span.tox-statusbar__branding {
+            display: none;
+        }
+
+        .accordion-button::after {
+            transition: all .3s;
+        }
+
+        .rotate-icon.accordion-button::after {
+            transform: rotate(-45deg);
+        }
+
+        #collapseOne {
+            transition: all .3s;
+            height: 0;
+            overflow: hidden;
+        }
+
+        #collapseOne:not(.hidden-cover) {
+            height: auto;
+        }
+    </style>
+{% endblock %}
+{% block message %}{{ message }}{% endblock %}
+{% block body %}
+    <main class="flex-grow-1 container mb-5">
+        <h1 class="mb-3">Publique um Artigo</h1>
+        <form action="{{ BASE_URL }}/artigo/editar/{{ article.id }}" method="post" class="m-auto col-12 col-lg-10 form-article">
+            <div class="mb-3">
+                <label for="form-article-title" class="form-label">Título do Artigo</label>
+                <input type="text" name="title" class="form-control" value="{{ article.title }}" id="form-article-title"
+                       placeholder="Título">
+            </div>
+            <div class="mb-3">
+                <label for="form-article-subtitle" class="form-label">Subtítulo do Artigo</label>
+                <input type="text" name="subtitle" class="form-control" value="{{ article.subtitle }}" id="form-article-subtitle"
+                       placeholder="Subtítulo">
+            </div>
+            {% if article.cover is not null %}
+                <div class="accordion mb-3" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" aria-expanded="true"
+                                    aria-controls="collapseOne"
+                                    id="btn-toggle-cover">
+                                Visualizar Capa
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show hidden-cover"
+                             aria-labelledby="headingOne">
+                            <div class="accordion-body text-center">
+                                <img src="{{ BASE_URL }}/{{ article.cover }}" class="img-fluid" alt="" srcset=""
+                                     id="img-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="mb-3">
+                <label for="form-article-cover" class="form-label">Selecione uma Image de Capa</label>
+                <input class="form-control" name="cover" type="file" id="form-article-cover">
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Escreva o Seu Artigo</label>
+                <textarea name="text" class="form-control" id="article-text" placeholder="Texto do seu artigo...">
+                    {{ article.content }}
+                </textarea>
+            </div>
+            <p class="progress-test"></p>
+            <div class="progress mb-3">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 20px"
+                     id="progress-bar-article"></div>
+            </div>
+            <button class="btn btn-outline-primary w-100" type="submit">Publicar</button>
+        </form>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ BASE_URL }}/assets/scripts/tinymce.min.js"></script>
+    <script>
+        const tinymceConfig = {
+            selector: 'textarea#article-text',
+            autosave_ask_before_unload: false,
+            powerpaste_allow_local_images: true,
+            menubar: false,
+            plugins: [
+                'a11ychecker', 'advcode', 'advlist', 'anchor', 'autolink', 'codesample', 'fullscreen', 'help',
+                'image', 'editimage', 'tinydrive', 'lists', 'link', 'media', 'powerpaste', 'preview',
+                'searchreplace', 'table', 'template', 'tinymcespellchecker', 'visualblocks', 'wordcount'
+            ],
+            toolbar: 'insertfile a11ycheck undo redo | bold italic underline | forecolor backcolor |  codesample | alignleft aligncenter alignright alignjustify | bullist numlist | link image',
+            spellchecker_dialog: true,
+            spellchecker_ignore_list: ['Ephox', 'Moxiecode'],
+            tinydrive_demo_files_url: '../_images/tiny-drive-demo/demo_files.json',
+            tinydrive_token_provider: (success, failure) => {
+                success({token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Ks_BdfH4CWilyzLNk8S2gDARFhuxIauLa8PwhdEQhEo'});
+            },
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+        };
+
+        tinymce.init(tinymceConfig);
+
+        const toggleCoverElement = document.getElementById('headingOne');
+        let show = false;
+        const toggleCover = () => {
+            const coverContainer = document.querySelector('#collapseOne');
+            coverContainer.classList.toggle('hidden-cover');
+            const accordionBtn = document.querySelector('.accordion-button');
+            accordionBtn.classList.toggle('rotate-icon');
+            if (show) {
+                accordionBtn.innerText = 'Visualizar Capa';
+                show = false;
+            } else {
+                accordionBtn.innerText = 'Ocultar Capa';
+                show = true;
+            }
+        }
+        if (toggleCoverElement)
+            toggleCoverElement.addEventListener('click', toggleCover);
+
+        const formArticle = document.querySelector('form.form-article');
+        const articleSubmit = (e) => {
+            e.preventDefault();
+            const formData = new FormData(formArticle);
+            document.querySelector('form.form-article input[type="file"]')
+                .addEventListener('change', (e) => {
+                    if (e.target.files !== null && e.target.files.length > 0) {
+                        formData.append('cover', e.target.files[0]);
+                    }
+                });
+
+            const xhr = new XMLHttpRequest();
+            const progress = (e) => {
+                let percent = Math.floor((e.loaded * 100) / e.total);
+                const progressBar = document.querySelector('#progress-bar-article');
+                const progressText = document.querySelector('.progress-test');
+                progressText.innerText = 'Aguade, carregando...';
+                progressBar.style.width = `${percent}%`;
+                progressBar.innerText = `${percent}%`;
+                if (percent >= 100) {
+                    progressText.innerText = 'Concluído';
+                    progressBar.style.width = 0;
+                    progressBar.innerText = '';
+                }
+            }
+            xhr.upload.addEventListener('progress', progress);
+            xhr.open('POST', `${formArticle.getAttribute('action')}`);
+            xhr.send(formData);
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300) {
+                    const res = JSON.parse(xhr.responseText);
+                    if (res.redirect) {
+                        window.location.href = res.redirect;
+                    }
+                }
+            }
+        }
+        formArticle.addEventListener('submit', articleSubmit);
+    </script>
+{% endblock %}

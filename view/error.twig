@@ -1,0 +1,9 @@
+{% extends('__theme.twig') %}
+{% block title %}Página não encontrada{% endblock %}
+{% block message %}{{ message }}{% endblock %}
+{% block body %}
+    <main class="d-flex flex-column align-items-center justify-content-center  align-self-stretch bg-danger h-100">
+        <h1 class="display-1 text-secondary">&bull; Oops! &bull;</h1>
+        <p class="lead text-light">Você tentou acessar uma página que não existe neste servidor.</p>
+    </main>
+{% endblock %}
