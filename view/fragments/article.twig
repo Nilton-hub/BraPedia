@@ -2,7 +2,12 @@
     <header class="card-header p-2">
         <div class="d-flex align-items-center gap-2">
             <div class="profile">
-                <i class="icon-profile-male border p-2 rounded-circle"></i>
+                {% if article.user_photo|length > 0 %}
+                    <div style="background-image: url({{ BASE_URL }}/{{ article.user_photo }});
+                            width: 45px; height: 45px; background-size: cover; background-position: center; border-radius: 50%;"></div>
+                {% else %}
+                    <i class="icon-profile-male border p-2 rounded-circle"></i>
+                {% endif %}
             </div>
             <div class="p-3">
                 <strong>{{ article.name }}</strong>

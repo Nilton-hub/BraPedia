@@ -12,7 +12,13 @@
                 <img src="{{ BASE_URL }}/{{ article.cover }}" alt="{{ article.title }}" srcset="" class="rounded-3 mb-3 img-fluid">
             {% endif %}
             <div class="col-9 col-lg-9 m-auto mt3">
-                <span class="opacity-50">Por</span> <span class="border rounded-circle p-2 icon-profile-male"></span>
+                <span class="opacity-50">Por</span>
+                {% if userPost.photo|length > 0 %}
+                    <span class="border rounded-circle d-inline-block"
+                          style="width: 30px; height: 30px; transform: translateY(10px); background-image: url({{ "#{BASE_URL}/#{userPost.photo}" }}); background-size: cover;"></span>
+                {% else %}
+                    <span class="border rounded-circle p-2 icon-profile-male"></span>
+                {% endif %}
                 <strong>{{ userPost.name }}</strong> <span
                         class="opacity-50"> &bull; {{ article.created_at|date('d/m/Y h:i', 'America/Sao_Paulo') }}</span>
             </div>

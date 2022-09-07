@@ -35,7 +35,7 @@ class Web
     public function home(): void
     {
         $articles = DB::table("posts AS p")
-            ->selectRaw("p.id, p.title, p.subtitle, p.cover, p.content, p.created_at, u.id AS 'user_id', u.name")
+            ->selectRaw("p.id, p.title, p.subtitle, p.cover, p.content, p.created_at, u.id AS 'user_id', u.name, u.photo AS user_photo")
             ->join("users u ON u.id = p.user_id")
             ->where("hidden = :hidden", ['hidden' => '0']);
         $coments = DB::table('comments')
@@ -43,8 +43,8 @@ class Web
             comments.updated_at, users.name AS user_name, users.photo")
             ->join("users ON comments.user_id = users.id");
         $responses = DB::table('comments_reply')
-            ->selectRaw('DISTINCT comments_reply.id, comments_reply.text, comments_reply.comment_id, comments_reply.updated_at, u.name AS user_name')
-            ->join('comments c on comments_reply.user_id = c.user_id')
+            ->selectRaw('DISTINCT comments_reply.id, comments_reply.text, comments_reply.comment_id, comments_reply.user_id, comments_reply.updated_at, u.name AS user_name, u.photo')
+            ->join('comments c on comments_reply.comment_id = c.id') // comments_reply.user_id = c.user_id
             ->join('users AS u ON u.id = comments_reply.user_id');
 
         echo $this->view->load('feed', [
@@ -178,7 +178,7 @@ class Web
                 redirect();
             }
             $userModel = (new User())->isId($article->user_id);
-            $user = (new Model($userModel))->read(null, ["id", "name"])->first();
+            $user = (new Model($userModel))->read(null, ["id", "name", "photo"])->first();
 
             $commentModel = (new Comment())->isPostId($id);
             $comments = (new Model($commentModel))->read(["post_id"])->get();

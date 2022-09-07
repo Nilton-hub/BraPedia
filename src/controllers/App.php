@@ -37,7 +37,7 @@ class App
         $this->user->isEmail(Auth::user()->email);
         $this->user->isId(Auth::user()->id);
         $this->user->isToken(Auth::user()->token);
-        $this->user->photo(Auth::user()->photo);
+        $this->user->isPhoto(Auth::user()->photo);
     }
 
     public function profile(array $data = null): void
@@ -252,6 +252,7 @@ class App
                 $commentSend = new \StdClass();
                 $commentSend->commentid = $articleId;
                 $commentSend->id = $articleId;
+                $commentSend->photo = Auth::user()->photo;
                 $commentSend->user_name = $this->user->name();
                 $commentSend->user = (object)[
                     'photo' => Auth::user()->photo,
@@ -306,6 +307,7 @@ class App
                         'response' => (object)[
                             'id' => $repplyId,
                             'user_name' => $this->user->name(),
+                            'user_response' => (object)['photo' => $this->user->photo()],
                             'text' => $post['response'],
                             'user_id' => $this->user->id()
                         ],
