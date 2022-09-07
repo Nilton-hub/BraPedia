@@ -1,3 +1,5 @@
+import notificationTpl from 'http://localhost/assets/scripts/components/notification-tpl.js';
+
 const body = document.querySelector('body'),
     btnToggleMenu = document.querySelector('#btn-toggle-menu'),
     mainsidebar = document.querySelector('#main-sidebar-menu'),
@@ -89,25 +91,50 @@ async function getChannels() {
     return await request.json();
 }
 
-getChannels()
-    .then(data => {
-        data.map(json => {
-            if (json.channel) {
-                const channel = `${json.channel.replaceAll(' ', '_')}_${json.user_id}`;
-                console.log(channel);
-            }
-        });
-    });
-
 var conn = new ab.Session('ws://localhost:8080',
     function() {
-        conn.subscribe('kittensCategory', function(topic, data) {
-            // This is where you would add the new article to the DOM (beyond the scope of this tutorial)
+        //article_Assincronismo_com_9_3
+        getChannels().then(response => {
+                response.map(channel => {
+                    conn.subscribe(channel, (topic, data) => {
+                        data = JSON.parse(data);
+                        switch (topic.split('_')[0]) {
+                            case 'article':
+                                console.log(`${data.username} comentou no seu artigo: \"${data.msg}\"`);
+                                // ${data.username} comentou no seu artigo: "Bla blá blá"
+                                break;
+                            case 'comment':
+                                console.log(`${data.username} respondeu seu comentário: \"${data.msg}\"`);
+                                // ${data.username} respondeu seu comentário: "Bla blá blá"
+                                break;
+                            case 'commentRepply':
+                                console.log(`${data.username} respondeu seu comentário: \"${data.msg}\"`);
+                                // ${data.username} respondeu seu comentário: "Bla blá blá"
+                                break;
+                        }
+                        console.log(topic);
+                        console.log(data);
+                    });
+                });
+            });
+        /*conn.subscribe('kittensCategory', function(topic, data) {
             console.log('New article published to category "' + topic + '" : ' + data.title);
-        });
+        });*/
     },
     function() {
         console.warn('WebSocket connection closed');
     },
     {'skipSubprotocolCheck': true}
 );
+
+/*
+const item_A = notificationTpl({
+    username: 'Marina',
+    msg: 'Muito bom!',
+    photo: 'http://localhost/uploads/profile/1662282486-eu-pb.jpg',
+    // url: `${baseUrl}/artigo/9#container-of-comment-25` // comment
+    url: `${baseUrl}/artigo/9#comment-response-67` // response
+}, 'Comentou no seu artigo');
+
+document.querySelector("#main-sidebar-menu").append(item_A);
+*/

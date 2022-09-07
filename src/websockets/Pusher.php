@@ -70,7 +70,6 @@ class Pusher implements WampServerInterface
      */
     function onSubscribe(ConnectionInterface $conn, $topic): void
     {
-        echo "Nova inscrição em {$topic}" . PHP_EOL;
         $this->subscribedTopics[$topic->getId()] = $topic;
     }
 
