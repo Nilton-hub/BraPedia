@@ -29,7 +29,7 @@ class Pusher implements WampServerInterface
      */
     function onOpen(ConnectionInterface $conn)
     {
-        echo "Conexão aberta: " . date("D, d/m/Y H:i:s");
+        echo "Conexão aberta: " . date("D, d/m/Y H:i:s") . PHP_EOL;
     }
 
     /**
@@ -70,6 +70,7 @@ class Pusher implements WampServerInterface
      */
     function onSubscribe(ConnectionInterface $conn, $topic): void
     {
+        echo "Nova inscrição em {$topic}" . PHP_EOL;
         $this->subscribedTopics[$topic->getId()] = $topic;
     }
 

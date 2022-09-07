@@ -35,6 +35,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     });
 
     $r->post('/profile-picture', '\\src\\controllers\App@profilePicture');
+    $r->get('/notify', '\\src\\controllers\App@channels');
 
 //    debug
     $r->addGroup('/test', function (RouteCollector $r) {

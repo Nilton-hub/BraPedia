@@ -51,7 +51,6 @@ class Model
             }
         }
         $fields = implode(" AND ", $fields);
-
         return DB::table($this->model::entity())
             ->select($columns)
             ->where($fields, $where);

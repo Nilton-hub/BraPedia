@@ -84,6 +84,21 @@ function closeAlert() {
 }
 
 // WEBSOCKET CONNECTION BY NOTIFICATIONS
+async function getChannels() {
+    const request = await fetch(`${baseUrl}/notify`);
+    return await request.json();
+}
+
+getChannels()
+    .then(data => {
+        data.map(json => {
+            if (json.channel) {
+                const channel = `${json.channel.replaceAll(' ', '_')}_${json.user_id}`;
+                console.log(channel);
+            }
+        });
+    });
+
 var conn = new ab.Session('ws://localhost:8080',
     function() {
         conn.subscribe('kittensCategory', function(topic, data) {

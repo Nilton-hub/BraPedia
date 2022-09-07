@@ -12,6 +12,7 @@ use src\models\Post;
 use src\models\User;
 use src\support\Auth;
 use src\support\Image;
+use src\support\NotificationChannels;
 
 class App
 {
@@ -399,10 +400,19 @@ class App
     /**
      * @return void
      */
+    public function channels(): void
+    {
+        $notificationChannels = new NotificationChannels();
+        $channels = $notificationChannels->channels();
+        echo json_encode($channels);
+    }
+
+    /**
+     * @return void
+     */
     public function logout(): void
     {
         (new Auth())->logout();
         redirect();
     }
 }
-
