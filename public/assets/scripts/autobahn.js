@@ -822,3 +822,12 @@ ab.Session.prototype.publish = function () {
 
    self._send(msg);
 };
+var conn = new ab.Session('ws://localhost:8080',
+    () => {
+
+    },
+    () => {
+
+    }
+);
+console.log(ab);

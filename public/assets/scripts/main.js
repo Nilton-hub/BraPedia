@@ -1,4 +1,4 @@
-import notificationTpl from 'http://localhost/assets/scripts/components/notification-tpl.js';
+import notificationTpl from './components/notification-tpl.js';
 
 const body = document.querySelector('body'),
     btnToggleMenu = document.querySelector('#btn-toggle-menu'),
@@ -98,10 +98,15 @@ var conn = new ab.Session('ws://localhost:8080',
                 response.map(channel => {
                     conn.subscribe(channel, (topic, data) => {
                         data = JSON.parse(data);
+                        let notifyTpl;
                         switch (topic.split('_')[0]) {
                             case 'article':
-                                console.log(`${data.username} comentou no seu artigo: \"${data.msg}\"`);
-                                // ${data.username} comentou no seu artigo: "Bla blá blá"
+                                notifyTpl = notificationTpl({
+                                    username: data.username,
+                                    msg: data.msg,
+                                    photo: `${baseUrl}/uploads/profile/${data.photo}`, // 1662282486-eu-pb.jpg
+                                    url: `${baseUrl}/artigo/9#${data.comment_id}` // comment
+                                }, 'Comentou no seu artigo');
                                 break;
                             case 'comment':
                                 console.log(`${data.username} respondeu seu comentário: \"${data.msg}\"`);
@@ -112,8 +117,7 @@ var conn = new ab.Session('ws://localhost:8080',
                                 // ${data.username} respondeu seu comentário: "Bla blá blá"
                                 break;
                         }
-                        console.log(topic);
-                        console.log(data);
+                        document.querySelector("#main-sidebar-menu").append(notifyTpl);
                     });
                 });
             });
@@ -128,6 +132,7 @@ var conn = new ab.Session('ws://localhost:8080',
 );
 
 /*
+// COMO ADICIONAR UM NOVO COMPONENTE DE NOTIFICAÇÃO
 const item_A = notificationTpl({
     username: 'Marina',
     msg: 'Muito bom!',
