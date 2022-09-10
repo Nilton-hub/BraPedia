@@ -20,7 +20,8 @@
     <div class="px-3 py-2 bg-dark text-white">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="{{ BASE_URL }}" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                <a href="{{ BASE_URL }}"
+                   class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
                     <img src="{{ BASE_URL }}/assets/images/logo.svg" alt="">
                 </a>
 
@@ -36,21 +37,24 @@
                             <i class="icon-home"></i>
                         </a>
                     </li>
-                    <li id="notification-button">
-                        <a href="javascript:void(0)" title="Notificações" class="nav-link text-white">
-                            <i class="icon-alarm"></i>
-                        </a>
-                    </li>
                     {% if user %}
-                    <li>
-                        <a href="{{ BASE_URL }}/perfil" title="perfil" class="nav-link text-white">
-                            {% if userPhoto is null or userPhoto|length == 0 %}
-                                <i class="icon-profile-male"></i>
-                            {% else %}
-                                <img src="{{ BASE_URL }}/{{ userPhoto }}" width="30px" height="30px" alt="" style="border-radius: 50%;">
-                            {% endif %}
-                        </a>
-                    </li>
+                        <li id="notification-button">
+                            <a href="javascript:void(0)" title="Notificações" class="nav-link text-white">
+                                <i class="icon-alarm"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if user %}
+                        <li>
+                            <a href="{{ BASE_URL }}/perfil" title="perfil" class="nav-link text-white">
+                                {% if userPhoto is null or userPhoto|length == 0 %}
+                                    <i class="icon-profile-male"></i>
+                                {% else %}
+                                    <img src="{{ BASE_URL }}/{{ userPhoto }}" width="30px" height="30px" alt=""
+                                         style="border-radius: 50%;">
+                                {% endif %}
+                            </a>
+                        </li>
                     {% else %}
                         <li>
                             <a href="{{ BASE_URL }}/login" title="entrar" class="nav-link text-white">
@@ -62,14 +66,22 @@
                         <a href="javascript:void(0)" title="menu" class="nav-link text-white">
                             <button class="icon-menu" id="btn-toggle-menu"></button>
                         </a>
-                        <ul class="position-fixed top-1 bg-info list-unstyled col-10 col-md-5 col-sm-6 col-lg-4" id="main-sidebar-menu" style="z-index: 25;">
+                        <ul class="position-fixed top-1 bg-info list-unstyled col-10 col-md-5 col-sm-6 col-lg-4"
+                            id="main-sidebar-menu" style="z-index: 25;">
                             <li><h3 class="text-center">Menu</h3></li>
-                            <li><a href="{{ BASE_URL }}" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Início</a></li>
-                            <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Termos de uso</a></li>
+                            <li><a href="{{ BASE_URL }}"
+                                   class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Início</a>
+                            </li>
+                            <li><a href="" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Termos
+                                    de uso</a></li>
                             {% if user %}
-                                <li><a href="{{ BASE_URL }}/sair" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Sair</a></li>
+                                <li><a href="{{ BASE_URL }}/sair"
+                                       class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Sair</a>
+                                </li>
                             {% else %}
-                                <li><a href="{{ BASE_URL }}/login" class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Entre na sua conta</a></li>
+                                <li><a href="{{ BASE_URL }}/login"
+                                       class="link-light text-decoration-none d-block py-2 px-5  border-bottom">Entre na
+                                        sua conta</a></li>
                             {% endif %}
                         </ul>
                     </li>
@@ -78,23 +90,25 @@
         </div>
     </div>
 </header>
-
-<div class="col-12 col-md-6 col-lg-4
+{% if user %}
+    <div class="col-12 col-md-6 col-lg-4
     notification-sidebar">
-    <button class="btn btn-close d-block text-white border p-2" style="margin: 10px 10px 10px auto;"></button>
-    <div class="border-top border-1 border-success
+        <button class="btn btn-close d-block text-white border p-2" style="margin: 10px 10px 10px auto;"></button>
+        <div class="border-top border-1 border-success
     notification-container"></div>
-</div>
-
+    </div>
+{% endif %}
 <div class="rounded-3 bg-info position-relative p-1 col-11 col-sm-11 col-md-6 col-lg-4 d-inline-block ms-auto me-3 my-2 float-end p-0 search-container">
     <form action="{{ BASE_URL }}/search" method="get" class="form-search p-0">
         <label class="rounded-2 d-flex w-100 p-0">
-            <input type="search" name="search" placeholder="Encontre um Artigo..." disabled class="col-10 p-2" id="input-article-search">
+            <input type="search" name="search" placeholder="Encontre um Artigo..." disabled class="col-10 p-2"
+                   id="input-article-search">
             <button type="submit" class="col-2 icon-search"></button>
         </label>
     </form>
 </div>
-<div id="liveAlertPlaceholder" style="width: 90%; margin: auto; position: fixed; top: 80px; left: 5%; opacity: 1; z-index: 10;">{% block message %}{% endblock %}</div>
+<div id="liveAlertPlaceholder"
+     style="width: 90%; margin: auto; position: fixed; top: 80px; left: 5%; opacity: 1; z-index: 10;">{% block message %}{% endblock %}</div>
 <!-- messages -->
 {% block body %}{% endblock %}
 <p id="test-jquery"></p>
