@@ -36,6 +36,11 @@
                             <i class="icon-home"></i>
                         </a>
                     </li>
+                    <li id="notification-button">
+                        <a href="javascript:void(0)" title="Notificações" class="nav-link text-white">
+                            <i class="icon-alarm"></i>
+                        </a>
+                    </li>
                     {% if user %}
                     <li>
                         <a href="{{ BASE_URL }}/perfil" title="perfil" class="nav-link text-white">
@@ -73,6 +78,13 @@
         </div>
     </div>
 </header>
+
+<div class="col-12 col-md-6 col-lg-4
+    notification-sidebar">
+    <button class="btn btn-close d-block text-white border p-2" style="margin: 10px 10px 10px auto;"></button>
+    <div class="border-top border-1 border-success
+    notification-container"></div>
+</div>
 
 <div class="rounded-3 bg-info position-relative p-1 col-11 col-sm-11 col-md-6 col-lg-4 d-inline-block ms-auto me-3 my-2 float-end p-0 search-container">
     <form action="{{ BASE_URL }}/search" method="get" class="form-search p-0">

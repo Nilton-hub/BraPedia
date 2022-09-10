@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?bls6oc');
-  src:  url('fonts/icomoon.eot?bls6oc#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?bls6oc') format('truetype'),
-    url('fonts/icomoon.woff?bls6oc') format('woff'),
-    url('fonts/icomoon.svg?bls6oc#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?tvgi8k');
+  src:  url('fonts/icomoon.eot?tvgi8k#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?tvgi8k') format('truetype'),
+    url('fonts/icomoon.woff?tvgi8k') format('woff'),
+    url('fonts/icomoon.svg?tvgi8k#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -28,6 +28,9 @@
 .icon-in-alt:before {
   content: "\e900";
 }
+.icon-alarm:before {
+  content: "\e910";
+}
 .icon-blocked:before {
   content: "\e90c";
 }
@@ -45,6 +48,9 @@
 }
 .icon-x:before {
   content: "\e90a";
+}
+.icon-profile-male1:before {
+  content: "\e90f";
 }
 .icon-eye:before {
   content: "\e901";

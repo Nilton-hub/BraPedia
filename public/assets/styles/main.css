@@ -102,6 +102,22 @@ body {
     font-size: 1.2rem;
 }
 
+/* notification */
+.notification-sidebar {
+    background: #0a53be;
+    position: fixed;
+    top: 120px;
+    height: calc(100% - 120px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    transform: translateX(-120%);
+    transition: transform 200ms linear 0s;
+}
+
+.notification-sidebar.active {
+    transform: translateX(0);
+}
+
 #btn-toggle-menu {
     background-color: inherit;
     color: white;
@@ -147,7 +163,11 @@ body {
     #main-sidebar-menu {
         top: calc(3rem + 10px);
     }
-}
+    .notification-sidebar {
+        top: 60px;
+        height: calc(100% - 60px);
+        z-index: 100;
+    }
 
 @media (min-width: 1200px) {
 
