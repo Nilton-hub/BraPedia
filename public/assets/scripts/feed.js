@@ -1,3 +1,5 @@
+import * as Main from './main.js';
+
 const topLink = document.querySelector('[href="#main-header"]'),
     bottomReference = document.querySelector('#bottom-reference'),
     btnsToggleComments = document.querySelectorAll('p.btn-toggle-comments'),
@@ -77,8 +79,17 @@ const toggleComments = (id, commentid) => {
     commentActions.classList.toggle('d-none');
 }
 
+const buttonsCommentOptions = document.querySelectorAll('[id^="container-of-comment-"] div.btn-comment-actions');
+buttonsCommentOptions.forEach(button => {
+    button.addEventListener('click', evt => {
+        const articleid = button.getAttribute('data-articleid');
+        const commentid = button.getAttribute('data-commentid');
+        toggleComments(articleid, commentid);
+    });
+});
+
 // COMMENT SUBMIT
-formsArtcilecomment = document.querySelectorAll('.form-article-commemnt');
+const formsArtcilecomment = document.querySelectorAll('.form-article-commemnt');
 formsArtcilecomment.forEach((element) => {
     const commentAction = (e) => {
         e.preventDefault();
@@ -103,56 +114,88 @@ formsArtcilecomment.forEach((element) => {
 function commentActionEdit(id) {
     let comment = document.getElementById(`post-comment-${id}`);
     let btnUpdate = document.getElementById(`btn-update-comment-${id}`);
-    btnUpdate.parentNode.style.display = 'inline-block';
-    comment.setAttribute("contenteditable", "true");
-    comment.style.width = 'calc(100% - 70px)';
-    comment.focus();
-    document.querySelector(`.comment-actions-${id}`).classList.add('d-none');
+    let btnCancel = document.getElementById(`btn-cancel-comment-${id}`);
+
+    const editCancel = () => {
+        btnUpdate.parentNode.style.display = 'none';
+        btnUpdate.parentNode.style.zIndex = '';
+        comment.removeAttribute('contenteditable');
+        comment.style.width = '100%';
+        btnUpdate.removeEventListener('click', sendRequest);
+    };
+    if (btnCancel)
+        btnCancel.addEventListener('click', ev => editCancel);
+    if (btnUpdate && comment) {
+        btnUpdate.parentNode.style.display = 'inline-block';
+        btnUpdate.parentNode.style.zIndex = '1';
+        comment.setAttribute("contenteditable", "true");
+        comment.style.width = 'calc(100% - 70px)';
+        comment.focus();
+        document.querySelector(`.comment-actions-${id}`).classList.add('d-none');
+    }
 
     const sendRequest = () => {
         if (comment.innerText.length === 0) {
-            message('Não é possível enviar enviar um comentário vazio.', 'danger');
+            Main.message('Não é possível enviar enviar um comentário vazio.', 'danger');
             return;
         }
         const formData = new FormData();
         formData.append('id', id);
         formData.append('action', 'edit');
         formData.append('text', comment.innerText);
-        fetch(`${baseUrl}/comment/action`, {
+        fetch(`${Main.baseUrl}/comment/action`, {
             method: 'POST',
             body: formData
         })
             .then(res => res.text())
             .then(data => { console.log(data) })
             .catch(err => { console.log(err) });
-        btnUpdate.parentNode.style.display = 'none';
-        comment.removeAttribute('contenteditable');
-        comment.style.width = '100%';
+        editCancel();
         btnUpdate.removeEventListener('click', sendRequest);
     }
-    btnUpdate.addEventListener('click', sendRequest);
-    document.getElementById(`btn-cancel-comment-${id}`).onclick = (e) => {
-        btnUpdate.parentNode.style.display = 'none';
-        comment.removeAttribute('contenteditable');
-        comment.style.width = '100%';
-        btnUpdate.removeEventListener('click', sendRequest);
-    };
+    if (btnUpdate && btnCancel) {
+        btnUpdate.addEventListener('click', sendRequest);
+        btnCancel.onclick = (e) => {
+            btnUpdate.parentNode.style.display = 'none';
+            comment.removeAttribute('contenteditable');
+            comment.style.width = '100%';
+            btnUpdate.removeEventListener('click', sendRequest);
+        };
+    }
 }
+
+const btnLiEdit = document.querySelectorAll('[id^="container-of-comment-"] .opt-edit');
+btnLiEdit.forEach(li => {
+    li.addEventListener('click', evt => {
+        const id = li.getAttribute('data-commentid');
+        commentActionEdit(id);
+    });
+});
 
 // TO REMOVER COMMENT
 function commentActionRemove(id) {
     const formData = new FormData();
     formData.append('id', id);
     formData.append('action', 'delete');
-    fetch(`${baseUrl}/comment/action`, {
+    fetch(`${Main.baseUrl}/comment/action`, {
         method: 'POST',
         body: formData
     })
         .then(res => res.text())
         .then(data => { console.log(data) })
         .catch(err => { console.log(err) });
-    document.getElementById(`container-of-comment-${id}`).remove();
+    const containerOfComment = document.getElementById(`container-of-comment-${id}`);
+    if (containerOfComment)
+        containerOfComment.remove();
 }
+
+const btnLiRemove = document.querySelectorAll('[id^="container-of-comment-"] .opt-delete');
+btnLiRemove.forEach(li => {
+    li.addEventListener('click', evt => {
+        const id = li.getAttribute('data-commentid');
+        commentActionRemove(id);
+    });
+});
 
 //RESPONSE SUBMIT
 const responseSubmit = (e) => {
@@ -182,6 +225,16 @@ const toggleResponse = (id, responseId) => {
     responseActions.classList.toggle('d-none');
 }
 
+const btnsDivResponse = document.querySelectorAll('[id^=btn-response-actions-]');
+btnsDivResponse.forEach(div => {
+    div.addEventListener('click', evt => {
+        const articleid = div.getAttribute('data-articleid');
+        const responseid = div.getAttribute('data-responseid');
+        toggleResponse(articleid, responseid);
+    });
+});
+
+// EDIT REPPLY
 function commentRepplyEdit(id) {
     const repply = document.getElementById(`comment-repply-${id}`);
     const btnSend = document.getElementById('btn-coment-reppy-send-' + id);
@@ -202,7 +255,7 @@ function commentRepplyEdit(id) {
             formData.append('repply_id', id);
             formData.append('action', 'edit');
             formData.append('text', repply.innerText);
-            fetch(`${baseUrl}/comment/repply-actions`, {
+            fetch(`${Main.baseUrl}/comment/repply-actions`, {
                 method: 'POST',
                 body: formData
             })
@@ -211,11 +264,20 @@ function commentRepplyEdit(id) {
         });
 }
 
+const btnsLisRepply = document.querySelectorAll('[id^="comment-repply-container-"] .opt-edit');
+btnsLisRepply.forEach(li => {
+    li.addEventListener('click', evt => {
+        const id = li.getAttribute('data-responseid');
+        commentRepplyEdit(id)
+    });
+});
+
+// DELETE REPPLY
 function commentRepplyDelete(id) {
     let formData = new FormData();
     formData.append('repply_id', id);
     formData.append('action', 'delete');
-    fetch(`${baseUrl}/comment/repply-actions`, {
+    fetch(`${Main.baseUrl}/comment/repply-actions`, {
         method: 'POST',
         body: formData
     })
@@ -227,3 +289,11 @@ function commentRepplyDelete(id) {
         })
         .catch(error => { console.log(error); });
 }
+
+const btnsLisResponseDelete = document.querySelectorAll('[id^="comment-repply-container-"] .opt-delete');
+btnsLisResponseDelete.forEach(li => {
+    li.addEventListener('click', evt => {
+        const id = li.getAttribute('data-responseid');
+        commentRepplyDelete(id);
+    })
+});

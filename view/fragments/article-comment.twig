@@ -1,12 +1,11 @@
-
 <div class="d-block w-100 comment-item" id="container-of-comment-{{ comment.id }}">
     <div class="d-flex align-items-center gap-3 p-2 bg-light mb-5 w-100 comment-item-inner" style="position: relative;">
         {% if comment.user_id ==  user.id %}
             <div class="btn-comment-actions-{{ comment.id }}">...</div><!-- btn -->
             <div class="comment-actions-{{ comment.id }} no-close-comment-opts d-none"><!-- Comment Options -->
                 <ul class="no-close-comment-opts">
-                    <li class="opt-edit no-close-comment-opts" onclick="commentActionEdit({{ comment.id }})">Editar</li>
-                    <li class="opt-delete no-close-comment-opts" onclick="commentActionDelete({{ comment.id }})">Apagar</li>
+                    <li class="opt-edit no-close-comment-opts" id="commentActionEdit-{{ comment.id }}">Editar</li>
+                    <li class="opt-delete no-close-comment-opts" id="commentActionDelete-{{ comment.id }}">Apagar</li>
                 </ul>
             </div>
         {% endif %}

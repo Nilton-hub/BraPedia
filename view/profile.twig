@@ -13,7 +13,6 @@
                         <i class="icon-profile-male border rounded-circle p-4 d-inline-block m-auto"
                            style="font-size: 4em;"></i>
                     {% else %}
-                        {# <div class="profile-picture" style="background-image: url(assets/images/icon-profile-png.png);"></div> #}
                         <div class="profile-picture"
                              style="background-image: url('{{ BASE_URL }}/{{ userPhoto }}'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
                     {% endif %}
@@ -129,5 +128,5 @@
     <!-- FIM MODAL -->
 {% endblock %}
 {% block scripts %}
-    <script src="{{ BASE_URL }}/assets/scripts/profile.js"></script>
+    <script src="{{ BASE_URL }}/assets/scripts/profile.js" type="module"></script>
 {% endblock %}

@@ -1,4 +1,7 @@
-const formArticle = document.querySelector('form.form-article');
+import * as Main from './main.js';
+
+const formArticle = document.querySelector('form.form-article'),
+    alertPlaceholder = document.getElementById('liveAlertPlaceholder');
 
 const tinymceConfig = {
     selector: 'textarea#article-text',

@@ -1,17 +1,30 @@
 import notificationTpl from "../components/notification-tpl.js";
 import '../autobahn.js';
 
+const login = () => {
+    const cookies = document.cookie.split(';')
+        .map(e => e.split('=')[0]);
+    return cookies.indexOf('login') !== -1;
+};
+
 export function notify() {
     const baseUrl = 'http://localhost';
+
     async function getChannels() {
         const request = await fetch(`${baseUrl}/notify`);
-        return await request.json();
+        if (login()) {
+            return await request.json();
+        }
+        return null;
     }
 
     var conn = new ab.Session('ws://localhost:8080',
-        function() {
+        async function () {
             //article_Assincronismo_com_9_3
-            getChannels().then(response => {
+            const notifications = getChannels();
+            if (!await notifications)
+                return;
+            notifications.then(response => {
                 response.map(channel => {
                     conn.subscribe(channel, (topic, data) => {
                         data = JSON.parse(data);

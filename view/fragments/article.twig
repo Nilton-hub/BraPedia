@@ -30,12 +30,10 @@
     {% if comments is defined and comments|length > 0 %}
         <p class="btn btn-link btn-toggle-comments" id="btn-toggle-comments-{{ article.id }}"></p>
         <div id="comments-container-{{ article.id }}">
-            {% set cont = 1 %}
             {% for comment in comments %}
                 {% if article.id == comment.post_id %}
                     {% include('fragments/comment.twig') %}
                 {% endif %}
-                {% set cont = cont + 1 %}
             {% endfor %}
         </div>
     {% endif %}

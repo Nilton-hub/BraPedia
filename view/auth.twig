@@ -85,7 +85,7 @@
     </main>
 {% endblock %}
 {% block scripts %}
-    <script src="{{ BASE_URL }}/assets/scripts/auth.js"></script>
+    <script src="{{ BASE_URL }}/assets/scripts/auth.js" type="module"></script>
     <script>
         const formForget = document.querySelector('form.form-account-forget');
         const accountForget = (evt) => {

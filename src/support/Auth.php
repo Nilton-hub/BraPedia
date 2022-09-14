@@ -206,7 +206,6 @@ class Auth
         $data = explode("|", base64_decode($token));
         $userModel = (new User())->isEmail($data[0]);
         $user = (new Model($userModel))->read(["email"], ["id, forget, forget_data"])->first();
-//        printf("<a href=\"%s/recuperar-senha/%s\">Voltar</a>", CONF_BASE_URL, $user->forget);
         if (!$user) {
             $this->error = "O email informado não existe na nossa base de dados.";
             return false;

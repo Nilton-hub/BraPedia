@@ -1,4 +1,7 @@
+import * as Main from './main.js';
+
 const formLogin = document.getElementById('form-login'),
+    alertPlaceholder = document.getElementById('liveAlertPlaceholder'),
     formRegister = document.getElementById('form-register'),
     divsFormHeader = document.querySelectorAll('.header-form div'),
     iconTogglePassword = document.getElementById('icon-toggle-password'),
@@ -7,7 +10,7 @@ const formLogin = document.getElementById('form-login'),
     modal = document.querySelector('#modals'),
     modalClose = () => {
         if (!modal.classList.contains('d-none')) {
-            modal.classList.add('d-none')
+            modal.classList.add('d-none');
         }
     };
 
@@ -123,7 +126,7 @@ const loginSubmit = (e) => {
         .then(res => res.json())
         .then(data => {
             console.log(data);
-            if (data.message) {
+            if (data.message && alertPlaceholder) {
                 alertPlaceholder.innerHTML = data.message
             }
             if (data.redirect) {
@@ -155,7 +158,7 @@ const resgisterSubmit = (e) => {
         })
             .then(data => data.json())
             .then(res => {
-                if (res.message) {
+                if (res.message && alertPlaceholder) {
                     alertPlaceholder.innerHTML = res.message;
                 }
                 if (res.redirect) {

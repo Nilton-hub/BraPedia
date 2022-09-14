@@ -39,7 +39,7 @@
 
         <!-- INÍCIO COMENTÁRIOS -->
         <section>
-            <form action="{{ BASE_URL }}/comment/comment" method="post" class="container-fluid" id="form-comment">
+            <form action="{{ BASE_URL }}/comment/comment" method="post" enctype="multipart/form-data" class="container-fluid" id="form-comment">
                 <div class="input-group mb-3 mt-5 w-75 m-auto">
                     <input type="hidden" name="article_id" value="{{ article.id }}">
                     <input type="hidden" name="name" value="{{ user.name }}">
@@ -81,5 +81,5 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{{ BASE_URL }}/assets/scripts/article.js"></script>
+    <script src="{{ BASE_URL }}/assets/scripts/article.js" type="module" async></script>
 {% endblock %}

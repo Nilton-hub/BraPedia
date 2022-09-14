@@ -1,4 +1,7 @@
+import * as Main from './main.js';
+
 let articleOptions = document.getElementById('article-options'),
+    alertPlaceholder = document.getElementById('liveAlertPlaceholder'),
     modalContentHidePost = document.querySelector('.modal-content-hide-post'),
     modalContentDeletePost = document.querySelector('.modal-content-delete-post'),
     btnArticleDelete = document.getElementById('btn-article-delete'),
@@ -108,14 +111,13 @@ const submitComment = (e) => {
     })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             btnCommentShowActions();
             if (data.commentTpl) {
                 document.querySelector('div.comment-list-container').innerHTML += data.commentTpl;
             }
             if (data.comment_id) {
                 document.querySelector('#form-comment [name="comment"]').value = '';
-                setTimeout(() =>  window.location.href = `${baseUrl}/artigo/${article_id}#container-of-comment-${data.comment_id}`, 200);
+                setTimeout(() =>  window.location.href = `${Main.baseUrl}/artigo/${article_id}#container-of-comment-${data.comment_id}`, 200);
             }
         })
         .catch(error => {
@@ -125,7 +127,8 @@ const submitComment = (e) => {
 }
 formComment.addEventListener('submit', submitComment);
 
-function commentActionEdit(id) {
+// EDIT COMMENTS
+const commentActionEdit = (id) => {
     let comment = document.getElementById(`post-comment-${id}`);
     let formComment = document.getElementById('form-comment-response-' + id);
     let btnEdit = document.getElementById(`btn-comment-update-${id}`);
@@ -146,7 +149,7 @@ function commentActionEdit(id) {
         formData.append('id', id);
         formData.append('action', 'edit');
         formData.append('text', comment.innerText);
-        fetch(`${baseUrl}/comment/action`, {
+        fetch(`${Main.baseUrl}/comment/action`, {
             method: 'POST',
             body: formData
         })
@@ -156,11 +159,22 @@ function commentActionEdit(id) {
     };
 }
 
-function commentActionDelete(id) {
+const btnsComentEdit = document.querySelectorAll(`[id^="commentActionEdit-"]`);
+btnsComentEdit.forEach((button) => {
+    button.addEventListener('click', evt => {
+        let id = evt.target.id;
+        let pos = parseInt(id.search('-'));
+        id = id.substring(pos + 1);
+        commentActionEdit(id);
+    });
+});
+
+// DELETE COMMENT
+const commentActionDelete = (id) => {
     const formData = new FormData();
     formData.append('id', id);
     formData.append('action', 'delete');
-    fetch(`${baseUrl}/comment/action`,{
+    fetch(`${Main.baseUrl}/comment/action`,{
         method: 'POST',
         body: formData
     })
@@ -168,6 +182,16 @@ function commentActionDelete(id) {
         .catch(error => console.error(error));
     document.getElementById(`container-of-comment-${id}`).remove();
 }
+
+const btnsComentDelete = document.querySelectorAll(`[id^="commentActionDelete-"]`);
+btnsComentDelete.forEach((button) => {
+    button.addEventListener('click', evt => {
+        let id = evt.target.id;
+        let pos = parseInt(id.search('-'));
+        id = id.substring(pos + 1);
+        commentActionDelete(id);
+    });
+});
 
 // BTN RESPONSE ACTIONS
 btnResponseActions.forEach((value, key) => {
@@ -178,6 +202,7 @@ btnResponseActions.forEach((value, key) => {
     value.addEventListener('click', showCommentOptions);
 });
 
+// EDIT RESPONSES
 function responseActionEdit(id) {
     const spanRepply = document.querySelector(`#comment-response-${id} span`),
         divResponseActions = document.getElementById(`div-response-actions-${id}`),
@@ -191,7 +216,7 @@ function responseActionEdit(id) {
         formData.append('repply_id', id);
         formData.append('action', 'edit');
         formData.append('text', spanRepply.innerText);
-        fetch(`${baseUrl}/comment/repply-actions`, {
+        fetch(`${Main.baseUrl}/comment/repply-actions`, {
             method: 'POST',
             body: formData
         })
@@ -211,11 +236,22 @@ function responseActionEdit(id) {
     btnUpdateRepply.addEventListener('click', actionEdit);
 }
 
+const btnsResponsesEdit = document.querySelectorAll('[id^="responseActionEdit-"]');
+btnsResponsesEdit.forEach(button => {
+    button.addEventListener('click', evt => {
+        let id = evt.target.id;
+        const pos = parseInt(id.search('-'));
+        id = id.substring(pos + 1);
+        responseActionEdit(id);
+    });
+});
+
+// DELETE RESPONSE
 function responseActionDelete(id) {
     const formData = new FormData();
     formData.append('repply_id', id);
     formData.append('action', 'delete');
-    fetch(`${baseUrl}/comment/repply-actions`, {
+    fetch(`${Main.baseUrl}/comment/repply-actions`, {
         method: 'POST',
         body: formData
     })
@@ -227,6 +263,15 @@ function responseActionDelete(id) {
         })
         .catch(err => console.error(err));
 }
+
+const btnsResponsesDelete = document.querySelectorAll('[id^="responseActionDelete-"]');
+btnsResponsesDelete.forEach(button => {
+    button.addEventListener('click', evt => {
+        const pos = parseInt(button.id.search('-'));
+        const id = button.id.substring(pos + 1);
+        responseActionDelete(id);
+    });
+});
 
 // RESPONSE SUBMIT
 const responseSubmit = (e) => {

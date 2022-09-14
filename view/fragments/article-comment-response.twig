@@ -3,8 +3,8 @@
         <div class="btn-response-actions-{{ response.id }}">...</div><!-- btn -->
         <div class="response-actions-{{ response.id }} no-close-comment-opts d-none">
             <ul class="no-close-comment-opts">
-                <li class="opt-edit no-close-comment-opts" onclick="responseActionEdit({{ response.id }})">Editar</li>
-                <li class="opt-delete no-close-comment-opts" onclick="responseActionDelete({{ response.id }})">Apagar</li>
+                <li class="opt-edit no-close-comment-opts" id="responseActionEdit-{{ response.id }}">Editar</li>
+                <li class="opt-delete no-close-comment-opts" id="responseActionDelete-{{ response.id }}">Apagar</li>
             </ul>
         </div>
     {% endif %}

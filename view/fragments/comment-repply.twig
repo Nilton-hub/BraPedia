@@ -1,11 +1,12 @@
 
 <div class="d-flex border-top pt-2 pe-2 mb-5 position-relative" style="margin-left: auto; width: 85%;" id="comment-repply-container-{{ response.id }}">
     {% if response.user_id == user.id %}
-    <div class="btn-response-actions-{{ article.id }}" id="btn-response-actions-{{ article.id }}" onclick="toggleResponse({{ article.id }}, {{ response.id }})" style="left: -30px;">...</div><!-- btn -->
+    <div class="btn-response-actions-{{ article.id }}" id="btn-response-actions-{{ article.id }}"
+         data-articleid="{{ article.id }}" data-responseid="{{ response.id }}" style="left: -30px;">...</div><!-- btn -->
     <div class="response-actions-{{ response.id }} no-close-comment-opts d-none" style="left: -30px; max-width: 120px;">
         <ul class="no-close-comment-opts">
-            <li class="opt-edit no-close-comment-opts" onclick="commentRepplyEdit({{ response.id }})">Editar</li>
-            <li class="opt-delete no-close-comment-opts" onclick="commentRepplyDelete({{ response.id }})">Apagar</li>
+            <li class="opt-edit no-close-comment-opts" data-responseid="{{ response.id }}">Editar</li>
+            <li class="opt-delete no-close-comment-opts" data-responseid="{{ response.id }}">Apagar</li>
         </ul>
     </div>
     {% endif %}

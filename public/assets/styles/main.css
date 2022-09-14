@@ -166,7 +166,6 @@ body {
     .notification-sidebar {
         top: 60px;
         height: calc(100% - 60px);
-        z-index: 100;
     }
 
 @media (min-width: 1200px) {

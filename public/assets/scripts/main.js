@@ -1,6 +1,6 @@
 import * as Notify from './helpers/notification.js';
 
-const body = document.querySelector('body'),
+export const body = document.querySelector('body'),
     btnToggleMenu = document.querySelector('#btn-toggle-menu'),
     mainsidebar = document.querySelector('#main-sidebar-menu'),
     searchContainer = document.querySelector('.search-container'),
@@ -58,8 +58,10 @@ const notificationToggle = e => {
     sidebarNotification.classList.toggle('active');
     mainsidebar.classList.remove('active');
 };
-buttonNotification.addEventListener('click', notificationToggle);
-sidebarNotificationInner.addEventListener('click', notificationToggle);
+if (buttonNotification) {
+    buttonNotification.addEventListener('click', notificationToggle);
+    sidebarNotificationInner.addEventListener('click', notificationToggle);
+}
 
 // FUNCTIONS
 //submit forms
@@ -78,10 +80,14 @@ function sendRequest(url, init) {
 }
 
 //message
+function closeAlert() {
+    wrapper.innerHTML = '';
+}
+
 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
 
 const wrapper = document.createElement('div');
-const message = (message, type) => {
+export const message = (message, type) => {
     wrapper.innerHTML = [
         `<div class="alert alert-${type} alert-dismissible" role="alert">`,
         `   <div>${message}</div>`,
@@ -89,10 +95,6 @@ const message = (message, type) => {
         '</div>'
     ].join('');
     alertPlaceholder.append(wrapper);
-}
-
-function closeAlert() {
-    wrapper.innerHTML = '';
 }
 
 // WEBSOCKET CONNECTION BY NOTIFICATIONS

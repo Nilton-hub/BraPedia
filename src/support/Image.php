@@ -31,7 +31,7 @@ class Image
      * @return bool
      * @throws \Gumlet\ImageResizeException
      */
-    public function upload(string $dir = CONF_UPLOAD_DIR . '/covers', ?int $w = null, ?int $h = null): bool
+    public function upload(string $dir = CONF_UPLOAD_DIR . '/covers', ?int $w = 640, ?int $h = 300): bool
     {
         if (empty($this->image)) {
             $this->error = "Você precisa informar os dados da imagem";
@@ -47,11 +47,9 @@ class Image
             $this->error = 'Não foi possível enviar a imagem.';
             return false;
         }
-//        if (!is_null($w) && !is_null($h)) {
-            $rsz = new ImageResize("{$dir}/{$name}");
-            $rsz->resize($w, $h);
-            $rsz->save("{$dir}/{$name}");
-//        }
+        $rsz = new ImageResize("{$dir}/{$name}");
+        $rsz->resize($w, $h);
+        $rsz->save("{$dir}/{$name}");
         $this->relativePath = mb_strstr($dir, 'uploads') . "/{$name}";
         return true;
     }

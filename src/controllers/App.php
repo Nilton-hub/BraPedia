@@ -41,6 +41,13 @@ class App
         $this->user->isPhoto(Auth::user()->photo);
     }
 
+    /**
+     * @param array|null $data
+     * @return void
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function profile(array $data = null): void
     {
         $post = filter_input_array(INPUT_POST, [
@@ -75,6 +82,9 @@ class App
         ]);
     }
 
+    /**
+     * @return void
+     */
     public function changePassword()
     {
         $post = filter_input_array(INPUT_POST, [
@@ -110,6 +120,13 @@ class App
         echo json_encode($json);
     }
 
+    /**
+     * @return void
+     * @throws \Gumlet\ImageResizeException
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function articleCreate(): void
     {
         $post = filter_input_array(INPUT_POST, [
@@ -187,8 +204,7 @@ class App
                 'cover' => $cover
             ]);
             (new Message())->success("Artigo atualizado com sucesso!")->flash();
-            $json['redirect'] = url('artigo/editar/' . $id);
-            echo json_encode($json);
+            redirect('artigo/editar/' . $id);
             return;
         }
         $article = $searchedArticle;
@@ -308,7 +324,10 @@ class App
                         'response' => (object)[
                             'id' => $repplyId,
                             'user_name' => $this->user->name(),
-                            'user_response' => (object)['photo' => $this->user->photo()],
+                            'user_response' => (object)[
+                                'photo' => $this->user->photo(),
+                                'name' => $this->user->name()
+                            ],
                             'text' => $post['response'],
                             'user_id' => $this->user->id()
                         ],

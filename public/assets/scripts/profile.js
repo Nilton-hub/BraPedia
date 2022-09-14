@@ -1,4 +1,7 @@
+import * as Main from './main.js';
+
 const btnProfileEdit = document.querySelector('#btn-profile-edit'),
+    alertPlaceholder = document.getElementById('liveAlertPlaceholder'),
     bntChangePassword = document.querySelector('.btn-change-password'),
     modalContentChangePassword = document.querySelector('.modal-content-change-password'),
     modalContentProfileEdit = document.querySelector('.modal-content-edit'),
@@ -132,7 +135,7 @@ const hidePost = (e) => {
     const toggleHidePost = (e) => {
         let formData = new FormData();
         formData.append('id', btn.getAttribute('data-article-id'));
-        fetch(`${baseUrl}/artigo/ocultar/${btn.getAttribute('data-article-id')}`, {
+        fetch(`${Main.baseUrl}/artigo/ocultar/${btn.getAttribute('data-article-id')}`, {
             method: 'POST',
             body: formData
         })
@@ -192,7 +195,7 @@ const deletePost = (e) => {
     let id = btn.getAttribute('data-article-id');
     const postDeleteAction = () => {
         id = 100000;
-        fetch(`${baseUrl}/artigo/deletar/${id}`, {
+        fetch(`${Main.baseUrl}/artigo/deletar/${id}`, {
             method: 'POST',
             body: `{id: ${id}}`
         })
@@ -241,9 +244,9 @@ const updateProfilePictureAction = (e) => {
                     alertPlaceholder.innerHTML = data.message;
                 }
                 if (data.path) {
-                    // document.querySelector('div.profile-picture').style.backgroundImage = `${baseUrl}/${data.path}`;
+                    // document.querySelector('div.profile-picture').style.backgroundImage = `${Main.baseUrl}/${data.path}`;
                     document.querySelector('div.profile-picture')
-                        .setAttribute('style', `${baseUrl}/${data.path}; background-size: cover; background-repeat: no-repeat; background-position: center;`)
+                        .setAttribute('style', `${Main.baseUrl}/${data.path}; background-size: cover; background-repeat: no-repeat; background-position: center;`)
                     setTimeout(() => { window.location.reload(); }, 2000);
                 }
                 console.log(data);

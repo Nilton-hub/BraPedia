@@ -1,17 +1,17 @@
 
 <div class="mx-1 mb-3 bg-info bg-opacity-10 p-2 position-relative" id="container-of-comment-{{ comment.commentid }}">
     {% if user is not null and user|length > 0 and comment.user_id == user.id %}
-        <div class="btn-comment-actions" onclick="toggleComments({{ article.id }}, {{ comment.commentid }})">...</div>
+        <div class="btn-comment-actions" data-articleid="{{ article.id }}" data-commentid="{{ comment.commentid }}">...</div>
         <!-- btn Comment -->
         <div class="comment-actions-{{ comment.commentid }} no-close-comment-opts d-none">
             <!-- Comment Options -->
             <ul class="no-close-comment-opts">
                 {% if comment.user_id == user.id %}
-                    <li class="opt-edit no-close-comment-opts" onclick="commentActionEdit({{ comment.commentid }})">
+                    <li class="opt-edit no-close-comment-opts" data-commentid="{{ comment.commentid }}">
                         Editar
                     </li>
                 {% endif %}
-                <li class="opt-delete no-close-comment-opts" onclick="commentActionRemove({{ comment.commentid }})">
+                <li class="opt-delete no-close-comment-opts" data-commentid="{{ comment.commentid }}">
                     Apagar
                 </li>
             </ul>
@@ -35,12 +35,10 @@
         {{ comment.text }}
     </p>
     <div style="position: absolute; right: 10px; top: 55px;  display: none; width: 50px;">
-        <button style="width: 100%; font-size: 0.8rem;"
-                id="btn-update-comment-{{ comment.commentid }}">
+        <button style="width: 100%; font-size: 0.8rem;" id="btn-update-comment-{{ comment.commentid }}">
             Ok
         </button>
-        <button style="width: 100%; font-size: 0.8rem;"
-                id="btn-cancel-comment-{{ comment.commentid }}">
+        <button style="width: 100%; font-size: 0.8rem;" id="btn-cancel-comment-{{ comment.commentid }}">
             cancel
         </button>
     </div>
