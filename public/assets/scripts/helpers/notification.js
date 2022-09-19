@@ -1,10 +1,11 @@
 import notificationTpl from "../components/notification-tpl.js";
 import '../autobahn.js';
 
+// VERIFICA SE O USUÁRIO ESTÁ AUTENTICADO
 const login = () => {
     const cookies = document.cookie.split(';')
-        .map(e => e.split('=')[0]);
-    return cookies.indexOf('login') !== -1;
+        .map(e => e.split('=')[0].replaceAll(' ', ''));
+    return cookies.indexOf('userToken') !== -1;
 };
 
 export function notify() {
@@ -12,6 +13,7 @@ export function notify() {
 
     async function getChannels() {
         const request = await fetch(`${baseUrl}/notify`);
+        // console.log(login());
         if (login()) {
             return await request.json();
         }
@@ -22,8 +24,9 @@ export function notify() {
         async function () {
             //article_Assincronismo_com_9_3
             const notifications = getChannels();
-            if (!await notifications)
+            if (!await notifications) {
                 return;
+            }
             notifications.then(response => {
                 response.map(channel => {
                     conn.subscribe(channel, (topic, data) => {
@@ -34,7 +37,7 @@ export function notify() {
                                 notifyTpl = notificationTpl({
                                     username: data.username,
                                     msg: data.msg,
-                                    photo: `${baseUrl}/uploads/profile/${data.photo}`, // 1662282486-eu-pb.jpg
+                                    photo: `${baseUrl}/uploads/profile/${data.photo}`, // 1663195074-eu-pb.jpg
                                     url: `${baseUrl}/artigo/9#${data.comment_id}` // comment
                                 }, 'Comentou no seu artigo');
                                 break;
@@ -47,7 +50,7 @@ export function notify() {
                                 // ${data.username} respondeu seu comentário: "Bla blá blá"
                                 break;
                         }
-                        document.querySelector("#main-sidebar-menu").append(notifyTpl);
+                        document.querySelector(".notification-sidebar").append(notifyTpl);
                     });
                 });
             });

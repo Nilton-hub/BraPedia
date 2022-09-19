@@ -1,4 +1,5 @@
 import * as Notify from './helpers/notification.js';
+import notificationTpl from "./components/notification-tpl.js";
 
 export const body = document.querySelector('body'),
     btnToggleMenu = document.querySelector('#btn-toggle-menu'),
@@ -45,7 +46,8 @@ formSearch.addEventListener('submit', (e) => {
 // TOOGLE SIDEBAR MENU
 const toggleMenu = etv => {
     mainsidebar.classList.toggle('active');
-    sidebarNotification.classList.remove('active');
+    if (sidebarNotification !== null)
+        sidebarNotification.classList.remove('active');
 };
 btnToggleMenu.addEventListener('click', toggleMenu);
 
@@ -100,15 +102,15 @@ export const message = (message, type) => {
 // WEBSOCKET CONNECTION BY NOTIFICATIONS
 Notify.notify();
 
-/*
 // COMO ADICIONAR UM NOVO COMPONENTE DE NOTIFICAÇÃO
-const item_A = notificationTpl({
-    username: 'Marina',
-    msg: 'Muito bom!',
-    photo: 'http://localhost/uploads/profile/1662282486-eu-pb.jpg',
-    // url: `${baseUrl}/artigo/9#container-of-comment-25` // comment
-    url: `${baseUrl}/artigo/9#comment-response-67` // response
-}, 'Comentou no seu artigo');
+/*for (let i = 1; i < 4; i++) {
+    const item_A = notificationTpl({
+        username: 'Marina',
+        msg: 'Muito bom!',
+        photo: 'http://localhost/uploads/profile/1663195074-eu-pb.jpg',
+        // url: `${baseUrl}/artigo/9#container-of-comment-25` // comment
+        url: `${baseUrl}/artigo/9#comment-response-67` // response
+    }, 'Comentou no seu artigo');
 
-document.querySelector("#main-sidebar-menu").append(item_A);
-*/
+    document.querySelector(".notification-sidebar").append(item_A);
+}*/

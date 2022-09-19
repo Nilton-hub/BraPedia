@@ -50,14 +50,14 @@
                                 {% if userPhoto is null or userPhoto|length == 0 %}
                                     <i class="icon-profile-male"></i>
                                 {% else %}
-                                    <img src="{{ BASE_URL }}/{{ userPhoto }}" width="30px" height="30px" alt=""
+                                    <img src="{{ BASE_URL }}/{{ userPhoto }}" width="30px" height="30px" alt="foto de perfil de {{ user.name }}"
                                          style="border-radius: 50%;">
                                 {% endif %}
                             </a>
                         </li>
                     {% else %}
                         <li>
-                            <a href="{{ BASE_URL }}/login" title="entrar" class="nav-link text-white">
+                            <a href="{{ BASE_URL }}/login" title="Entrar" class="nav-link text-white">
                                 <i class="icon-in-alt"></i>
                             </a>
                         </li>
@@ -90,6 +90,8 @@
         </div>
     </div>
 </header>
+
+{# NOTIFICAÇÕES #}
 {% if user %}
     <div class="col-12 col-md-6 col-lg-4
     notification-sidebar" style="z-index: 100;">
@@ -98,6 +100,7 @@
     notification-container"></div>
     </div>
 {% endif %}
+{# FORMULÁRIO DE PESQUISA #}
 <div class="rounded-3 bg-info position-relative p-1 col-11 col-sm-11 col-md-6 col-lg-4 d-inline-block ms-auto me-3 my-2 float-end p-0 search-container">
     <form action="{{ BASE_URL }}/search" method="get" class="form-search p-0">
         <label class="rounded-2 d-flex w-100 p-0">
@@ -107,9 +110,9 @@
         </label>
     </form>
 </div>
+{# MENSAGENS #}
 <div id="liveAlertPlaceholder"
      style="width: 90%; margin: auto; position: fixed; top: 80px; left: 5%; opacity: 1; z-index: 10;">{% block message %}{% endblock %}</div>
-<!-- messages -->
 {% block body %}{% endblock %}
 <p id="test-jquery"></p>
 <footer class="mt-3">
