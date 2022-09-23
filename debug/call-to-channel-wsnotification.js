@@ -6,9 +6,10 @@ let ch3 = 'commentRepply_Não_tô_45_3';
 let data = {};
 data.username = 'Daniel';
 data.msg = 'Blá blá blá';
-data.photo = '1662282486-eu-pb.jpg';
-data.url = `http://localhost//artigo/9`;
+data.photo = '1663195074-eu-pb.jpg';
+data.url = `http://localhost/artigo/9`;
 data.comment_id = 'comment-response-67';
+data.element_id = 9;
 
 let msg = JSON.stringify(data);
 conn.publish(ch1, msg);

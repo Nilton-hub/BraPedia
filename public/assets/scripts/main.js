@@ -66,21 +66,6 @@ if (buttonNotification) {
 }
 
 // FUNCTIONS
-//submit forms
-function sendRequest(url, init) {
-    let req = fetch(url, init)
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            return data;
-        })
-        .catch(error => {
-            console.error(error);
-        });
-    return req;
-}
-
 //message
 function closeAlert() {
     wrapper.innerHTML = '';
@@ -101,16 +86,3 @@ export const message = (message, type) => {
 
 // WEBSOCKET CONNECTION BY NOTIFICATIONS
 Notify.notify();
-
-// COMO ADICIONAR UM NOVO COMPONENTE DE NOTIFICAÇÃO
-/*for (let i = 1; i < 4; i++) {
-    const item_A = notificationTpl({
-        username: 'Marina',
-        msg: 'Muito bom!',
-        photo: 'http://localhost/uploads/profile/1663195074-eu-pb.jpg',
-        // url: `${baseUrl}/artigo/9#container-of-comment-25` // comment
-        url: `${baseUrl}/artigo/9#comment-response-67` // response
-    }, 'Comentou no seu artigo');
-
-    document.querySelector(".notification-sidebar").append(item_A);
-}*/

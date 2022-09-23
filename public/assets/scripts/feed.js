@@ -41,16 +41,16 @@ document.querySelectorAll('h4.article-card-title a')
 
 // BTN TOGGLE COMENTS
 btnsToggleComments.forEach(value => {
-    const pText = ['Exibir todos os comentários...', 'Ocultar todos os comentários'];
-    value.innerHTML = pText[0];
+    const paragraphText = ['Exibir todos os comentários...', 'Ocultar todos os comentários'];
+    value.innerHTML = paragraphText[0];
     const id = value.getAttribute('id');
     const toggleComments = () => {
         let currentCommentsContainer = document.querySelector(`#${id} ~ div[id^="comments-container-"]`);
         currentCommentsContainer.classList.toggle('comments-show');
-        if (value.innerHTML === pText[0]) {
-            value.innerHTML = pText[1];
+        if (value.innerHTML === paragraphText[0]) {
+            value.innerHTML = paragraphText[1];
         } else {
-            value.innerHTML = pText[0];
+            value.innerHTML = paragraphText[0];
         }
     }
 
@@ -103,6 +103,9 @@ formsArtcilecomment.forEach((element) => {
                 if (data.commentTpl) {
                     document.getElementById(`comments-container-${element.article_id.value}`).innerHTML += data.commentTpl;
                     element.childNodes[3].childNodes[5].value = '';
+
+                    //    [ FAZER O ENVIO DA NOTIFICAÇÃO ]
+
                 }
             })
             .catch(err => { console.log(err) });

@@ -33,7 +33,7 @@ class TestController
     public function test()
     {
         require __DIR__ . '/../../debug/test.php';
-        echo $this->view->load('/email/forget-access');
+//        echo $this->view->load('/email/forget-access');
     }
 
     public function testMsg()

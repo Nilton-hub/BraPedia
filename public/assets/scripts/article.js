@@ -1,4 +1,5 @@
 import * as Main from './main.js';
+import { sendNotification } from './helpers/functions.js';
 
 let articleOptions = document.getElementById('article-options'),
     alertPlaceholder = document.getElementById('liveAlertPlaceholder'),
@@ -12,7 +13,7 @@ let articleOptions = document.getElementById('article-options'),
     formComment = document.querySelector('form#form-comment'),
     /* SHARED */
     modal = document.querySelector('#modals'),
-        modalClose = () => {
+    modalClose = () => {
         // MAIN MODAL
         if (!modal.classList.contains('d-none')) {
             modal.classList.add('d-none');
@@ -42,13 +43,15 @@ const toggleOptionsArticle = () => {
         showArticleOptions = true;
     }
 
-    setTimeout(() => {
+    let timeout = setTimeout(() => {
         showArticleOptions = false;
         if (articleOptions && articleOptions.classList.contains('toggle-opt-show')) {
             articleOptions.classList.remove('toggle-opt-show');
             articleOptions.classList.add('toggle-opt-hidden');
         }
+        clearTimeout(timeout);
     }, 3000);
+    setTimeout(() => clearTimeout(timeout), 3000);
 }
 document.addEventListener('scroll', toggleOptionsArticle);
 
@@ -98,6 +101,7 @@ function btnCommentShowActions() {
         value.addEventListener('click', showCommentOptions);
     });
 }
+
 btnCommentShowActions();
 
 // SUBMIT COMMETN
@@ -105,6 +109,7 @@ const submitComment = (e) => {
     e.preventDefault();
     const article_id = formComment.article_id.value;
     const formData = new FormData(formComment);
+    const commentText = formComment.comment.value;
     fetch(formComment.getAttribute('action'), {
         method: formComment.getAttribute('method'),
         body: formData
@@ -117,13 +122,23 @@ const submitComment = (e) => {
             }
             if (data.comment_id) {
                 document.querySelector('#form-comment [name="comment"]').value = '';
-                setTimeout(() =>  window.location.href = `${Main.baseUrl}/artigo/${article_id}#container-of-comment-${data.comment_id}`, 200);
+                setTimeout(() => window.location.href = `${Main.baseUrl}/artigo/${article_id}#container-of-comment-${data.comment_id}`, 200);
+            }
+            if (data.channel) {
+                const noticationData = {};
+                noticationData.username = formComment.name.value;
+                noticationData.url = `http://localhost/artigo/${formComment.article_id.value}`;
+                noticationData.element_id = formComment.article_id.value;
+                noticationData.msg = commentText;
+                noticationData.photo = data.photo;
+                noticationData.comment_id = `post-comment-${data.comment_id}`;
+                sendNotification(data.channel, noticationData);
             }
         })
         .catch(error => {
             message(`Para comentar é necessário fazer login! <a href="${baseUrl}/login" title="Entrar">Entrar</a>`, 'danger');
-            console.error(error) 
-     });
+            console.error(error)
+        });
 }
 formComment.addEventListener('submit', submitComment);
 
@@ -154,8 +169,12 @@ const commentActionEdit = (id) => {
             body: formData
         })
             .then(res => res.text())
-            .then(data => { hideDivBtnOptions() })
-            .catch(err => { console.log(err); });
+            .then(data => {
+                hideDivBtnOptions()
+            })
+            .catch(err => {
+                console.log(err);
+            });
     };
 }
 
@@ -174,7 +193,7 @@ const commentActionDelete = (id) => {
     const formData = new FormData();
     formData.append('id', id);
     formData.append('action', 'delete');
-    fetch(`${Main.baseUrl}/comment/action`,{
+    fetch(`${Main.baseUrl}/comment/action`, {
         method: 'POST',
         body: formData
     })
@@ -221,16 +240,22 @@ function responseActionEdit(id) {
             body: formData
         })
             .then(res => res.text())
-            .then(data => { console.log(data) })
-            .catch(error => { console.log(error) });
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log(error)
+            });
         btnUpdateRepply.removeEventListener('click', actionEdit);
     }
+
     function focusRemve() {
         spanRepply.removeAttribute('contenteditable');
         divResponseActions.classList.add('d-none');
         spanRepply.blur();
         btnUpdateRepply.removeEventListener('click', actionEdit);
     }
+
     document.querySelector(`#div-response-actions-${id} .btn-response-action-cancel`)
         .addEventListener('click', focusRemve);
     btnUpdateRepply.addEventListener('click', actionEdit);
@@ -290,7 +315,9 @@ const responseSubmit = (e) => {
                 formRepply.reset();
             }
         })
-        .catch(err => { console.error(err) });
+        .catch(err => {
+            console.error(err)
+        });
 }
 
 const formsResponse = document.querySelectorAll('[id^="form-comment-response-"]');

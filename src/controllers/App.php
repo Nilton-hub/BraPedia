@@ -256,14 +256,14 @@ class App extends Controller
                 ->isUserId($this->user->id())
                 ->isPostId($post['article_id'])
                 ->isText($post['comment']);
-            if ($articleId = (new Model($comment))->create()) {
+            if ($commentId = (new Model($comment))->create()) {
                 $view = new View(__DIR__ . '/../../view/fragments/', 'twig');
                 $article = new \StdClass();
                 $article->id = $post['article_id'];
                 $article->name = $post['name'];
                 $commentSend = new \StdClass();
-                $commentSend->commentid = $articleId;
-                $commentSend->id = $articleId;
+                $commentSend->commentid = $commentId;
+                $commentSend->id = $commentId;
                 $commentSend->photo = Auth::user()->photo;
                 $commentSend->user_name = $this->user->name();
                 $commentSend->user = (object)[
@@ -285,7 +285,9 @@ class App extends Controller
                         'photo' => Auth::user()->photo
                     ]
                 ]);
-                $json['comment_id'] = $articleId;
+                $json['comment_id'] = $commentId;
+                $json['photo'] = Auth::user()->photo;
+                $json['channel'] = (new \src\support\NotificationChannels())->channel('article', $post['article_id']);
                 echo json_encode($json);
                 return;
             }
@@ -377,10 +379,6 @@ class App extends Controller
      */
     public function channels(): void
     {
-        if (!Auth::user()) {
-            echo json_encode([]);
-            return;
-        }
         $notificationChannels = new NotificationChannels();
         $channels = $notificationChannels->channels();
         echo json_encode($channels);

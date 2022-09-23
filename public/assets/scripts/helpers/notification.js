@@ -9,12 +9,13 @@ const login = () => {
 };
 
 export function notify() {
+    if (!login()) {
+        return null;
+    }
     const baseUrl = 'http://localhost';
     async function getChannels() {
         const request = await fetch(`${baseUrl}/notify`);
-        if (login()) {
-            return await request.json();
-        }
+        return await request.json();
         return null;
     }
 
@@ -30,22 +31,22 @@ export function notify() {
                     conn.subscribe(channel, (topic, data) => {
                         data = JSON.parse(data);
                         let notifyTpl;
+                        let element_id = (data.element_id ?? '');
+                        const notificationData = {};
                         switch (topic.split('_')[0]) {
-                            case 'article':
-                                notifyTpl = Notification({
-                                    username: data.username,
-                                    msg: data.msg,
-                                    photo: `${baseUrl}/uploads/profile/${data.photo}`, // 1663195074-eu-pb.jpg
-                                    url: `${baseUrl}/artigo/9#${data.comment_id}` // comment
-                                }, 'Comentou no seu artigo');
+                            case 'article': // ARTIGO
+                                notificationData.username = data.username;
+                                notificationData.msg = data.msg;
+                                notificationData.photo = `${baseUrl}/${data.photo}`;
+                                notificationData.url = `${baseUrl}/artigo/${element_id}#${data.comment_id}`;
+                                notifyTpl = Notification(notificationData, 'Comentou no seu artigo');
                                 break;
-                            case 'comment':
-                                console.log(`${data.username} respondeu seu comentário: \"${data.msg}\"`);
-                                // ${data.username} respondeu seu comentário: "Bla blá blá"
-                                break;
-                            case 'commentRepply':
-                                console.log(`${data.username} respondeu seu comentário: \"${data.msg}\"`);
-                                // ${data.username} respondeu seu comentário: "Bla blá blá"
+                            case 'comment': // COMENTÁTRIO
+                                notificationData.username = data.username;
+                                notificationData.msg = data.msg;
+                                notificationData.photo = `${baseUrl}/${data.photo}`;
+                                notificationData.url = `${baseUrl}/artigo/${element_id}#${data.comment_id}`;
+                                notifyTpl = Notification(notificationData, `respondeu seu comentário`);
                                 break;
                         }
                         document.querySelector(".notification-sidebar").append(notifyTpl);
