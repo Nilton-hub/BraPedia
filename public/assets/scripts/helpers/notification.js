@@ -1,4 +1,4 @@
-import notificationTpl from "../components/notification-tpl.js";
+import Notification from "../components/notification.js";
 import '../autobahn.js';
 
 // VERIFICA SE O USUÁRIO ESTÁ AUTENTICADO
@@ -10,10 +10,8 @@ const login = () => {
 
 export function notify() {
     const baseUrl = 'http://localhost';
-
     async function getChannels() {
         const request = await fetch(`${baseUrl}/notify`);
-        // console.log(login());
         if (login()) {
             return await request.json();
         }
@@ -34,7 +32,7 @@ export function notify() {
                         let notifyTpl;
                         switch (topic.split('_')[0]) {
                             case 'article':
-                                notifyTpl = notificationTpl({
+                                notifyTpl = Notification({
                                     username: data.username,
                                     msg: data.msg,
                                     photo: `${baseUrl}/uploads/profile/${data.photo}`, // 1663195074-eu-pb.jpg

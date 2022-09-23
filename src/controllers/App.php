@@ -2,6 +2,7 @@
 
 namespace src\controllers;
 
+use src\core\Controller;
 use src\core\Message;
 use src\core\Model;
 use src\core\Session;
@@ -14,7 +15,7 @@ use src\support\Auth;
 use src\support\Image;
 use src\support\NotificationChannels;
 
-class App
+class App extends Controller
 {
     /** @var View */
     private View $view;
@@ -25,6 +26,7 @@ class App
 
     public function __construct()
     {
+        parent::__construct();
         $this->view = new View(dirname(__DIR__, 2) . "/view/");
         $this->view->addData('BASE_URL', CONF_BASE_URL);
         $this->view->addData('message', (new Session())->flash());
@@ -375,6 +377,10 @@ class App
      */
     public function channels(): void
     {
+        if (!Auth::user()) {
+            echo json_encode([]);
+            return;
+        }
         $notificationChannels = new NotificationChannels();
         $channels = $notificationChannels->channels();
         echo json_encode($channels);

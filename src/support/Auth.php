@@ -133,7 +133,7 @@ class Auth
         setcookie('userToken', null, [
             'expires' => time() - 3600,
             'path' => '/',
-            'samesite' => 'None'
+            'samesite' => 'Strict'
         ]);
         return null;
     }

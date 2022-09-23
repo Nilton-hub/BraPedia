@@ -2,24 +2,25 @@
 
 namespace src\controllers;
 
+use src\core\Controller;
 use src\core\Message;
 use src\core\Model;
 use src\core\Session;
 use src\core\View;
 use src\models\Comment;
-use src\models\CommentsReply;
 use src\models\Post;
 use src\models\User;
 use src\support\Auth;
 use \Willry\QueryBuilder\DB;
 
-class Web
+class Web extends Controller
 {
     /** @var View */
     private View $view;
 
     public function __construct()
     {
+        parent::__construct();
         $this->view = new View(dirname(__DIR__, 2) . "/view/");
         $this->view->addData('BASE_URL', CONF_BASE_URL);
         $this->view->addData('message', (new Session())->flash());

@@ -1,4 +1,4 @@
-function notificationTpl(data, msg) {
+function Notification(data, msg) {
     const container = document.createElement('div');
     container.classList.add('notify');
     container.classList.add('d-flex');
@@ -20,4 +20,4 @@ function notificationTpl(data, msg) {
     return container;
 }
 
-export default notificationTpl;
+export default Notification;

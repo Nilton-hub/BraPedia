@@ -1,5 +1,5 @@
 import * as Notify from './helpers/notification.js';
-import notificationTpl from "./components/notification-tpl.js";
+import Notification from "./components/notification.js";
 
 export const body = document.querySelector('body'),
     btnToggleMenu = document.querySelector('#btn-toggle-menu'),
