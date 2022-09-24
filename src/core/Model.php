@@ -43,7 +43,6 @@ class Model
             return DB::table($this->model::entity())->select($columns);
         }
         $fields = [];
-        $where = [];
         foreach ($whereColumns as $column) {
             $fields[] = "{$column} = :{$column}";
             if (method_exists($this->model, $column)) {

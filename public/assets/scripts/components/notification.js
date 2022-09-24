@@ -1,4 +1,5 @@
 function Notification(data, msg) {
+    // data = {url: "", photo: "", username: "", msg: ""};
     const container = document.createElement('div');
     container.classList.add('notify');
     container.classList.add('d-flex');

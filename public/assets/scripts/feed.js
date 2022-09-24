@@ -1,4 +1,6 @@
 import * as Main from './main.js';
+import {baseUrl} from "./main.js";
+import {sendNotification} from "./helpers/functions.js";
 
 const topLink = document.querySelector('[href="#main-header"]'),
     bottomReference = document.querySelector('#bottom-reference'),
@@ -94,6 +96,7 @@ formsArtcilecomment.forEach((element) => {
     const commentAction = (e) => {
         e.preventDefault();
         const formData = new FormData(element);
+        const commentText = element.comment.value;
         fetch(`${element.getAttribute('action')}`, {
             method: 'POST',
             body: formData
@@ -103,9 +106,14 @@ formsArtcilecomment.forEach((element) => {
                 if (data.commentTpl) {
                     document.getElementById(`comments-container-${element.article_id.value}`).innerHTML += data.commentTpl;
                     element.childNodes[3].childNodes[5].value = '';
-
-                    //    [ FAZER O ENVIO DA NOTIFICAÇÃO ]
-
+                }
+                if (data.channel) {
+                    const notificationData = {};
+                    notificationData.url = `${baseUrl}/artigo/${element.article_id.value}`;
+                    notificationData.photo = data.photo;
+                    notificationData.username = element.name.value;
+                    notificationData.msg = commentText;
+                    sendNotification(data.channel, notificationData);
                 }
             })
             .catch(err => { console.log(err) });

@@ -1,5 +1,6 @@
 import * as Notify from './helpers/notification.js';
 import Notification from "./components/notification.js";
+import notification from "./components/notification.js";
 
 export const body = document.querySelector('body'),
     btnToggleMenu = document.querySelector('#btn-toggle-menu'),
@@ -27,12 +28,6 @@ const showSearchContainer = evt => {
 }
 btnSearch.addEventListener('click', showSearchContainer);
 
-window.addEventListener('click', evt => {
-    if (evt.srcElement !== searchContainer && evt.srcElement !== btnSearch && evt.target !== searchContainer && evt.target !== btnSearch) {
-        // console.log(evt.srcElement);
-    }
-});
-
 // SEARCH SUBMIT
 formSearch.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -41,6 +36,24 @@ formSearch.addEventListener('submit', (e) => {
         return;
     }
     window.location.href = `${baseUrl}/search/${search}`;
+});
+
+// NOTIFICATIONS
+const loadNotifications = async () => {
+    try {
+        const req = await fetch(`${baseUrl}/notifications`);
+        const data = await req.json();
+        return data;
+    } catch (error) {
+        return error;
+    }
+};
+
+loadNotifications().then(data => {
+    data.forEach(d => {
+        const notify = notification(d, d.content);
+        document.querySelector('div.notification-container').append(notify);
+    });
 });
 
 // TOOGLE SIDEBAR MENU

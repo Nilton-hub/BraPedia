@@ -125,14 +125,14 @@ const submitComment = (e) => {
                 setTimeout(() => window.location.href = `${Main.baseUrl}/artigo/${article_id}#container-of-comment-${data.comment_id}`, 200);
             }
             if (data.channel) {
-                const noticationData = {};
-                noticationData.username = formComment.name.value;
-                noticationData.url = `http://localhost/artigo/${formComment.article_id.value}`;
-                noticationData.element_id = formComment.article_id.value;
-                noticationData.msg = commentText;
-                noticationData.photo = data.photo;
-                noticationData.comment_id = `post-comment-${data.comment_id}`;
-                sendNotification(data.channel, noticationData);
+                const notificationData = {};
+                notificationData.username = formComment.name.value;
+                notificationData.url = `http://localhost/artigo/${formComment.article_id.value}`;
+                notificationData.element_id = formComment.article_id.value;
+                notificationData.msg = commentText;
+                notificationData.photo = data.photo;
+                notificationData.comment_id = `post-comment-${data.comment_id}`;
+                sendNotification(data.channel, notificationData);
             }
         })
         .catch(error => {

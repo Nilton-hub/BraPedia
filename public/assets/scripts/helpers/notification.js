@@ -16,7 +16,6 @@ export function notify() {
     async function getChannels() {
         const request = await fetch(`${baseUrl}/notify`);
         return await request.json();
-        return null;
     }
 
     var conn = new ab.Session('ws://localhost:8080',

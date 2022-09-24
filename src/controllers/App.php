@@ -9,6 +9,7 @@ use src\core\Session;
 use src\core\View;
 use src\models\Comment;
 use src\models\CommentsReply;
+use src\models\Notification;
 use src\models\Post;
 use src\models\User;
 use src\support\Auth;
@@ -256,7 +257,8 @@ class App extends Controller
                 ->isUserId($this->user->id())
                 ->isPostId($post['article_id'])
                 ->isText($post['comment']);
-            if ($commentId = (new Model($comment))->create()) {
+//            if ($commentId = (new Model($comment))->create()) {
+            if ($commentId = 5) { // remover após o teste
                 $view = new View(__DIR__ . '/../../view/fragments/', 'twig');
                 $article = new \StdClass();
                 $article->id = $post['article_id'];
@@ -288,6 +290,15 @@ class App extends Controller
                 $json['comment_id'] = $commentId;
                 $json['photo'] = Auth::user()->photo;
                 $json['channel'] = (new \src\support\NotificationChannels())->channel('article', $post['article_id']);
+
+                // [ CRIAR A NOTIFICAÇÃO - DB ]
+                $notify = (new Notification())
+                    ->isUsername($post['name'])
+                    ->isUrl(url("artigo/{$post['article_id']}"))
+                    ->isMsg(mb_substr($post['comment'], 0, 29))
+                    ->isPhoto(Auth::user()->photo)
+                    ->isContent("Comentou no seu artigo");
+                $json['notification_id'] = (new Model($notify))->create();
                 echo json_encode($json);
                 return;
             }
@@ -297,6 +308,9 @@ class App extends Controller
 
     /**
      * @return void
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function repply(): void
     {
@@ -369,6 +383,9 @@ class App extends Controller
         $this->application->commentAction();
     }
 
+    /**
+     * @return void
+     */
     public function replyActions(): void
     {
         $this->application->replyActions();
@@ -382,6 +399,15 @@ class App extends Controller
         $notificationChannels = new NotificationChannels();
         $channels = $notificationChannels->channels();
         echo json_encode($channels);
+    }
+
+    /**
+     * @return void
+     */
+    public function notifications(): void
+    {
+        $data = (new Model(new Notification()))->read()->limit(30)->order('created_at')->get();
+        echo json_encode($data);
     }
 
     /**
