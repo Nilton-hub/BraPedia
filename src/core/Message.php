@@ -92,7 +92,7 @@ class Message
         return <<<MSG
 <div class="alert alert-{$this->type} alert-dismissible" role="alert">
     <div>{$this->text}</div>
-    <button type="button" class="btn-close" onclick="closeAlert()" data-bs-dismiss="alert" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 MSG;
     }

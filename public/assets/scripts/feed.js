@@ -95,12 +95,13 @@ formsArtcilecomment.forEach((element) => {
                 }
                 if (data.channel) {
                     const notificationData = {};
-                    notificationData.url = `${baseUrl}/artigo/${element.article_id.value}`;
+                    notificationData.url = `${baseUrl}/artigo/${element.article_id.value}#container-of-comment-${notificationData.comment_id}`;
                     notificationData.photo = data.photo;
                     notificationData.username = element.name.value;
                     notificationData.msg = commentText;
-                    notificationData.comment_id = element.article_id.value;
-                    notificationData.id = element.article_id.value;
+                    notificationData.comment_id = data.comment_id;
+                    notificationData.element_id = element.article_id.value;
+                    notificationData.id = data.id;
                     sendNotification(data.channel, notificationData);
                 }
             })

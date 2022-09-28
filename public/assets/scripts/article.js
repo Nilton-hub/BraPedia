@@ -126,13 +126,15 @@ const submitComment = (e) => {
             }
             if (data.channel) {
                 const notificationData = {};
-                notificationData.username = formComment.name.value;
-                notificationData.url = `http://localhost/artigo/${formComment.article_id.value}`;
-                notificationData.element_id = formComment.article_id.value;
-                notificationData.msg = commentText;
+                notificationData.url = `http://localhost/artigo/${formComment.article_id.value}#container-of-comment-${notificationData.comment_id}`;
                 notificationData.photo = data.photo;
-                notificationData.comment_id = `post-comment-${data.comment_id}`;
+                notificationData.username = formComment.name.value;
+                notificationData.msg = commentText;
+                notificationData.comment_id = data.comment_id;
+                notificationData.element_id = formComment.article_id.value;
+                notificationData.id = data.id;
                 sendNotification(data.channel, notificationData);
+                console.log(data.comment_id);
             }
         })
         .catch(error => {

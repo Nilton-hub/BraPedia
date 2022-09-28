@@ -1,5 +1,6 @@
 import * as Notify from './helpers/notification.js';
 import notification from "./components/notification.js";
+import { login } from "./helpers/functions.js";
 
 export const body = document.querySelector('body'),
     btnToggleMenu = document.querySelector('#btn-toggle-menu'),
@@ -48,10 +49,14 @@ const loadNotifications = async () => {
 };
 
 loadNotifications().then(data => {
-    data.forEach(d => {
-        const notify = notification(d, d.content);
-        document.querySelector('div.notification-container').append(notify);
-    });
+    if (login()) {
+        data.forEach(d => {
+            const notify = notification(d, d.content);
+            const notificationContaier = document.querySelector('div.notification-container');
+            if (notificationContaier)
+                notificationContaier.append(notify);
+        });
+    }
 });
 
 // WEBSOCKET CONNECTION BY NOTIFICATIONS

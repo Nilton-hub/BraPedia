@@ -1,12 +1,6 @@
 import Notification from "../components/notification.js";
+import { login } from "./functions.js";
 import '../autobahn.js';
-
-// VERIFICA SE O USUÁRIO ESTÁ AUTENTICADO
-const login = () => {
-    const cookies = document.cookie.split(';')
-        .map(e => e.split('=')[0].replaceAll(' ', ''));
-    return cookies.indexOf('userToken') !== -1;
-};
 
 export function notify() {
     if (!login()) {
@@ -20,7 +14,6 @@ export function notify() {
 
     var conn = new ab.Session('ws://localhost:8080',
         async function () {
-            //article_Assincronismo_com_9_3
             const notifications = getChannels();
             if (!await notifications) {
                 return;
@@ -30,14 +23,19 @@ export function notify() {
                     conn.subscribe(channel, (topic, data) => {
                         data = JSON.parse(data);
                         let notifyTpl;
-                        let element_id = (data.element_id ?? '');
+                        let element_id;
                         const notificationData = {};
                         switch (topic.split('_')[0]) {
                             case 'article': // ARTIGO
+                                element_id = (data.comment_id ? `container-of-comment-${data.comment_id}` : null);
+                                element_id = (element_id ?? `container-of-comment-${data.id}`);
+                                console.log(data, element_id);
                                 notificationData.username = data.username;
                                 notificationData.msg = data.msg;
                                 notificationData.photo = `${baseUrl}/${data.photo}`;
-                                notificationData.url = `${baseUrl}/artigo/${data.comment_id}#${element_id}`;
+                                notificationData.url = `${baseUrl}/artigo/${data.element_id}#${element_id}`;
+                                notificationData.comment_id = data.comment_id ?? null;
+                                notificationData.id = data.id ?? null;
                                 notifyTpl = Notification(notificationData, 'Comentou no seu artigo');
                                 break;
                             case 'comment': // COMENTÁTRIO
@@ -45,6 +43,8 @@ export function notify() {
                                 notificationData.msg = data.msg;
                                 notificationData.photo = `${baseUrl}/${data.photo}`;
                                 notificationData.url = `${baseUrl}/artigo/${element_id}#${data.comment_id}`;
+                                notificationData.comment_id = data.comment_id ?? null;
+                                notificationData.id = data.id ?? null;
                                 notifyTpl = Notification(notificationData, `respondeu seu comentário`);
                                 break;
                         }

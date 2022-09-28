@@ -2,8 +2,9 @@ import { element } from '../helpers/element.js';
 import { date, strRemume } from "../helpers/functions.js";
 import { baseUrl } from "../main.js";
 
-// {name: "", class: "", classes: [], id: "", attrs: [], text: "", child: "", childs: []}
+// data = {url: "", photo: "", username: "", msg: "", comment_id: "", id: ""}
 function Notification(data, msg, id) {
+    console.log(data.photo);
     const divPhoto = element({
         name: 'div',
         attrs: [{
@@ -18,7 +19,7 @@ function Notification(data, msg, id) {
         class: 'notify-time',
         text: dateStr
     });
-    console.log(data);
+
     const divOptions = element({
         name: 'i',
         classes: ['notify-options', 'icon-trash'],

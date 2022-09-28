@@ -257,8 +257,7 @@ class App extends Controller
                 ->isUserId($this->user->id())
                 ->isPostId($post['article_id'])
                 ->isText($post['comment']);
-//            if ($commentId = (new Model($comment))->create()) {
-            if ($commentId = 5) { // remover após o teste
+            if ($commentId = (new Model($comment))->create()) {
                 $view = new View(__DIR__ . '/../../view/fragments/', 'twig');
                 $article = new \StdClass();
                 $article->id = $post['article_id'];
@@ -292,11 +291,11 @@ class App extends Controller
                 $json['channel'] = (new \src\support\NotificationChannels())->channel('article', $post['article_id']);
                 $notify = (new Notification())
                     ->isUsername($post['name'])
-                    ->isUrl(url("artigo/{$post['article_id']}"))
+                    ->isUrl(url("artigo/{$post['article_id']}#container-of-comment-{$commentId}"))
                     ->isMsg(mb_substr($post['comment'], 0, 29))
-                    ->isPhoto(Auth::user()->photo)
+                    ->isPhoto(url(Auth::user()->photo))
                     ->isContent("Comentou no seu artigo");
-//                $json['notification_id'] = (new Model($notify))->create();
+                $json['notification_id'] = (new Model($notify))->create();
                 echo json_encode($json);
                 return;
             }

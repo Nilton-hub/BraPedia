@@ -1,8 +1,10 @@
+// FAZ A COMUNICAÇÃO COM API PARA O ENVIO DA NOTIFICAÇÃO
 export const sendNotification = (channel, data) => {
     let msg = JSON.stringify(data);
     conn.publish(channel, msg);
 };
 
+// RETORNA A DATA NO FORMADO ADOTADO NO BRASIL COMO STRING
 export const date = (date = null) => {
     if (date) {
         date = date.substring(0, 10).split('-');
@@ -14,6 +16,7 @@ export const date = (date = null) => {
     return `${objectDate.getDate()}/${month}/${objectDate.getFullYear()}`;
 };
 
+// CORTA UMA PARTE DA STRING APARTIR DOS PRIMEIROS CARACTERES ATÉ O VALOR INFORMADO NO SEGUNDO PARÂMETRO
 export const strRemume = (text, length = 100) => {
     let arrtext = text.split('');
     let textLength = arrtext.length;
@@ -28,3 +31,10 @@ export const strRemume = (text, length = 100) => {
     }
     return text;
 }
+
+// VERIFICA SE O USUÁRIO ESTÁ AUTENTICADO
+export const login = () => {
+    const cookies = document.cookie.split(';')
+        .map(e => e.split('=')[0].replaceAll(' ', ''));
+    return cookies.indexOf('userToken') !== -1;
+};
