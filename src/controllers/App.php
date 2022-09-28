@@ -325,6 +325,15 @@ class App extends Controller
                     $tpl = 'article-comment-response';
                 }
                 $id = ($post['article_id'] ?? ($post['comment_id'] ?? null));
+                $notificationUrl = url("artigo/{$post['articleId']}#response-container-{$repplyId}");
+                $notificationModel = (new Notification())
+                    ->isUrl($notificationUrl)
+                    ->isContent("respondeu seu comentário")
+                    ->isPhoto(url($this->user->photo()))
+                    ->isMsg($post['response'])
+                    ->isUsername($this->user->name())
+                    ->isUserId($this->user->id());
+                $notificationId = (new Model($notificationModel))->create();
                 echo json_encode([
                     'id' => $repplyId,
                     'tpl' => $view->load($tpl, [
@@ -340,7 +349,12 @@ class App extends Controller
                             'user_id' => $this->user->id()
                         ],
                         'user' => (object)['id' => $this->user->id()]
-                    ])
+                    ]),
+                    'photo' => $this->user->photo(),
+                    'channel' => (new NotificationChannels())->channel('comment', $id),
+                    'url' => $notificationUrl,
+                    'username' => $this->user->name(),
+                    'notification_id' => $notificationId
                 ]);
                 return;
             }

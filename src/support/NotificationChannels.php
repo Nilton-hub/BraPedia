@@ -98,7 +98,7 @@ class NotificationChannels
 
     /**
      * @param string $type or article or comment
-     * @param int $id
+     * @param int $id the identifier of the fetched record
      * @return string|null
      */
     public function channel(string $type, int $id): ?string

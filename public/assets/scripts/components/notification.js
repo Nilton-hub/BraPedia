@@ -2,8 +2,8 @@ import { element } from '../helpers/element.js';
 import { date, strRemume } from "../helpers/functions.js";
 import { baseUrl } from "../main.js";
 
-// data = {url: "", photo: "", username: "", msg: "", comment_id: "", id: "", element_id: ""}
-function Notification(data, msg, id) {
+// data = {url: "", photo: "", username: "", msg: "", comment_id|response_id: "", element_id: ""}
+function Notification(data, msg) {
     const divPhoto = element({
         name: 'div',
         attrs: [{

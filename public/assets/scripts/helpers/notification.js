@@ -29,7 +29,6 @@ export function notify() {
                             case 'article': // ARTIGO
                                 element_id = (data.comment_id ? `container-of-comment-${data.comment_id}` : null);
                                 element_id = (element_id ?? `container-of-comment-${data.id}`);
-                                console.log(data, element_id);
                                 notificationData.username = data.username;
                                 notificationData.msg = data.msg;
                                 notificationData.photo = `${baseUrl}/${data.photo}`;
@@ -39,16 +38,17 @@ export function notify() {
                                 notifyTpl = Notification(notificationData, 'Comentou no seu artigo');
                                 break;
                             case 'comment': // COMENTÁTRIO
+                                // response-container-{}
+                                notificationData.url = data.url; // `${baseUrl}/artigo/${element_id}#response-container-${data.response_id}`;
+                                notificationData.photo = `${baseUrl}/${data.photo}`;
                                 notificationData.username = data.username;
                                 notificationData.msg = data.msg;
-                                notificationData.photo = `${baseUrl}/${data.photo}`;
-                                notificationData.url = `${baseUrl}/artigo/${element_id}#${data.comment_id}`;
-                                notificationData.comment_id = data.comment_id ?? null;
-                                notificationData.id = data.id ?? null;
+                                notificationData.response_id = data.response_id ?? null;
+                                notificationData.id = data.id ?? data.notification_id;
                                 notifyTpl = Notification(notificationData, `respondeu seu comentário`);
                                 break;
                         }
-                        document.querySelector("div.notification-container").after(notifyTpl);
+                        document.querySelector("div.notification-container").before(notifyTpl);
                     });
                 });
             });

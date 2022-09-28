@@ -134,7 +134,6 @@ const submitComment = (e) => {
                 notificationData.element_id = formComment.article_id.value;
                 notificationData.id = data.id;
                 sendNotification(data.channel, notificationData);
-                console.log(data.comment_id);
             }
         })
         .catch(error => {
@@ -304,6 +303,7 @@ btnsResponsesDelete.forEach(button => {
 const responseSubmit = (e) => {
     e.preventDefault();
     const formRepply = e.target;
+    const responseText = formRepply.response.value;
     const commentId = formRepply.comment_id.value;
     const formData = new FormData(formRepply);
     fetch(formRepply.getAttribute('action'), {
@@ -315,6 +315,17 @@ const responseSubmit = (e) => {
             if (data.tpl) {
                 document.getElementById(`response-list-container-${commentId}`).innerHTML += data.tpl;
                 formRepply.reset();
+            }
+            if (data.channel) {
+            //    GERAR A NOTIFICAÇÃO
+                const notificationData = {};
+                notificationData.url = data.url;
+                notificationData.photo = data.photo;
+                notificationData.username = data.username;
+                notificationData.msg = responseText;
+                notificationData.response_id = data.id;
+                notificationData.id = data.notification_id;
+                sendNotification(data.channel, notificationData);
             }
         })
         .catch(err => {

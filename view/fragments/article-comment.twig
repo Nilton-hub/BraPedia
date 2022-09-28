@@ -38,6 +38,7 @@
                 <div class="input-group w-100 text-break">
                     <input type="text" name="response" placeholder="Responder..." id="comment-{{ comment.id }}" class="form-control">
                     <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                    <input type="hidden" name="articleId" value="{{ article.id }}">
                     <input type="hidden" name="page" value="article_page">
                     <button class="icon-send btn btn-outline-info"></button>
                 </div>

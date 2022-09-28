@@ -16,6 +16,7 @@ class Notification implements Model
 
     /** @var ?int $id primary key */
     private ?int $id;
+    private ?int $user_id;
     private ?string $url;
     private ?string $photo;
     private ?string $username;
@@ -54,6 +55,24 @@ class Notification implements Model
     public function id(): ?int
     {
         return $this->id ?? null;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function user_id(): ?int
+    {
+        return $this->user_id ?? null;
+    }
+
+    /**
+     * @param int|null $user_id
+     * @return Notification
+     */
+    public function isUserId(?int $user_id): Notification
+    {
+        $this->user_id = $user_id;
+        return $this;
     }
 
     /**
