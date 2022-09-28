@@ -118,6 +118,28 @@ body {
     transform: translateX(0);
 }
 
+.notify-item {
+    position: relative;
+    transition: background 250ms linear;
+}
+
+.notify-item:hover {
+    background: #15438e;
+}
+
+.notify-content {
+    color: #fdfdfd;
+}
+
+.notify-time {
+    font-size: 0.75rem;
+    color: #252525;
+}
+
+.notify-options:hover {
+    color: gray;
+}
+
 #btn-toggle-menu {
     background-color: inherit;
     color: white;

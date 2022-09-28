@@ -1,5 +1,4 @@
 import * as Notify from './helpers/notification.js';
-import Notification from "./components/notification.js";
 import notification from "./components/notification.js";
 
 export const body = document.querySelector('body'),
@@ -42,8 +41,7 @@ formSearch.addEventListener('submit', (e) => {
 const loadNotifications = async () => {
     try {
         const req = await fetch(`${baseUrl}/notifications`);
-        const data = await req.json();
-        return data;
+        return await req.json();
     } catch (error) {
         return error;
     }
@@ -55,6 +53,9 @@ loadNotifications().then(data => {
         document.querySelector('div.notification-container').append(notify);
     });
 });
+
+// WEBSOCKET CONNECTION BY NOTIFICATIONS
+Notify.notify();
 
 // TOOGLE SIDEBAR MENU
 const toggleMenu = etv => {
@@ -96,6 +97,3 @@ export const message = (message, type) => {
     ].join('');
     alertPlaceholder.append(wrapper);
 }
-
-// WEBSOCKET CONNECTION BY NOTIFICATIONS
-Notify.notify();

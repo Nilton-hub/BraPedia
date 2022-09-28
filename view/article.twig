@@ -8,7 +8,7 @@
         <header class="d-flex flex-column align-items-center">
             <h1 class="text-primary">{{ article.title }}</h1>
             <h2 class="text-secondary">{{ article.subtitle }}</h2>
-            {% if article.cover is defined %}
+            {% if article.cover is defined and article.cover|length > 0 %}
                 <img src="{{ BASE_URL }}/{{ article.cover }}" alt="{{ article.title }}" srcset="" class="rounded-3 mb-3 img-fluid">
             {% endif %}
             <div class="col-9 col-lg-9 m-auto mt3">

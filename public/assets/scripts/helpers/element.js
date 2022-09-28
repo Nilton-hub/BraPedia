@@ -1,5 +1,5 @@
 export function element(config) {
-    // {name: "", class: "", classes: [], id: "", attrs: [], text: "", child: "", childs: []}
+    // {name: "", class: "", classes: [], id: "", attrs: [{name: '', value: ''}], text: "", child: "", childs: []}
     const e = document.createElement(config.name);
     if (config.class) {
         e.classList.add(config.class);

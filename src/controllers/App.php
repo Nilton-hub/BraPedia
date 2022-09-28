@@ -290,15 +290,13 @@ class App extends Controller
                 $json['comment_id'] = $commentId;
                 $json['photo'] = Auth::user()->photo;
                 $json['channel'] = (new \src\support\NotificationChannels())->channel('article', $post['article_id']);
-
-                // [ CRIAR A NOTIFICAÇÃO - DB ]
                 $notify = (new Notification())
                     ->isUsername($post['name'])
                     ->isUrl(url("artigo/{$post['article_id']}"))
                     ->isMsg(mb_substr($post['comment'], 0, 29))
                     ->isPhoto(Auth::user()->photo)
                     ->isContent("Comentou no seu artigo");
-                $json['notification_id'] = (new Model($notify))->create();
+//                $json['notification_id'] = (new Model($notify))->create();
                 echo json_encode($json);
                 return;
             }
@@ -408,6 +406,16 @@ class App extends Controller
     {
         $data = (new Model(new Notification()))->read()->limit(30)->order('created_at')->get();
         echo json_encode($data);
+    }
+
+    /**
+     * @return void
+     */
+    public function removeNotification(): void
+    {
+        $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+        $notification = (new Notification())->isId($id);
+        echo json_encode(['ok' => (new Model($notification))->delete('id = :n', ['n' => $id])]);
     }
 
     /**

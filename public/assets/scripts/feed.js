@@ -1,6 +1,6 @@
 import * as Main from './main.js';
 import {baseUrl} from "./main.js";
-import {sendNotification} from "./helpers/functions.js";
+import { sendNotification, strRemume } from "./helpers/functions.js";
 
 const topLink = document.querySelector('[href="#main-header"]'),
     bottomReference = document.querySelector('#bottom-reference'),
@@ -22,20 +22,6 @@ window.addEventListener('scroll', (e) => {
     scrollIterator++;
 });
 
-const strRemume = (text, length = 100) => {
-    let arrtext = text.split('');
-    let textLength = arrtext.length;
-    if (textLength > length) {
-        let newText = [];
-        for (const newTextKey in arrtext) {
-            if (newTextKey <= length + 1){
-                newText.push(arrtext[newTextKey]);
-            }
-        }
-        return newText.join('') + '...';
-    }
-    return text;
-}
 document.querySelectorAll('h4.article-card-title a')
     .forEach(element => {
         element.innerHTML = strRemume(element.innerText);
@@ -113,6 +99,8 @@ formsArtcilecomment.forEach((element) => {
                     notificationData.photo = data.photo;
                     notificationData.username = element.name.value;
                     notificationData.msg = commentText;
+                    notificationData.comment_id = element.article_id.value;
+                    notificationData.id = element.article_id.value;
                     sendNotification(data.channel, notificationData);
                 }
             })
