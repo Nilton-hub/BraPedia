@@ -403,8 +403,13 @@ class App extends Controller
      */
     public function notifications(): void
     {
-        $data = (new Model(new Notification()))->read()->limit(30)->order('created_at')->get();
-        echo json_encode($data);
+        echo json_encode(
+            (new Model(new Notification()))
+                ->read()
+                ->limit(30)
+                ->order('id DESC, created_at DESC')
+                ->get()
+        );
     }
 
     /**

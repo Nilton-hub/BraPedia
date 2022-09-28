@@ -48,7 +48,7 @@ export function notify() {
                                 notifyTpl = Notification(notificationData, `respondeu seu comentário`);
                                 break;
                         }
-                        document.querySelector(".notification-sidebar").append(notifyTpl);
+                        document.querySelector("div.notification-container").after(notifyTpl);
                     });
                 });
             });

@@ -2,9 +2,8 @@ import { element } from '../helpers/element.js';
 import { date, strRemume } from "../helpers/functions.js";
 import { baseUrl } from "../main.js";
 
-// data = {url: "", photo: "", username: "", msg: "", comment_id: "", id: ""}
+// data = {url: "", photo: "", username: "", msg: "", comment_id: "", id: "", element_id: ""}
 function Notification(data, msg, id) {
-    console.log(data.photo);
     const divPhoto = element({
         name: 'div',
         attrs: [{
@@ -58,7 +57,10 @@ function Notification(data, msg, id) {
         childs: [divPhoto, divContent, divOptions],
         class: 'notify-item'
     });
-    const handleRedirectNofication = ({ target }) =>  window.location.href = data.url;
+    const handleRedirectNofication = ({ target }) =>  {
+        window.location.href = data.url;
+        document.querySelector('div.notification-sidebar').classList.remove('active');
+    };
     container.addEventListener('click', handleRedirectNofication);
     return container;
 }

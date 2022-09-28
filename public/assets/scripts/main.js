@@ -102,3 +102,8 @@ export const message = (message, type) => {
     ].join('');
     alertPlaceholder.append(wrapper);
 }
+//
+// let data = {url: 'http://localhost/artigo/9#container-of-comment-undefined', photo: 'http://localhost/uploads/profile/1663195074-eu-pb.jpg', username: 'Nilton Duarte', msg: 'CCC', comment_id: '141', id: 5};
+// const notifyComponent = notification(data, 'Testando nova notificação');
+// document.querySelector('div.notification-sidebar div').before(notifyComponent);
+// console.log(notifyComponent);
