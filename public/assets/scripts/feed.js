@@ -201,6 +201,7 @@ btnLiRemove.forEach(li => {
 const responseSubmit = (e) => {
     e.preventDefault();
     const formRepply = e.target;
+    const responseText = formRepply.response.value;
     const formData = new FormData(formRepply);
     fetch(`${formRepply.getAttribute('action')}`, {
         method: formRepply.getAttribute('method'),
@@ -210,6 +211,16 @@ const responseSubmit = (e) => {
         .then(data => {
             if (data.tpl) {
                 document.getElementById(`response-list-container-${formRepply.comment_id.value}`).innerHTML += data.tpl;
+            }
+            if (data.channel) {
+                const notificationData = {};
+                notificationData.url = data.url;
+                notificationData.photo = data.photo;
+                notificationData.username = data.username;
+                notificationData.msg = responseText;
+                notificationData.response_id = data.id;
+                notificationData.id = data.notification_id;
+                sendNotification(data.channel, notificationData);
             }
         })
         .catch(error => { console.log(error) });

@@ -317,7 +317,6 @@ const responseSubmit = (e) => {
                 formRepply.reset();
             }
             if (data.channel) {
-            //    GERAR A NOTIFICAÇÃO
                 const notificationData = {};
                 notificationData.url = data.url;
                 notificationData.photo = data.photo;

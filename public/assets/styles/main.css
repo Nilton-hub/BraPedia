@@ -103,6 +103,24 @@ body {
 }
 
 /* notification */
+#main-nav-menu .notification-alert {
+    position: relative;
+}
+
+#main-nav-menu .notification-count:not(:empty) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: red;
+    font-size: 0.8rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
 .notification-sidebar {
     background: #0a53be;
     position: fixed;

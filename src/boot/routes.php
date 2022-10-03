@@ -38,6 +38,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->get('/notify', '\\src\\controllers\App@channels');
     $r->get('/notifications', '\\src\\controllers\App@notifications');
     $r->post('/remove-notifications', '\\src\\controllers\App@removeNotification');
+    $r->post('/clear-notifications', '\\src\\controllers\App@clearNotification');
 
 //    debug
     $r->addGroup('/test', function (RouteCollector $r) {

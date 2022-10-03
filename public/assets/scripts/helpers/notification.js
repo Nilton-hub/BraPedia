@@ -38,7 +38,6 @@ export function notify() {
                                 notifyTpl = Notification(notificationData, 'Comentou no seu artigo');
                                 break;
                             case 'comment': // COMENTÁTRIO
-                                // response-container-{}
                                 notificationData.url = data.url; // `${baseUrl}/artigo/${element_id}#response-container-${data.response_id}`;
                                 notificationData.photo = `${baseUrl}/${data.photo}`;
                                 notificationData.username = data.username;

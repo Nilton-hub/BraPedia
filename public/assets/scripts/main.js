@@ -8,6 +8,7 @@ export const body = document.querySelector('body'),
     searchContainer = document.querySelector('.search-container'),
     btnSearch = document.getElementById('btn-search'),
     formSearch = document.querySelector('form.form-search'),
+    notficationsCountElement = document.querySelector('#main-nav-menu .notification-count'),
     baseUrl = 'http://localhost';
 
 // SEARCH
@@ -50,12 +51,22 @@ const loadNotifications = async () => {
 
 loadNotifications().then(data => {
     if (login()) {
+        let totNewsNotifies = 0;
         data.forEach(d => {
+            if (!Number(d.view)) {
+                totNewsNotifies++;
+            }
             const notify = notification(d, d.content);
             const notificationContaier = document.querySelector('div.notification-container');
             if (notificationContaier)
                 notificationContaier.append(notify);
         });
+        if (totNewsNotifies > 0 && totNewsNotifies <= 9) {
+            notficationsCountElement.innerHTML = totNewsNotifies;
+        }
+        if (totNewsNotifies > 9) {
+            notficationsCountElement.innerHTML = '+9';
+        }
     }
 });
 
@@ -78,7 +89,14 @@ const buttonNotification = document.getElementById('notification-button');
 const notificationToggle = e => {
     sidebarNotification.classList.toggle('active');
     mainsidebar.classList.remove('active');
+    if (sidebarNotification.classList.contains('active')) {
+        notficationsCountElement.innerHTML = '';
+        fetch(`${baseUrl}/clear-notifications`, {
+            method: 'POST'
+        }).then(d => d.text()).then(json => console.log(json));
+    }
 };
+
 if (buttonNotification) {
     buttonNotification.addEventListener('click', notificationToggle);
     sidebarNotificationInner.addEventListener('click', notificationToggle);
@@ -102,8 +120,3 @@ export const message = (message, type) => {
     ].join('');
     alertPlaceholder.append(wrapper);
 }
-//
-// let data = {url: 'http://localhost/artigo/9#container-of-comment-undefined', photo: 'http://localhost/uploads/profile/1663195074-eu-pb.jpg', username: 'Nilton Duarte', msg: 'CCC', comment_id: '141', id: 5};
-// const notifyComponent = notification(data, 'Testando nova notificação');
-// document.querySelector('div.notification-sidebar div').before(notifyComponent);
-// console.log(notifyComponent);

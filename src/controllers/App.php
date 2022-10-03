@@ -15,6 +15,7 @@ use src\models\User;
 use src\support\Auth;
 use src\support\Image;
 use src\support\NotificationChannels;
+use Willry\QueryBuilder\DB;
 
 class App extends Controller
 {
@@ -325,7 +326,7 @@ class App extends Controller
                     $tpl = 'article-comment-response';
                 }
                 $id = ($post['article_id'] ?? ($post['comment_id'] ?? null));
-                $notificationUrl = url("artigo/{$post['articleId']}#response-container-{$repplyId}");
+                $notificationUrl = url("artigo/" . ($post['articleId'] ?? $post['article_id']) . "#response-container-{$repplyId}");
                 $notificationModel = (new Notification())
                     ->isUrl($notificationUrl)
                     ->isContent("respondeu seu comentário")
@@ -351,7 +352,7 @@ class App extends Controller
                         'user' => (object)['id' => $this->user->id()]
                     ]),
                     'photo' => $this->user->photo(),
-                    'channel' => (new NotificationChannels())->channel('comment', $id),
+                    'channel' => (new NotificationChannels())->channel('comment', $post['comment_id']),
                     'url' => $notificationUrl,
                     'username' => $this->user->name(),
                     'notification_id' => $notificationId
@@ -434,6 +435,16 @@ class App extends Controller
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
         $notification = (new Notification())->isId($id);
         echo json_encode(['ok' => (new Model($notification))->delete('id = :n', ['n' => $id])]);
+    }
+
+    /**
+     * @return void
+     */
+    public function clearNotification(): void
+    {
+        echo json_encode([
+            'lines' => (new Model(new Notification()))->update(null, null, ['view' => 1])
+        ]);
     }
 
     /**
