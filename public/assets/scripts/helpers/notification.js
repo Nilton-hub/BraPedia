@@ -48,6 +48,16 @@ export function notify() {
                                 break;
                         }
                         document.querySelector("div.notification-container").before(notifyTpl);
+                        let notficationsCountElement = document.querySelector('#main-nav-menu .notification-count');
+                        let notficationsCount = Number(notficationsCountElement.innerHTML);
+                        if (notficationsCount === 0) {
+                            notficationsCount = 1;
+                        } else if (notficationsCount < 9) {
+                            notficationsCount++;
+                        } else {
+                            notficationsCount = '+9';
+                        }
+                        notficationsCountElement.innerHTML = notficationsCount;
                     });
                 });
             });

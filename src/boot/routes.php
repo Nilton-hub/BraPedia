@@ -35,6 +35,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     });
 
     $r->post('/profile-picture', '\\src\\controllers\App@profilePicture');
+//    Notifications
     $r->get('/notify', '\\src\\controllers\App@channels');
     $r->get('/notifications', '\\src\\controllers\App@notifications');
     $r->post('/remove-notifications', '\\src\\controllers\App@removeNotification');

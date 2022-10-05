@@ -22,7 +22,7 @@ class Notification implements Model
     private ?string $username;
     private ?string $msg;
     private ?string $content;
-    private ?bool $view;
+    private int $view = 0;
 
     /**
      * @return string
@@ -167,18 +167,18 @@ class Notification implements Model
     }
 
     /**
-     * @return bool|null
+     * @return int|null
      */
-    public function view(): ?bool
+    public function view(): ?int
     {
         return $this->view ?? null;
     }
 
     /**
-     * @param bool|null $view
+     * @param int|null $view
      * @return Notification
      */
-    public function isView(?bool $view): Notification
+    public function isView(int $view): Notification
     {
         $this->view = $view;
         return $this;

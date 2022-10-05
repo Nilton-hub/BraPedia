@@ -33,8 +33,9 @@ class Application
     public function commentAction(): void
     {
         $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+        $id = filter_var($post['id'], FILTER_VALIDATE_INT);
         if ($post) {
-            $comment = (new Comment())->isId($post['id']);
+            $comment = (new Comment())->isId($id);
             $comentModel = (new Model($comment))->read(['id'])->first();
             if (is_null($comentModel)) {
                 echo json_encode(['error' => 'comentário inexistente.']);

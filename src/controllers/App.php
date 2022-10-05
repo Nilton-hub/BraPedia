@@ -259,6 +259,7 @@ class App extends Controller
                 ->isPostId($post['article_id'])
                 ->isText($post['comment']);
             if ($commentId = (new Model($comment))->create()) {
+//              if created, gerenerate comment view
                 $view = new View(__DIR__ . '/../../view/fragments/', 'twig');
                 $article = new \StdClass();
                 $article->id = $post['article_id'];
@@ -295,7 +296,8 @@ class App extends Controller
                     ->isUrl(url("artigo/{$post['article_id']}#container-of-comment-{$commentId}"))
                     ->isMsg(mb_substr($post['comment'], 0, 29))
                     ->isPhoto(url(Auth::user()->photo))
-                    ->isContent("Comentou no seu artigo");
+                    ->isContent("Comentou no seu artigo")
+                    ->isView('0');
                 $json['notification_id'] = (new Model($notify))->create();
                 echo json_encode($json);
                 return;

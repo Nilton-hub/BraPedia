@@ -224,6 +224,7 @@ const responseSubmit = (e) => {
             }
         })
         .catch(error => { console.log(error) });
+    formRepply.response.value = '';
 }
 const formsResponse = document.querySelectorAll('form[class^="form-response-"]');
 formsResponse.forEach((formResponse) => {

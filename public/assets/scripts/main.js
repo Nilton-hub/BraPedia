@@ -93,7 +93,7 @@ const notificationToggle = e => {
         notficationsCountElement.innerHTML = '';
         fetch(`${baseUrl}/clear-notifications`, {
             method: 'POST'
-        }).then(d => d.text()).then(json => console.log(json));
+        });
     }
 };
 
