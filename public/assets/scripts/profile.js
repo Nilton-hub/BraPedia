@@ -1,5 +1,5 @@
 import * as Main from './main.js';
-¹
+
 const btnProfileEdit = document.querySelector('#btn-profile-edit'),
     alertPlaceholder = document.getElementById('liveAlertPlaceholder'),
     bntChangePassword = document.querySelector('.btn-change-password'),
