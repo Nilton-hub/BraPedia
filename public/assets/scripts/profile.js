@@ -1,5 +1,5 @@
 import * as Main from './main.js';
-
+¹
 const btnProfileEdit = document.querySelector('#btn-profile-edit'),
     alertPlaceholder = document.getElementById('liveAlertPlaceholder'),
     bntChangePassword = document.querySelector('.btn-change-password'),
@@ -244,14 +244,19 @@ const updateProfilePictureAction = (e) => {
                     alertPlaceholder.innerHTML = data.message;
                 }
                 if (data.path) {
+                    let divPicture = document.querySelector('div.profile-picture');
+                    divPicture = divPicture === undefined ? document.createElement('div') : divPicture;
+                    divPicture.classList.add('profile-picture');
                     // document.querySelector('div.profile-picture').style.backgroundImage = `${Main.baseUrl}/${data.path}`;
-                    document.querySelector('div.profile-picture')
-                        .setAttribute('style', `${Main.baseUrl}/${data.path}; background-size: cover; background-repeat: no-repeat; background-position: center;`)
-                    setTimeout(() => { window.location.reload(); }, 2000);
+                    divPicture
+                        .setAttribute('style', `background-image: URL(${Main.baseUrl}/${data.path}); background-size: cover; background-repeat: no-repeat; background-position: center;`);
+                    document.querySelector('div.text-center').before(divPicture);
+                    document.querySelector('li a[title="perfil"] img').setAttribute('src', `${Main.baseUrl}/${data.path}`);
+                    // setTimeout(() => { window.location.reload(); }, 2000);
                 }
-                console.log(data);
             })
             .catch(err => console.error(err));
     }
 }
 inputFileProfilePicture.addEventListener('change', updateProfilePictureAction);
+// text-center

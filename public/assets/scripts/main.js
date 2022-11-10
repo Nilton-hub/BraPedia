@@ -9,7 +9,7 @@ export const body = document.querySelector('body'),
     btnSearch = document.getElementById('btn-search'),
     formSearch = document.querySelector('form.form-search'),
     notficationsCountElement = document.querySelector('#main-nav-menu .notification-count'),
-    baseUrl = 'http://localhost';
+    baseUrl = 'http://brapedia.infinityfreeapp.com/public';
 
 // SEARCH
 searchContainer.style.display = 'flex';
@@ -115,7 +115,7 @@ export const message = (message, type) => {
     wrapper.innerHTML = [
         `<div class="alert alert-${type} alert-dismissible" role="alert">`,
         `   <div>${message}</div>`,
-        '   <button type="button" class="btn-close" onclick="closeAlert()" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
         '</div>'
     ].join('');
     alertPlaceholder.append(wrapper);

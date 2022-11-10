@@ -82,7 +82,7 @@ function redirect(string $path = ''): void
  * @param string $uri
  * @return string
  */
-function url(string $uri = '/'): string
+function url(?string $uri = '/'): string
 {
     return CONF_BASE_URL . '/' . ($uri[0] === '/' ? substr($uri, 1) : $uri);
 }

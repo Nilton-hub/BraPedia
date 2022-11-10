@@ -16,7 +16,7 @@
                 <article class="article-search-result border rounded p-2 mt-3 mb-1">
                     <!--  d-flex flex-column  flex-md-row -->
                     {% set cover = (result.cover|length > 0 ? "#{BASE_URL}/#{result.cover}" : "#{ BASE_URL }/assets/images/article-back-cover-rectangle.svg") %}
-                    <div class="order-1 order-md-0 cover-container border" style="background-image: url({{ cover }});">
+                    <div class="order-1 order-md-0 cover-container border" style="background-image: url({{ cover }}); height: 18em; background-size: cover;">
                         <a href="{{ BASE_URL }}/artigo/{{ result.id }}"></a>
                         <!--     cover area       -->
                     </div>
@@ -43,16 +43,16 @@
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 {% if pages > 1 %}
-                    <li class="page-item"><a href="{{ page == 1 ? 'javascript:void(0)' : "#{ URL_BASE }/search/#{ searchTerms }/1" }}" class="page-link">Início</a></li>
+                    <li class="page-item"><a href="{{ page == 1 ? 'javascript:void(0)' : "#{ BASE_URL }/search/#{ searchTerms }/1" }}" class="page-link">Início</a></li>
                     <li class="page-item">
                         {{ 1 < page ?
-                        "<a href=\"#{ URL_BASE }/search/#{ searchTerms }/#{ page - 1 }\" class=\"page-link\" aria-label=\"Previous\">&laquo;</a>" :
+                        "<a href=\"#{ BASE_URL }/search/#{ searchTerms }/#{ page - 1 }\" class=\"page-link\" aria-label=\"Previous\">&laquo;</a>" :
                         "<span class=\"page-link\" aria-hidden=\true\">&laquo;</span>" }}
                     </li>
 
                     {% for i in range(1, pages) %}
                         {% if i != page %}
-                            <li class="page-item"><a href="{{ URL_BASE }}/search/{{ searchTerms }}/{{ i }}"
+                            <li class="page-item"><a href="{{ BASE_URL }}/search/{{ searchTerms }}/{{ i }}"
                                                      class="page-link">{{ i }}</a></li>
                         {% else %}
                             <li class="page-item active"><span class="page-link">{{ i }}</span></li>
@@ -66,7 +66,7 @@
                     </li>
                     <li class="page-item"><a href="{{ page == pages ?
                         'javascript:void(0)' :
-                        "#{ URL_BASE }/search/#{ searchTerms }/#{ pages }" }}" class="page-link">Final</a></li>
+                        "#{ BASE_URL }/search/#{ searchTerms }/#{ pages }" }}" class="page-link">Final</a></li>
                 {% endif %}
             </ul>
         </nav>

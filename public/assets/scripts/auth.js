@@ -170,7 +170,10 @@ const resgisterSubmit = (e) => {
 };
 
 formRegister.addEventListener('submit', resgisterSubmit);
+
 // ACTION FORM FORGET
+const formForget = document.querySelector('form.form-account-forget');
+console.log(formForget);
 
 if (self.fetch) {
     console.log(true);

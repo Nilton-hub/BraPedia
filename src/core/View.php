@@ -13,8 +13,9 @@ class View
 
     /**
      * @param string $path
+     * @param string $ext
      */
-    public function __construct(string $path, $ext = "twig")
+    public function __construct(string $path, string $ext = "twig")
     {
         $this->template = new Environment(new FilesystemLoader($path), [
             'auto_reload' => true,
@@ -38,7 +39,7 @@ class View
 
     /**
      * @param string $name
-     * @param $value
+     * @param mixed $value
      * @return void
      */
     public function addData(string $name, $value): void

@@ -1,5 +1,5 @@
 import * as Main from './main.js';
-import {baseUrl} from "./main.js";
+// import {Url} from "./main.js";
 import { sendNotification, strRemume } from "./helpers/functions.js";
 
 const topLink = document.querySelector('[href="#main-header"]'),
@@ -94,6 +94,7 @@ formsArtcilecomment.forEach((element) => {
                     element.childNodes[3].childNodes[5].value = '';
                 }
                 if (data.channel) {
+                    baseUrl = baseUrl === undefined ? Main.baseUrl : baseUrl;
                     const notificationData = {};
                     notificationData.url = `${baseUrl}/artigo/${element.article_id.value}#container-of-comment-${notificationData.comment_id}`;
                     notificationData.photo = data.photo;
@@ -254,26 +255,26 @@ function commentRepplyEdit(id) {
     repply.setAttribute('contenteditable', true);
     repply.focus();
     function removeEditable () {
-            repply.removeAttribute('contenteditable');
-            repply.blur();
-            btnSend.parentNode.classList.replace('d-block', 'd-none');
+        repply.removeAttribute('contenteditable');
+        repply.blur();
+        btnSend.parentNode.classList.replace('d-block', 'd-none');
     }
     document.getElementById('btn-coment-reppy-cancel-' + id)
         .addEventListener('click', removeEditable);
 
     btnSend.addEventListener('click', ev => {
-            removeEditable();
-            let formData = new FormData();
-            formData.append('repply_id', id);
-            formData.append('action', 'edit');
-            formData.append('text', repply.innerText);
-            fetch(`${Main.baseUrl}/comment/repply-actions`, {
-                method: 'POST',
-                body: formData
-            })
-                .then(res => res.json())
-                .catch(error => { console.log(error); });
-        });
+        removeEditable();
+        let formData = new FormData();
+        formData.append('repply_id', id);
+        formData.append('action', 'edit');
+        formData.append('text', repply.innerText);
+        fetch(`${Main.baseUrl}/comment/repply-actions`, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .catch(error => { console.log(error); });
+    });
 }
 
 const btnsLisRepply = document.querySelectorAll('[id^="comment-repply-container-"] .opt-edit');

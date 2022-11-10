@@ -5,6 +5,9 @@
 {% block title %}Feed{% endblock %}
 {% block message %}{{ message }}{% endblock %}
 {% block body %}
+    <p class="text-center">
+        Compartilhe conosco o seu conhecimento. Crie um artigo sobre um assunto que você entende e ajude as pessoas.
+    </p>
     <main class="container flex-grow-1">
         {#    TEMPLATE`S ARTICLE    #}
         {% if articles is defined and articles|length > 0 %}

@@ -13,7 +13,7 @@
     <link rel="icon" sizes="48x48" type="image/png" href="{{ BASE_URL }}/assets/favicons/favicon-48x48.png">
     <link rel="icon" sizes="64x64" type="image/png" href="{{ BASE_URL }}/assets/favicons/favicon-64x64.png">
     {% block styles %}{% endblock %}
-    <title>Blog366 - {% block title %}{% endblock %}</title>
+    <title>BraPedia - {% block title %}{% endblock %}</title>
 </head>
 <body class="bg-light d-flex flex-column justify-content-between">
 <header class="w-100 main-header" id="main-header">
@@ -114,6 +114,7 @@
 {# MENSAGENS #}
 <div id="liveAlertPlaceholder"
      style="width: 90%; margin: auto; position: fixed; top: 80px; left: 5%; opacity: 1; z-index: 10;">{% block message %}{% endblock %}</div>
+
 {% block body %}{% endblock %}
 <p id="test-jquery"></p>
 <footer class="mt-3">

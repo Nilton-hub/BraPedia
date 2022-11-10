@@ -25,12 +25,14 @@
         </header>
 
         {% if user and user.id == article.user_id %}
-        <!-- ARTICLE OPTIONS -->
+            <!-- ARTICLE OPTIONS -->
             <div class="btn-group-vertical d-inline-block position-fixed me-auto  toggle-opt-hidden"
                  style="width: 75px; right: 20px; top: calc(50vh - 85px); z-index: 15;" id="article-options">
-                <a href="./article-update.html" title="Editar artigo" class="btn btn-outline-success float-end">Editar</a>
+                <a href="{{ BASE_URL }}/artigo/editar/{{ article.id }}" title="Editar artigo" class="btn btn-outline-success float-end">Editar</a>
                 <button class="btn btn-outline-success float-end" id="btn-article-delete">Deletar</button>
-                <button class="btn btn-outline-success float-end" id="btn-article-hide">Ocultar</button>
+                <button class="btn btn-outline-success float-end" data-status="" id="btn-article-hide">
+                    {{ article.hidden == 0 ? 'Ocultar' : 'Exibir'}}
+                </button>
             </div>
         {% endif %}
         <article class="mt-4 m-auto col-9 col-lg-9 lead">
@@ -49,9 +51,9 @@
                 </div>
             </form>
             <div class="comment-list-container">
-            {% for comment in comments %}
-                {% include("fragments/article-comment.twig") %}
-            {% endfor %}
+                {% for comment in comments %}
+                    {% include("fragments/article-comment.twig") %}
+                {% endfor %}
             </div>
         </section>
     </main>
@@ -62,19 +64,31 @@
         </div>
         <!-- hide post -->
         <div class="m-auto bg-light rounded-3 border p-3 d-none modal-content-hide-post modal-hidden">
-            <p class="text-center lead">Ao ocultar um artigo, ele não aparecerá mais no feed para os outros usuários.
-                Mas você ainda poderá vê-lo no seu Perfil.</p>
-            <div class="d-flex gap-2 justify-content-end">
-                <button class="btn btn-primary">Ocultar</button>
-                <button class="btn btn-outline-primary">Cancelar</button>
-            </div>
+            {% if article.hidden == 0 %}
+                <p class="text-center lead">
+                    Ao ocultar um artigo, ele não aparecerá mais no feed para os outros usuários.
+                    Mas você ainda poderá vê-lo no seu Perfil.
+                </p>
+                <div class="d-flex gap-2 justify-content-end">
+                    <button class="btn btn-primary" onclick="hiddenArticle()">Ocultar</button>
+                    <button class="btn btn-outline-primary" onclick="closeModals()">Cancelar</button>
+                </div>
+            {% else %}
+                <p class="text-center lead">
+                    Ao exibir um artigo, ele também aparecerá no feed para os outros usuários.
+                </p>
+                <div class="d-flex gap-2 justify-content-end">
+                    <button class="btn btn-primary" onclick="hiddenArticle()">Exibir</button>
+                    <button class="btn btn-outline-primary" onclick="closeModals()">Cancelar</button>
+                </div>
+            {% endif %}
         </div>
         <!-- delete post -->
         <div class="m-auto bg-light rounded-3 border p-3 d-none modal-content-delete-post modal-hidden">
             <p class="text-center lead">Deseja deletar este artigo permanentemente?</p>
             <div class="d-flex gap-2 justify-content-end">
-                <button class="btn btn-primary">Deletar</button>
-                <button class="btn btn-outline-primary">Cancelar</button>
+                <button class="btn btn-primary" onclick="deleteArticle()">Deletar</button>
+                <button class="btn btn-outline-primary" onclick="closeModals()">Cancelar</button>
             </div>
         </div>
     </div>
@@ -82,4 +96,37 @@
 
 {% block scripts %}
     <script src="{{ BASE_URL }}/assets/scripts/article.js" type="module" async></script>
+    <script>
+        function closeModals() {
+            document.getElementById('modals').classList.add('d-none');
+            document.querySelectorAll('#modals > div:not([id="btn-close-modal"])')
+                .forEach(modal => modal.classList.add('d-none'));
+        }
+        async function hiddenArticle() {
+            closeModals();
+            try {
+                const request = await fetch('{{ BASE_URL }}/artigo/ocultar/{{ article.id }}', {
+                    method: 'POST'
+                });
+                const json = await request.json();
+                console.log(json);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        async function deleteArticle() {
+            closeModals();
+            try {
+                const request = await fetch('{{ BASE_URL }}/artigo/deletar/{{ article.id }}', {
+                    method: 'POST'
+                });
+                const json = await request.json();
+                if (json.success) {
+                    window.location.redirect = '{{ BASE_URL }}/perfil';
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    </script>
 {% endblock %}

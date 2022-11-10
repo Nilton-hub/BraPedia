@@ -60,6 +60,7 @@ const deletePost = () => {
         modal.classList.remove('d-none');
         modalContentDeletePost.classList.remove('d-none');
         modalContentDeletePost.classList.replace('modal-hidden', 'modal-show');
+        console.log('Deletar Post');
     }
 };
 if (btnArticleDelete) {
@@ -71,6 +72,7 @@ const hidePost = () => {
         modal.classList.remove('d-none');
         modalContentHidePost.classList.replace('modal-hidden', 'modal-show');
         modalContentHidePost.classList.remove('d-none');
+        console.log('Ocultar Post');
     }
 };
 if (btnArticleHide) {
@@ -137,7 +139,7 @@ const submitComment = (e) => {
             }
         })
         .catch(error => {
-            message(`Para comentar é necessário fazer login! <a href="${baseUrl}/login" title="Entrar">Entrar</a>`, 'danger');
+            Main.message(`Para comentar é necessário fazer login! <a href="${Main.baseUrl}/login" title="Entrar">Entrar</a>`, 'danger');
             console.error(error)
         });
 }
@@ -312,6 +314,7 @@ const responseSubmit = (e) => {
     })
         .then(res => res.json())
         .then(data => {
+            console.log(data);
             if (data.tpl) {
                 document.getElementById(`response-list-container-${commentId}`).innerHTML += data.tpl;
                 formRepply.reset();

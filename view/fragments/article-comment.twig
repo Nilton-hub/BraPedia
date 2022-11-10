@@ -12,7 +12,7 @@
         <div class="borders rounded-circle align-self-start comment-cover" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
             {% if comment.user.photo and comment.user.photo|length > 0 %}
                 <div class="bg-user-cover"
-                     style="background-image: url({{ BASE_URL }}/{{ user.photo }}); background-size: cover; border-radius: 50%; width: 45px; height: 45px;"></div>
+                     style="background-image: url({{ BASE_URL }}/{{ comment.user.photo }}); background-size: cover; border-radius: 50%; width: 45px; height: 45px;"></div>
             {% else %}
                 <i class="icon-profile-male"></i>
             {% endif %}

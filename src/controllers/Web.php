@@ -38,7 +38,8 @@ class Web extends Controller
         $articles = DB::table("posts AS p")
             ->selectRaw("p.id, p.title, p.subtitle, p.cover, p.content, p.created_at, u.id AS 'user_id', u.name, u.photo AS user_photo")
             ->join("users u ON u.id = p.user_id")
-            ->where("hidden = :hidden", ['hidden' => '0']);
+            ->where("hidden = :hidden", ['hidden' => '0'])
+            ->order('created_at DESC');
         $coments = DB::table('comments')
             ->selectRaw("comments.id AS 'commentid', comments.user_id, comments.post_id, comments.text, comments.created_at, 
             comments.updated_at, users.name AS user_name, users.photo")
@@ -143,19 +144,34 @@ class Web extends Controller
         $page = ($data['page'] ?? 1);
         $limit = 1;
         $offset = ceil(($page - 1) * $limit);
-        $data = DB::table(Post::entity())
-            ->selectRaw(
-                Post::entity() . ".title ," . Post::entity() . ".id ," . Post::entity() . ".subtitle, " . " cover, " . User::entity() . ".name as user_name"
-            )
-            ->join(User::entity() . " ON " . User::entity() . ".id = " . Post::entity() . ".user_id")
-            ->order(Post::entity() . '.created_at DESC')
-            ->where("MATCH(title, subtitle) AGAINST(:search)", ['search' => $searchTerms]);
-        $total = $data->count();
+        $dataArr = explode(' ', $data['search']);
+        $dataStrTitle = "title LIKE :" . implode(" OR title LIKE :", $dataArr);
+        $dataStrSubtitle = "subtitle LIKE :" . implode(" OR subtitle LIKE :", $dataArr);
+        $whereClause = "WHERE {$dataStrTitle} OR {$dataStrSubtitle}";
+        $stmt = \Willry\QueryBuilder\Connect::getInstance()->prepare(
+            "SELECT " .
+            Post::entity() . ".title, " . Post::entity() . ".id, " . Post::entity() . ".subtitle, " . Post::entity() . ".cover, " . User::entity() . ".name as user_name " .
+            " FROM posts join " .
+            User::entity() . " ON " . User::entity() . ".id = " . Post::entity() . ".user_id" .
+            " $whereClause ORDER BY " . Post::entity() . ".created_at DESC LIMIT {$limit} OFFSET {$offset}"
+        );
+        $stmt2 = \Willry\QueryBuilder\Connect::getInstance()->prepare(
+            "SELECT COUNT(" . Post::entity() . ".id) as row_count FROM " . Post::entity() . " {$whereClause}"
+        );
+        foreach ($dataArr as $bind) {
+            $stmt->bindValue(":{$bind}", "%{$bind}%", \PDO::PARAM_STR);
+            $stmt2->bindValue(":{$bind}", "%{$bind}%", \PDO::PARAM_STR);
+        }
+        $stmt->execute();
+        $stmt2->execute();
+        $rows = $stmt->fetchAll();
+        $total = $stmt2->fetch()->row_count;
         $pages = ceil($total / $limit);
+
         echo $this->view->load('search-results', [
             'user' => Auth::user(),
             'searchTerms' => $searchTerms,
-            'results' => $data->limit($limit)->offset($offset)->get(),
+            'results' => $rows,
             'total' => $total,
             'pages' => $pages,
             'page' => $page
@@ -179,8 +195,7 @@ class Web extends Controller
                 redirect();
             }
             $userModel = (new User())->isId($article->user_id);
-            $user = (new Model($userModel))->read(null, ["id", "name", "photo"])->first();
-
+            $user = (new Model($userModel))->read(['id'], ["id", "name", "photo"])->first();
             $commentModel = (new Comment())->isPostId($id);
             $comments = (new Model($commentModel))->read(["post_id"])->get();
             foreach ($comments as $i => $comment) {
@@ -208,7 +223,8 @@ class Web extends Controller
         if (!$email) {
             echo json_encode([
                 "message" => "O email informado é inválido.",
-                "type" => "danger"
+                "type" => "danger",
+                "email" => $email
             ]);
             return;
         }

@@ -20,7 +20,8 @@
                 <label for="password_re" class="form-label">Repita sua senha:</label>
                 <input type="password" class="form-control" name="password_re" id="password_re" aria-describedby="Repetir a senha">
             </div>
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-end gap-2">
+                <button type="reset" class="btn btn-danger btn-lg text-white d-block">Limpar</button>
                 <button type="submit" class="btn btn-info btn-lg text-white d-block">Salvar</button>
             </div>
         </form>
@@ -29,6 +30,20 @@
 
 {% block scripts %}
     <script>
+        const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+
+        const wrapper = document.createElement('div');
+        const message = (message, type) => {
+            wrapper.innerHTML = [
+                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                `   <div>${message}</div>`,
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                '</div>'
+            ].join('');
+            alertPlaceholder.append(wrapper);
+        }
+
+        const baseUrl = '{{ BASE_URL }}';
         const formReset = document.querySelector('form.for-reset');
         const passwdReset = (e) => {
             e.preventDefault();
@@ -38,16 +53,15 @@
                 method: 'POST',
                 body: formData
             })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if (data.message) {
-                    message(data.message, data.type);
-                }
-                if (data.redirect) {
-                    window.location.href = data.redirect;
-                }
-            });
+                .then(res => res.json())
+                .then(data => {
+                    if (data.message) {
+                        message(data.message, data.type);
+                    }
+                    if (data.redirect) {
+                        window.location.href = data.redirect;
+                    }
+                });
         }
         formReset.addEventListener('submit', passwdReset);
     </script>

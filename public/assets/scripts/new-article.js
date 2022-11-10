@@ -32,7 +32,7 @@ const articleSubmit = (e) => {
             if (e.target.files !== null && e.target.files.length > 0) {
                 formData.append('cover', e.target.files[0]);
             }
-    });
+        });
 
     const xhr = new XMLHttpRequest();
     let percent = 0;

@@ -19,10 +19,7 @@ use Willry\QueryBuilder\DB;
 
 class App extends Controller
 {
-    /** @var View */
     private View $view;
-
-    /** @var null|User */
     private ?User $user;
     private Application $application;
 
@@ -81,7 +78,7 @@ class App extends Controller
             return;
         }
         $articles = (new Post())->isUserId($this->user->id());
-        $articleModel = (new Model($articles))->read(['user_id'])->get();
+        $articleModel = (new Model($articles))->read(['user_id'])->order('created_at DESC')->get();
         echo $this->view->load('profile', [
             'user' => $this->user,
             'articles' => $articleModel
@@ -291,8 +288,13 @@ class App extends Controller
                 $json['comment_id'] = $commentId;
                 $json['photo'] = Auth::user()->photo;
                 $json['channel'] = (new \src\support\NotificationChannels())->channel('article', $post['article_id']);
+
+                $articleModel = (new Post())->isId($comment->post_id());
+                $article = (new Model($articleModel))->read(['id'], ['id', 'user_id'])->first();
+
                 $notify = (new Notification())
                     ->isUsername($post['name'])
+                    ->isUserId($article->user_id)
                     ->isUrl(url("artigo/{$post['article_id']}#container-of-comment-{$commentId}"))
                     ->isMsg(mb_substr($post['comment'], 0, 29))
                     ->isPhoto(url(Auth::user()->photo))
@@ -328,6 +330,10 @@ class App extends Controller
                     $tpl = 'article-comment-response';
                 }
                 $id = ($post['article_id'] ?? ($post['comment_id'] ?? null));
+
+                $commentModel = (new Comment())->isId($repply->comment_id());
+                $commentData = (new Model($commentModel))->read(['id'], ['user_id'])->first();
+
                 $notificationUrl = url("artigo/" . ($post['articleId'] ?? $post['article_id']) . "#response-container-{$repplyId}");
                 $notificationModel = (new Notification())
                     ->isUrl($notificationUrl)
@@ -335,9 +341,10 @@ class App extends Controller
                     ->isPhoto(url($this->user->photo()))
                     ->isMsg($post['response'])
                     ->isUsername($this->user->name())
-                    ->isUserId($this->user->id());
+                    ->isUserId($commentData->user_id);
                 $notificationId = (new Model($notificationModel))->create();
                 echo json_encode([
+                    'debug' => $commentData->user_id,
                     'id' => $repplyId,
                     'tpl' => $view->load($tpl, [
                         'article' => (object)['id' => $id],
@@ -420,9 +427,10 @@ class App extends Controller
      */
     public function notifications(): void
     {
+        $notifications = (new Notification())->isUserId($this->user->id());
         echo json_encode(
-            (new Model(new Notification()))
-                ->read()
+            (new Model($notifications))
+                ->read(['user_id'])
                 ->limit(30)
                 ->order('id DESC, created_at DESC')
                 ->get()

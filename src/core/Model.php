@@ -35,6 +35,7 @@ class Model
 
     /**
      * @param array|null $whereColumns
+     * @param array $columns
      * @return DB
      */
     public function read(?array $whereColumns = null, array $columns = ["*"]): DB
@@ -115,6 +116,9 @@ class Model
         }
     }
 
+    /**
+     * @return ModelInterface
+     */
     public function model(): ModelInterface
     {
         return $this->model;
