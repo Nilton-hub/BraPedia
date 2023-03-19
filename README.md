@@ -23,7 +23,7 @@ dentro de `.env` para valores corretos, pois elas estão com valores demonstrati
 tabelas nescessárias para o funcionamento do sistema;
 4. abrir o arquivo `src/boot/config.php` e lá dentro, definir o valor da constante CONF_BASE_URL para a URL correta em 
 localhost conforme o endereço em que a aplicação está sendo executada no servidor. Por exemplo `const CONF_BASE_URL = 'http://localhost:8888'` e também a 
-constante URL em `public/assets/scripts/main.js` no início do arquivo logo abaixo dos imports;
+constante URL em `public/assets/scripts/main.js` no início do arquivo logo abaixo dos imports. Seguem abaixo os exemplos:
 __________
 config.php
 ```php
