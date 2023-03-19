@@ -25,7 +25,7 @@ tabelas nescessárias para o funcionamento do sistema;
 localhost conforme o endereço em que a aplicação está sendo executada no servidor. Por exemplo `const CONF_BASE_URL = 'http://localhost:8888'` e também a 
 constante URL em `public/assets/scripts/main.js` no início do arquivo logo abaixo dos imports;
 __________
-index.php
+config.php
 ```php
 <?php
 
