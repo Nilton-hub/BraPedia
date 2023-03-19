@@ -21,3 +21,4 @@ você consiga ver a aplicação executando.
 - Email: [joseniltonduarte3@gmail.com](mailto:joseniltonduarte3@gmail.com)
 - [Linkedin](https://www.linkedin.com/in/nilton-duarte-05b530175/)
 - [Instagram](https://www.instagram.com/duarte_2000/)
+- [Twitter](https://twitter.com/NiltonD17284468)
