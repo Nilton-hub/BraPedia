@@ -71,3 +71,6 @@ Onde canta o Sabiá.
 
 ##
 document.querySelector('body#tinymce');
+
+
+Eu eu te imaginei no quarto com a porta fechada escutando a música e dublando a cantora segurando uma escova de cabelo como se fosse um microfone

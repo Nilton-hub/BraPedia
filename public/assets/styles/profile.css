@@ -55,7 +55,7 @@ a.article-cover-container::after {
     align-items: center;
     border-radius: 5px;
     background-color: transparent;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.5px;
     transition: background-color 0.3s linear,
                 border 0.3s linear;
     cursor: pointer;

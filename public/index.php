@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/../src/boot/routes.php';
+header("Access-Control-Allow-Origin: *");
 ob_start();
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];

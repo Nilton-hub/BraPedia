@@ -12,7 +12,6 @@ use src\models\Post;
 use src\models\User;
 use src\support\Auth;
 use \Willry\QueryBuilder\DB;
-
 class Web extends Controller
 {
     /** @var View */
@@ -69,11 +68,30 @@ class Web extends Controller
             'email' => FILTER_VALIDATE_EMAIL,
             'password' => FILTER_DEFAULT,
             'password_re' => FILTER_DEFAULT,
+            'g-recaptcha-response' => FILTER_DEFAULT
         ]);
         if ($post) {
             $json = [];
+            $curl = curl_init();
+            curl_setopt_array($curl, [
+                CURLOPT_URL => CONF_CAPTCHA_URL,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => [
+                    'response' => $post['g-recaptcha-response'],
+                    'secret' => CONF_CAPTCHA_SECRET
+                ]
+            ]);
+            $curlResponse = json_decode(curl_exec($curl));
+            curl_close($curl);
+            if (empty($curlResponse->success) || !$curlResponse->success) {
+                $json['message'] = (new Message())->warning("O campo de recaptcha é obrigatório para continuar.")
+                    ->render();
+                echo json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                return;
+            }
             if (in_array("", $post)) {
-                $json['message'] = (new Message())->warning("preencha todos os campos para enviar!")->render();
+                $json['message'] = (new Message())->warning("Preencha todos os campos para enviar!")->render();
                 echo json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
                 return;
             }

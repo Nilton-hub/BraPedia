@@ -44,7 +44,7 @@ class Auth
             }
             $this->error = "Erro ao cadastrar, verifique os dados.";
             return false;
-        } catch (\Throwable $exception) {
+        } catch (\PDOException $exception) {
             $this->error = $exception->getMessage();
             return false;
         }
@@ -130,7 +130,7 @@ class Auth
                 return $authenticatedUser;
             }
         }
-        setcookie('userToken', null, [
+        setcookie('userToken', "", [
             'expires' => time() - 3600,
             'path' => '/',
             'samesite' => 'Strict'

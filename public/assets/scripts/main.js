@@ -9,7 +9,8 @@ export const body = document.querySelector('body'),
     btnSearch = document.getElementById('btn-search'),
     formSearch = document.querySelector('form.form-search'),
     notficationsCountElement = document.querySelector('#main-nav-menu .notification-count'),
-    baseUrl = 'http://brapedia.infinityfreeapp.com/public';
+//    baseUrl = 'http://brapedia.infinityfreeapp.com/public';
+    baseUrl = 'http://localhost:8888';
 
 // SEARCH
 searchContainer.style.display = 'flex';

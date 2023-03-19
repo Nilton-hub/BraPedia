@@ -1,9 +1,11 @@
 {% extends('__theme.twig') %}
 {% block styles %}
     <style>
-        form button {
-            letter-spacing: 1.5px;
-            font-size: 1.12em !important;
+        form button { letter-spacing: 1.5px; font-size: 1.12rem !important; }
+        div.g-recaptcha, div.h-captcha {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
         }
     </style>
 {% endblock %}
@@ -61,7 +63,9 @@
                            id="password-register_re">
                 </div>
                 <p id="passwordVerifyText"></p>
-                <button type="submit" class="btn btn-dark d-block w-100">Criar Conta</button>
+{#                <div class="h-captcha" data-sitekey="5d22a043-b204-4dae-96e7-9acebe658933"></div>#}
+                <div class="g-recaptcha" data-sitekey="6Lfn5BElAAAAALlCJf65HTD5K3WQ7skJvqcmquFJ"></div>
+                <button type="submit" class="btn btn-dark d-block w-100" id="btn-register">Criar Conta</button>
             </form>
         </div>
 
@@ -85,47 +89,8 @@
     </main>
 {% endblock %}
 {% block scripts %}
+{#    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>#}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="{{ BASE_URL }}/assets/scripts/auth.js" type="module"></script>
-    <script>
-        const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-
-        const wrapper = document.createElement('div');
-        const message = (message, type) => {
-            wrapper.innerHTML = [
-                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-                `   <div>${message}</div>`,
-                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-                '</div>'
-            ].join('');
-            alertPlaceholder.append(wrapper);
-        }
-
-        const formForget = document.querySelector('form.form-account-forget');
-        const accountForget = (evt) => {
-            evt.preventDefault();
-            const formData = new FormData(formForget);
-            const btnForget = formForget.btn_forget;
-            btnForget.innerText = 'Aguarde...';
-            btnForget.setAttribute('disabled', '');
-            fetch(`${formForget.getAttribute('action')}`, {
-                method: formForget.getAttribute('method'),
-                body: formData
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.message) {
-                        message(data.message, data.type);
-                    }
-                    if (!data.success) {
-                        btnForget.removeAttribute('disabled');
-                    }
-                    btnForget.innerText = 'Pronto';
-                })
-                .catch(error => {
-                    message('Erro ao enviar, tente novamente mais tarde', 'warning');
-                    console.log(error)
-                });
-        }
-        formForget.addEventListener('submit', accountForget);
-    </script>
+    <script src="{{ BASE_URL }}/assets/scripts/register.js"></script>
 {% endblock %}

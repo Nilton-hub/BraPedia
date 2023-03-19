@@ -90,6 +90,10 @@ formsArtcilecomment.forEach((element) => {
             .then(res => res.json())
             .then(data => {
                 if (data.commentTpl) {
+                    console.log(
+                        document.getElementById(`btn-toggle-comments-${element.article_id.value}`),
+                        `btn-toggle-comments-${element.article_id.value}`
+                    );
                     document.getElementById(`comments-container-${element.article_id.value}`).innerHTML += data.commentTpl;
                     element.childNodes[3].childNodes[5].value = '';
                 }

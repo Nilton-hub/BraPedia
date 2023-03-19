@@ -1,7 +1,7 @@
 <?php
 
 // BASE URL
-const CONF_BASE_URL = 'http://localhost';
+const CONF_BASE_URL = 'http://localhost:8888';
 
 // DATABASE
 const CONF_PDO_OPT = [
@@ -48,3 +48,8 @@ define('CONF_EMAIL', [
     'secure' => \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS,
     'port' => 587
 ]);
+
+// CAPTCHA
+define('CONF_CAPTCHA_URL', getenv('CONF_CAPTCHA_URL'));
+define('CONF_CAPTCHA_SITEKEY', getenv('CONF_CAPTCHA_SITEKEY'));
+define('CONF_CAPTCHA_SECRET', getenv('CONF_CAPTCHA_SECRET'));

@@ -2,7 +2,7 @@ import * as Main from './main.js';
 
 const formLogin = document.getElementById('form-login'),
     alertPlaceholder = document.getElementById('liveAlertPlaceholder'),
-    formRegister = document.getElementById('form-register'),
+//    formRegister = document.getElementById('form-register'),
     divsFormHeader = document.querySelectorAll('.header-form div'),
     iconTogglePassword = document.getElementById('icon-toggle-password'),
     btnToggleModal = document.querySelector('#btn-toggle-modal'),
@@ -134,46 +134,10 @@ const loginSubmit = (e) => {
             }
         });
 }
-
 formLogin.addEventListener('submit', loginSubmit);
-// ACTION FORM REGISTER
-const emailRegister = document.getElementById('email-register');
-const resgisterSubmit = (e) => {
-    e.preventDefault();
-    const forData = new FormData(formRegister);
-
-    let outpuForm = false;
-    if (passwodRegister.value.length === 0 || passwodRegisterRepeat.value.length === 0 || emailRegister.value.length === 0) {
-        message('Preencha todos os campos para cria sua conta!', 'danger');
-    } else if (passwodRegister.value !== passwodRegisterRepeat.value) {
-        message('As senhas informadas não batem!', 'danger');
-    } else {
-        outpuForm = true;
-    }
-    if (outpuForm) {
-        const requestUrl = formRegister.getAttribute('action');
-        fetch(requestUrl, {
-            method: 'POST',
-            body: forData
-        })
-            .then(data => data.json())
-            .then(res => {
-                if (res.message && alertPlaceholder) {
-                    alertPlaceholder.innerHTML = res.message;
-                }
-                if (res.redirect) {
-                    window.location.href = res.redirect;
-                }
-                return res;
-            });
-    }
-};
-
-formRegister.addEventListener('submit', resgisterSubmit);
 
 // ACTION FORM FORGET
 const formForget = document.querySelector('form.form-account-forget');
-console.log(formForget);
 
 if (self.fetch) {
     console.log(true);

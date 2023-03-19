@@ -15,7 +15,7 @@ body {
 }
 
 .modal-content {
-    transform: 2.5s;
+    transition: all 2.5s;
 }
 
 .modal-hidden {
@@ -45,7 +45,7 @@ body {
     margin: 0;
     cursor: pointer;
     box-sizing: border-box;
-    transform: all 2.5s linear;
+    transition: all 2.5s linear;
 }
 
 #btn-close-modal:hover {
@@ -186,6 +186,21 @@ body {
     cursor: pointer;
 }
 
+span.btn-load {
+    border: 4px solid #e1c1c1;
+    border-top-color: #5e5d5d;
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    animation: spin 0.8s linear 0s infinite normal forwards running;
+    transform: rotate(0deg);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
 @media (min-width: 576px) {
 
 }
@@ -200,13 +215,16 @@ body {
     body {
         display: flex;
     }
+
     #main-sidebar-menu {
         top: calc(3rem + 10px);
     }
+
     .notification-sidebar {
         top: 60px;
         height: calc(100% - 60px);
     }
+}
 
 @media (min-width: 1200px) {
 

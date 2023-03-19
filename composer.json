@@ -9,16 +9,12 @@
             "name": "Nilton Duarte",
             "email": "tvirapegubeco@gmail.com",
             "role": "developer",
-            "homepage": "https://instagram.com/n.i.l.t.o.n.1"
+            "homepage": "https://instagram.com/duarte_200"
         }
     ],
-    "config": {
-        "vendor-dir": "vendor"
-    },
+    "config": { "vendor-dir": "vendor" },
     "autoload": {
-        "psr-4": {
-            "src\\": "src"
-        },
+        "psr-4": { "src\\": "src" },
         "files": [
             "./boot/bootstrap.php",
             "./src/boot/config.php",
@@ -26,15 +22,16 @@
         ]
     },
     "require": {
-        "php": "^7.4",
+        "php": "^7.4|^8.0",
         "ext-pdo": "*",
         "ext-json": "*",
         "ext-gd": "*",
-        "nikic/fast-route": "^v1.3.0",
-        "willry/querybuilder": "^1.1.1",
+        "ext-curl": "*",
+        "nikic/fast-route": "^v1.0",
+        "willry/querybuilder": "^1.0",
         "twig/twig": "^v3.4.1",
-        "cboden/ratchet": "^v0.4.4",
         "gumlet/php-image-resize": "2.0.*",
-        "phpmailer/phpmailer": "^6.6"
+        "phpmailer/phpmailer": "^6.6",
+        "cboden/ratchet": "^0.4.4"
     }
 }

@@ -84,7 +84,7 @@ function redirect(string $path = ''): void
  */
 function url(?string $uri = '/'): string
 {
-    return CONF_BASE_URL . '/' . ($uri[0] === '/' ? substr($uri, 1) : $uri);
+    return CONF_BASE_URL . '/' . (gettype($uri) === 'string' && $uri[0] === '/' ? substr($uri, 1) : $uri);
 }
 
 // DATE
