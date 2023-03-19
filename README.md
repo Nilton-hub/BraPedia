@@ -1,6 +1,6 @@
 # BraPedia ![Logo BraPedia](https://raw.githubusercontent.com/Nilton-hub/BraPedia/0d1a290e97a20430fc02c92075a25450c8c60269/public/assets/images/logo.svg)
-Uma aplicação web destinada a criação de perfil para publicação e gerenciamento de artigos onde os usuários autenticados poderão ler e comentar os artigos 
-uns dos outros e responder aos comentarios uns dos outros.
+
+Uma aplicação web destinada a criação de perfil onde os usuários poderão interagir lendo, publicando, gerenciando artigos, comentando nos artigos, respondendo aos comentarios uns dos outros e muito mais.
 
 ## Como Rodar a Aplicação Corretamente
 
