@@ -17,7 +17,7 @@ Uma aplicação web destinada a criação de perfil onde os usuários poderão i
 
 1. Você deve renomear o arquivo `.env.exemple` na pasta raíz do projeto para `.env` ou fazer uma cópia dele e renomear 
 para `.env`;
-2. substituir todos os valores (ou pelo menos nas que correspondem ao acesso ao banco de dados) das variáveis de ambientes
+2. substituir todos os valores (ou pelo menos os que correspondem ao acesso ao banco de dados) das variáveis de ambientes
 dentro de `.env` para valores corretos, pois elas estão com valores demonstrativos que não funcionam;
 3. executar o arquivo em `data/database/main_database.sql` no seu servidor de banco de dados. Ele criará o banco de dados **brapedia** e todas as 
 tabelas nescessárias para o funcionamento do sistema;
