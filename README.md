@@ -22,19 +22,14 @@ dentro de `.env` para valores corretos, pois elas estão com valores demonstrati
 3. executar o arquivo em `data/database/main_database.sql` no seu servidor de banco de dados. Ele criará o banco de dados **brapedia** e todas as 
 tabelas nescessárias para o funcionamento do sistema;
 4. abrir o arquivo `src/boot/config.php` e lá dentro, definir o valor da constante CONF_BASE_URL para a URL correta em 
-localhost conforme o endereço em que a aplicação está sendo executada no servidor. Por exemplo `const CONF_BASE_URL = 'http://localhost:8888'` e também a constante URL em `public/assets/scripts/main.js` no início do arquivo logo abaixo dos imports;
-index.php
-```php
+localhost conforme o endereço em que a aplicação está sendo executada no servidor. Por exemplo `const CONF_BASE_URL = 'http://localhost:8888'` ```php
 <?php
 
 // BASE URL
 const CONF_BASE_URL = 'http://localhost:8888';
-```
-main.js
-```javascript
+``` e também a constante URL em `public/assets/scripts/main.js` no início do arquivo logo abaixo dos imports; ```javascript
 const URL = 'http://localhost:8888';
-```
-Os exemplos acima assumem que você está executando o servidor em localhost na porta 8888. Caso não for use, a URL específica.
+``` Os exemplos acima assumem que você está executando o servidor em localhost na porta 8888. Caso não for use, a URL específica.
 5. iniciar o servidor web dentro da pasta `/public`. Pois é ela que contem toda a saída que será retornada para o cliente.
 
 Estes passos permitem que ao iniciar um servidor web capaz de executar o PHP e acessar a respectiva URL pelo navegador, 
