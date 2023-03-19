@@ -1,4 +1,7 @@
 .idea/
 vendor/
-storage/sessions
+public/uploads/covers/*
+public/uploads/profile/*
+storage/sessions/*
 .env
+

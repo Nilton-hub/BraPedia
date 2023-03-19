@@ -4,14 +4,26 @@ Uma aplicação web destinada a criação de perfil onde os usuários poderão i
 
 ## Como Rodar a Aplicação Corretamente
 
+### Pré requisitos
+
+É necessário ter instalados corretamente as seguintes dependências:
+
+- Servidor de banco de dados MySQL v8.0+;
+- Linguagem PHP v8.1+;
+- [Composer](https://getcomposer.org/) v2.0+ gerenciador de dependências
+
+> **Nota:** É opcional o uso de um servidor web, pois a aplicação funciona perfeitamente com o servidor embutido do PHP. Basta executar `php -S localhost:80 -t public` no terminal aberto dentro da pasta raiz do projeto. No entanto, este servidor embutido é limitado e não é ideal para produção. Apenas para desenvolvimento. Utilize um servidor web profissional capaz de trabalhar com PHP como Apache ou Nginx.
+> Obtenhar mais informações sobre o servidor embutido do PHP na [página de documentação](https://www.php.net/manual/pt_BR/features.commandline.webserver.php) sobre ele.
+
 1. Você deve renomear o arquivo `.env.exemple` na pasta raíz do projeto para `.env` ou fazer uma cópia dele e renomear 
 para `.env`;
-2. substituir todos os valores (ou pelo menos nas variáveis de conexão ao banco de dados) das variáveis de ambientes lá
-dentro para variáveis corretas, pois elas estão com valores demonstrativos que não funcionam;
-3. executar o arquivo em `data/database/main_database.sql`. Ele criará o banco de dados chamado **brapedia** e todas as 
+2. substituir todos os valores (ou pelo menos nas variáveis de conexão ao banco de dados) das variáveis de ambientes
+dentro de `.env` para valores corretos, pois elas estão com valores demonstrativos que não funcionam;
+3. executar o arquivo em `data/database/main_database.sql` no seu servidor de banco de dados. Ele criará o banco de dados **brapedia** e todas as 
 tabelas nescessárias para o funcionamento do sistema;
-4. abrir o arquivo `src/boot/config.php` e lá dentro, definir a constante CONF_BASE_URL para o domínio correto em 
-localhost. Por exemplo `const CONF_BASE_URL = 'http://localhost:8888'`;
+4. abrir o arquivo `src/boot/config.php` e lá dentro, definir o valor da constante CONF_BASE_URL para a URL correta em 
+localhost conforme o endereço em que a aplicação está sendo executada no servidor. Por exemplo `const CONF_BASE_URL = 'http://localhost:8888'` e também a constante URL em `public/assets/scripts/main.js` no início dos arquivos logo abaixo dos imports;
+5. iniciar o servidor web dentro da pasta `/public`. Pois é ela que contem toda a saída que será retornada para o cliente.
 
 Estes passos permitem que ao iniciar um servidor web capaz de executar o PHP e acessar a respectiva URL pelo navegador, 
 você consiga ver a aplicação executando.

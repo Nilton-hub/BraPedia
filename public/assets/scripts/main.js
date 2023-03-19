@@ -2,6 +2,9 @@ import * as Notify from './helpers/notification.js';
 import notification from "./components/notification.js";
 import { login } from "./helpers/functions.js";
 
+const URL = 'http://localhost:8888';
+//const URL = 'http://brapedia.infinityfreeapp.com/public';
+
 export const body = document.querySelector('body'),
     btnToggleMenu = document.querySelector('#btn-toggle-menu'),
     mainsidebar = document.querySelector('#main-sidebar-menu'),
@@ -9,8 +12,7 @@ export const body = document.querySelector('body'),
     btnSearch = document.getElementById('btn-search'),
     formSearch = document.querySelector('form.form-search'),
     notficationsCountElement = document.querySelector('#main-nav-menu .notification-count'),
-//    baseUrl = 'http://brapedia.infinityfreeapp.com/public';
-    baseUrl = 'http://localhost:8888';
+    baseUrl = URL;
 
 // SEARCH
 searchContainer.style.display = 'flex';
