@@ -1,5 +1,5 @@
-# BraPedia
-Uma aplicação web destinada a criação de perfil na mesma para publicação e gerenciamento de artigos onde os usuários autenticados poderão ler e comentar os artigos 
+# BraPedia ![Logo BraPedia](https://raw.githubusercontent.com/Nilton-hub/BraPedia/0d1a290e97a20430fc02c92075a25450c8c60269/public/assets/images/logo.svg)
+Uma aplicação web destinada a criação de perfil para publicação e gerenciamento de artigos onde os usuários autenticados poderão ler e comentar os artigos 
 uns dos outros e responder aos comentarios uns dos outros.
 
 ## Como Rodar a Aplicação Corretamente
@@ -15,3 +15,9 @@ localhost. Por exemplo `const CONF_BASE_URL = 'http://localhost:8888'`;
 
 Estes passos permitem que ao iniciar um servidor web capaz de executar o PHP e acessar a respectiva URL pelo navegador, 
 você consiga ver a aplicação executando.
+
+### Contato do Desenvolvedor
+
+- Email: [joseniltonduarte3@gmail.com](mailto:joseniltonduarte3@gmail.com)
+- [Linkedin](https://www.linkedin.com/in/nilton-duarte-05b530175/)
+- [Instagram](https://www.instagram.com/duarte_2000/)
