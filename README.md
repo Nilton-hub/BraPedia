@@ -10,7 +10,7 @@ Uma aplicação web destinada a criação de perfil onde os usuários poderão i
 
 - Servidor de banco de dados MySQL v8.0+;
 - Linguagem PHP v8.1+;
-- [Composer](https://getcomposer.org/) v2.0+ gerenciador de dependências
+- [Composer](https://getcomposer.org/) v2.0+ gerenciador de dependências.
 
 > **Nota:** É opcional o uso de um servidor web, pois a aplicação funciona perfeitamente com o servidor embutido do PHP. Basta executar `php -S localhost:80 -t public` no terminal aberto dentro da pasta raiz do projeto. No entanto, este servidor embutido é limitado e não é ideal para produção. Apenas para desenvolvimento. Utilize um servidor web profissional capaz de trabalhar com PHP como Apache ou Nginx.
 > Obtenhar mais informações sobre o servidor embutido do PHP na [página de documentação](https://www.php.net/manual/pt_BR/features.commandline.webserver.php) sobre ele.
