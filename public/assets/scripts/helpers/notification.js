@@ -1,12 +1,12 @@
 import Notification from "../components/notification.js";
 import { login } from "./functions.js";
 import '../autobahn.js';
+import { baseUrl } from '../main.js';
 
 export function notify() {
     if (!login()) {
         return null;
     }
-    const baseUrl = 'http://localhost';
     async function getChannels() {
         const request = await fetch(`${baseUrl}/notify`);
         return await request.json();

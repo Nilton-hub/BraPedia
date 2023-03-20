@@ -155,4 +155,3 @@ function request_limit(string $key, int $limit, int $seconds): bool
     ]);
     return false;
 }
-

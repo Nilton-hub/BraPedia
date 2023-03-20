@@ -1,7 +1,6 @@
 // FAZ A COMUNICAÇÃO COM API PARA O ENVIO DA NOTIFICAÇÃO
 export const sendNotification = (channel, data) => {
-    const msg = JSON.stringify(data);
-    conn.publish(channel, msg);
+    conn.publish(channel, JSON.stringify(data));
 };
 
 // RETORNA A DATA NO FORMADO ADOTADO NO BRASIL COMO STRING
