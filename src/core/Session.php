@@ -14,6 +14,9 @@ class Session
      */
     public function __construct()
     {
+        if (!is_dir(SESSION_PATH)) {
+            mkdir(SESSION_PATH, recursive: true);
+        }
         if (!session_id()) {
             session_save_path(SESSION_PATH);
             session_start();
@@ -111,5 +114,14 @@ class Session
             return $flash;
         }
         return null;
+    }
+
+    /**
+     * @return void
+     * @throws \Exception
+     */
+    public function csrf(): void
+    {
+        $_SESSION['csrf_token'] = base64_encode(random_bytes(20));
     }
 }

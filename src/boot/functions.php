@@ -97,3 +97,62 @@ function date_portuguese(string $data): string
     setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
     return strftime($data);
 }
+
+
+// SESSION
+
+
+/**
+ * @return string
+ * @throws Exception
+ */
+function csrf_input(): string
+{
+    $session = new \src\core\Session();
+    $session->csrf();
+    $token = $session->csrf_token ?? '';
+    return <<<INPUT
+<input type="hidden" name="csrf_token" value="{$token}" >
+INPUT;
+}
+
+/**
+ * @param array|object $request
+ * @return bool
+ */
+function csrf_verify(array|object $request): bool
+{
+    $request = (object)$request;
+    $session = new \src\core\Session();
+    if (empty($session->csrf_token) || empty($request->csrf_token) || $session->csrf_token !== $request->csrf_token) {
+        return false;
+    }
+    return true;
+}
+
+/**
+ * @param string $key
+ * @param int $limit
+ * @param int $seconds
+ * @return bool
+ */
+function request_limit(string $key, int $limit, int $seconds): bool
+{
+    $session = new src\core\Session();
+    if ($session->has($key) && $session->$key?->time >= time() && $session->$key?->requests < $limit) {
+        $session->set($key, [
+            'time' => time() + $seconds,
+            'requests' => $session->$key->requests + 1
+        ]);
+        return false;
+    }
+    if ($session->has($key) && $session->$key?->time >= time() && $session->$key?->requests >= $limit) {
+        return true;
+    }
+    $session->set($key, [
+        'time' => time() + $seconds,
+        'requests' => 1
+    ]);
+    return false;
+}
+

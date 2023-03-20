@@ -21,6 +21,7 @@
 
         <div class="border border-1 border-info border-top-0 col-sm-11 col-md-6 col-lg-6 m-auto p-md-5  p-2 text-black-50  rounded-bottom">
             <form action="{{ BASE_URL }}/login" method="post" id="form-login">
+                {{ inpu_token }}
                 <div class="mb-3">
                     <label for="email-login" class="form-label">Email</label>
                     <input type="email" name="email" value="{{ userEmailCookie }}" class="form-control" placeholder="exemplo@email.com" id="email-login">
@@ -43,6 +44,7 @@
             </form>
 
             <form action="{{ BASE_URL }}/cadastro" method="post" id="form-register" class="d-none">
+                {{ inpu_token }}
                 <div class="mb-3">
                     <label for="name-register" class="form-label">Nome</label>
                     <input type="text" name="name" class="form-control" placeholder="Como você quer ser chamado" id="name-register">

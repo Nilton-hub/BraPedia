@@ -2,7 +2,6 @@ import * as Main from './main.js';
 
 const formLogin = document.getElementById('form-login'),
     alertPlaceholder = document.getElementById('liveAlertPlaceholder'),
-//    formRegister = document.getElementById('form-register'),
     divsFormHeader = document.querySelectorAll('.header-form div'),
     iconTogglePassword = document.getElementById('icon-toggle-password'),
     btnToggleModal = document.querySelector('#btn-toggle-modal'),
@@ -27,7 +26,7 @@ iconTogglePassword.addEventListener('click', () => {
     }
 });
 
-divsFormHeader.forEach((value, key,) => {
+divsFormHeader.forEach((value) => {
     value.style.cursor = 'pointer';
 });
 
@@ -88,7 +87,7 @@ const passwordVerify = () => {
     if (password.length > 0 && passwordRepeat.length > 0) {
         if (passwodRegister.value !== passwodRegisterRepeat.value) {
             if (passwordVerifyText.classList.contains('text-success')) {
-                passwordVerifyText.classList.remove('text-success');
+                passwordVerifyText.classList.remove('text-succ  ess');
             }
             passwordVerifyText.classList.add('text-danger');
             passwordVerifyText.innerHTML = '<strong>Senhas não conferem</strong>';
@@ -118,20 +117,25 @@ btnToggleModal.addEventListener('click', toggleModal);
 // ACTION FORM LOGIN
 const loginSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData(formLogin);
+    const formData = new FormData(formLogin),
+        formButton = formLogin.querySelector('[type="submit"]');
+    let buttonContent = formButton.innerHTML;
+    formButton.innerHTML = `<span class="btn-load"></span> Aguarde...`;
+    formButton.setAttribute('disabled', '');
     fetch(formLogin.getAttribute('action'), {
         method: formLogin.getAttribute('method'),
         body: formData
     })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             if (data.message && alertPlaceholder) {
                 alertPlaceholder.innerHTML = data.message
             }
             if (data.redirect) {
                 window.location.href = data.redirect;
             }
+            formButton.innerHTML = buttonContent;
+            formButton.removeAttribute('disabled');
         });
 }
 formLogin.addEventListener('submit', loginSubmit);
@@ -139,8 +143,6 @@ formLogin.addEventListener('submit', loginSubmit);
 // ACTION FORM FORGET
 const formForget = document.querySelector('form.form-account-forget');
 
-if (self.fetch) {
-    console.log(true);
-} else {
-    console.log(false);
+if (!self.fetch) {
+    console.log('No javascript fetch api');
 }

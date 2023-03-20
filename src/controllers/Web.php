@@ -68,7 +68,8 @@ class Web extends Controller
             'email' => FILTER_VALIDATE_EMAIL,
             'password' => FILTER_DEFAULT,
             'password_re' => FILTER_DEFAULT,
-            'g-recaptcha-response' => FILTER_DEFAULT
+            'g-recaptcha-response' => FILTER_DEFAULT,
+            'csrf_token' => FILTER_DEFAULT
         ]);
         if ($post) {
             $json = [];
@@ -88,6 +89,20 @@ class Web extends Controller
                 $json['message'] = (new Message())->warning("O campo de recaptcha é obrigatório para continuar.")
                     ->render();
                 echo json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                return;
+            }
+            if (!csrf_verify($post)) {
+                $json['message'] = (new Message())
+                    ->danger("Tipo de envio não permitido! Favor use o botão do formulário para enviar.")
+                    ->render();
+                echo json_encode($json);
+                return;
+            }
+            if (request_limit("weblogin", 3, 300)) {
+                $json['message'] = (new Message())
+                    ->danger("Você está fazendo muitas tentativas de login. Aguarde para poder tentar outra vez.")
+                    ->render();
+                echo json_encode($json);
                 return;
             }
             if (in_array("", $post)) {
@@ -127,10 +142,25 @@ class Web extends Controller
         $post = filter_input_array(INPUT_POST, [
             'email' => FILTER_VALIDATE_EMAIL,
             'password' => FILTER_DEFAULT,
-            'remember' => FILTER_VALIDATE_BOOLEAN
+            'remember' => FILTER_VALIDATE_BOOLEAN,
+            'csrf_token' => FILTER_DEFAULT
         ]);
         if ($post) {
             $auth = new Auth();
+            if (!csrf_verify($post)) {
+                $json['message'] = (new Message())
+                    ->danger("Tipo de envio não permitido! Favor use o botão do formulário para enviar.")
+                    ->render();
+                echo json_encode($json);
+                return;
+            }
+            if (request_limit("weblogin", 3, 300)) {
+                $json['message'] = (new Message())
+                    ->danger("Você está fazendo muitas tentativas de login. Aguarde para poder tentar outra vez.")
+                    ->render();
+                echo json_encode($json);
+                return;
+            }
             if (!$auth->authenticate($post['email'], $post['password'], ($post['remember'] ?? false))) {
                 $json['message'] = (new Message())->danger($auth->error())->render();
                 echo json_encode($json);
@@ -142,7 +172,8 @@ class Web extends Controller
             return;
         }
         echo $this->view->load('auth', [
-            'userEmailCookie' => ($_COOKIE['user-email'] ?? null)
+            'userEmailCookie' => ($_COOKIE['user-email'] ?? null),
+            'inpu_token' => csrf_input()
         ]);
     }
 
@@ -275,13 +306,20 @@ class Web extends Controller
         if (!$data['code']) {
             redirect('/erro');
         }
-        $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRIPPED);
+        $post = $data ? array_map(fn($input) => trim(htmlspecialchars($input)), $data) : null;
         if ($post) {
             if ($post['password'] !== $post['password_re']) {
                 echo json_encode([
                     'message' => 'As senhas não batem! Você precisa informar duas senhas iguais.',
                     'type' => 'danger'
                 ]);
+                return;
+            }
+            if (!csrf_verify($post)) {
+                $json['message'] = (new Message())
+                    ->danger("Tipo de envio não permitido! Favor use o botão do formulário para enviar.")
+                    ->render();
+                echo json_encode($json);
                 return;
             }
             $auth = new Auth();

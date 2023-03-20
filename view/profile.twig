@@ -57,6 +57,10 @@
         </section>
     </main>
     <!-- MODAL -->
+    <script src="{{ BASE_URL }}/assets/scripts/profile.js" type="module"></script>
+    <!-- FIM MODAL -->
+{% endblock %}
+{% block scripts %}
     <div class="modal-bg-show d-none" id="modals">
         <div id="btn-close-modal">
             &plus;
@@ -65,6 +69,7 @@
         <div class="m-auto bg-light rounded-3 border p-3 d-none modal-content-edit modal-hidden">
             <form action="{{ BASE_URL }}/perfil" method="post" class="user-profile-edit">
                 <p class="text-center">Informe seus dados e clique em <b>Atualizar</b>.</p>
+                {{ csrf_input }}
                 <div class="input-group mb-3">
                     <label for="user-name" class="input-group-text">Nome</label>
                     <input type="text" name="name" value="{{ user.name }}" id="user-name" placeholder=""
@@ -86,6 +91,7 @@
              style="z-index: 25;">
             <form action="{{ BASE_URL }}/atualizar-senha" method="post" class="form-change-password">
                 <p class="text-center">Preencha os campos abaixo para alterar sua senha.</p>
+                {{ csrf_input }}
                 <div class="input-group mb-3">
                     <label for="user-current-password" class="input-group-text">Senha atual</label>
                     <input type="password" name="current-password" id="user-current-password"
@@ -125,8 +131,4 @@
             </div>
         </div>
     </div>
-    <!-- FIM MODAL -->
-{% endblock %}
-{% block scripts %}
-    <script src="{{ BASE_URL }}/assets/scripts/profile.js" type="module"></script>
 {% endblock %}

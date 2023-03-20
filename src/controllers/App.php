@@ -55,9 +55,17 @@ class App extends Controller
     {
         $post = filter_input_array(INPUT_POST, [
             'name' => FILTER_SANITIZE_SPECIAL_CHARS,
-            'email' => FILTER_VALIDATE_EMAIL
+            'email' => FILTER_VALIDATE_EMAIL,
+            'csrf_token' => FILTER_DEFAULT
         ]);
         if ($post) {
+            if (!csrf_verify($post)) {
+                $json['message'] = (new Message())
+                    ->danger("Tipo de envio não permitido! Favor use o botão do formulário para enviar.")
+                    ->render();
+                echo json_encode($json);
+                return;
+            }
             if (!$post['name'] || !$post['email']) {
                 $json['message'] = (new Message())->warning('Erro! Os dados não foram informados corretamente.')->render();
                 echo json_encode($json);
@@ -81,7 +89,8 @@ class App extends Controller
         $articleModel = (new Model($articles))->read(['user_id'])->order('created_at DESC')->get();
         echo $this->view->load('profile', [
             'user' => $this->user,
-            'articles' => $articleModel
+            'articles' => $articleModel,
+            'csrf_input' => csrf_input()
         ]);
     }
 
